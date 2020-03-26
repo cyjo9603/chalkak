@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Input, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
@@ -9,7 +10,11 @@ const LoginForm = () => {
       <Input placeholder="아이디" prefix={<UserOutlined />} />
       <Input.Password placeholder="비밀번호" />
       <Button ghost>로그인</Button>
-      <Button ghost>회원가입</Button>
+      <Link href="/signup">
+        <a>
+          <Button ghost>회원가입</Button>
+        </a>
+      </Link>
     </FormWrapper>
   );
 };

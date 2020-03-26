@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Input } from 'antd';
 
 import Wrapper from './Wrapper';
@@ -10,7 +11,11 @@ const Header = () => {
     <HeaderWrapper>
       <Wrapper>
         <div>
-          <img src="/logo_main.svg" alt="logo" />
+          <Link href="/">
+            <a>
+              <img src="/logo_main.svg" alt="logo" />
+            </a>
+          </Link>
           <Search />
         </div>
         <LoginForm />
