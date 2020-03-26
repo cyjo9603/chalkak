@@ -5,7 +5,7 @@ import { ServerStyleSheet } from 'styled-components';
 
 interface Props {
   helmet: HelmetData;
-  styleTags: any;
+  styleTags: Array<React.ReactElement<{}>>;
 }
 
 class MyDocument extends Document<Props> {
