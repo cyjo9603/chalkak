@@ -12,6 +12,7 @@ import axios from 'axios';
 
 import reducer from '../reducers';
 import rootSaga from '../sagas/index';
+import AppLayout from '../component/AppLayout';
 
 interface Props {
   Component: AppProps['Component'];
@@ -47,7 +48,9 @@ const Chalkak = ({ Component, store, pageProps }: Props) => {
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.js"></script>
       </Helmet>
-      <Component {...pageProps} />
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
     </Provider>
   );
 };
