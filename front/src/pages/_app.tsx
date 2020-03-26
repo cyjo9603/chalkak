@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Helmet from 'react-helmet';
 import withRedux, { MakeStoreOptions } from 'next-redux-wrapper';
