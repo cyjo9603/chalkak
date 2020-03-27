@@ -9,7 +9,11 @@ const LoginForm = () => {
     <FormWrapper>
       <Input placeholder="아이디" prefix={<UserOutlined />} />
       <Input.Password placeholder="비밀번호" />
-      <Button ghost>로그인</Button>
+      <Link href="/signin">
+        <a>
+          <Button ghost>로그인</Button>
+        </a>
+      </Link>
       <Link href="/signup">
         <a>
           <Button ghost>회원가입</Button>
@@ -27,7 +31,7 @@ const FormWrapper = styled.div`
     margin-right: 10px;
   }
 
-  & > button {
+  & button {
     width: 100px;
     margin-right: 10px;
   }
