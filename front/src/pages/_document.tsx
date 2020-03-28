@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Main, NextScript, DocumentContext } from 'next/document';
+import Document, { Main, Head, NextScript, DocumentContext } from 'next/document';
 import Helmet, { HelmetData } from 'react-helmet';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -24,10 +24,10 @@ class MyDocument extends Document<Props> {
 
     return (
       <html {...htmlAttrs} lang="ko">
-        <head>
+        <Head>
           {this.props.styleTags}
           {Object.values(helmet).map((el) => el.toComponent())}
-        </head>
+        </Head>
         <body {...bodyAttrs}>
           <Main />
           <NextScript />
