@@ -8,7 +8,7 @@ import withReduxSaga from 'next-redux-saga';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, Store, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import axios from 'axios';
 
 import reducer from '../reducers';
@@ -17,6 +17,13 @@ import AppLayout from '../component/AppLayout';
 import theme from '../theme';
 
 import 'antd/dist/antd.less';
+
+const GolbalStyle = createGlobalStyle`
+body {
+  @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+  font-family: 'Nanum Gothic', sans-serif;
+}
+`;
 
 interface Props {
   Component: AppProps['Component'];
@@ -41,6 +48,7 @@ const Chalkak = ({ Component, store, pageProps }: Props) => {
           <meta name="og:description" content="Chalkak" />
           <meta property="og:type" content="website" />
         </Helmet>
+        <GolbalStyle />
         <AppLayout>
           <Component {...pageProps} />
         </AppLayout>
