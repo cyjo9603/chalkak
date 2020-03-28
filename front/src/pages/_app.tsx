@@ -14,6 +14,8 @@ import reducer from '../reducers';
 import rootSaga from '../sagas/index';
 import AppLayout from '../component/AppLayout';
 
+import 'antd/dist/antd.less';
+
 interface Props {
   Component: AppProps['Component'];
   store: Store;
@@ -35,18 +37,6 @@ const Chalkak = ({ Component, store, pageProps }: Props) => {
         <meta name="og:title" content="Chalkak" />
         <meta name="og:description" content="Chalkak" />
         <meta property="og:type" content="website" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css" />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.js"></script>
       </Helmet>
       <AppLayout>
         <Component {...pageProps} />
