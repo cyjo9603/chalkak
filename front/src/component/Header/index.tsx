@@ -3,6 +3,9 @@ import Link from 'next/link';
 
 import { HeaderWrapper, LeftWrapper, Search } from './HeaderStyled';
 import UnSignInMenu from './UnSignInMenu';
+import SignInMenu from './SignInMenu';
+
+import dummy from '../../dummy';
 
 const Header = () => {
   return (
@@ -16,7 +19,7 @@ const Header = () => {
           </Link>
           <Search />
         </LeftWrapper>
-        <UnSignInMenu />
+        {dummy.user.userInfo ? <SignInMenu /> : <UnSignInMenu />}
       </div>
     </HeaderWrapper>
   );

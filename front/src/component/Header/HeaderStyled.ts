@@ -70,3 +70,19 @@ export const SignLink = styled(Menu.Item)`
     width: 100%;
   }
 `;
+
+export const UserAvatar = styled(Menu.Item)`
+  text-align: center;
+  & div {
+    margin-left: 8px;
+    display: inline;
+    font-weight: 900;
+  }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.MOBILE}px) {
+    width: 50px;
+    & div {
+      display: none;
+    }
+  }
+`;
