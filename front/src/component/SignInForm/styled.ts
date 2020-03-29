@@ -27,6 +27,14 @@ export const Form = styled.form`
       color: ${(props) => props.theme.PRIMARY_COLOR};
     }
   }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.PC}px) {
+    border: none;
+  }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.TABLET}px) {
+    top: 20px;
+  }
 `;
 
 export const InputWrapper = styled.div<{ focus: boolean }>`
