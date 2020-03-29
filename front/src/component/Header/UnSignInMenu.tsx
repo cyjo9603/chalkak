@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import { MenuOutlined } from '@ant-design/icons';
 
 import { HeaderMenu, SignLink } from './HeaderStyled';
 
 const UnSignInMenu = () => (
-  <HeaderMenu mode="horizontal" theme="dark">
+  <HeaderMenu mode="horizontal" theme="dark" overflowedIndicator={<MenuOutlined />}>
     <SignLink key="signin">
       <Link href="/signin">
         <a>
