@@ -1,40 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
-import { Menu } from 'antd';
 
-import { HeaderWrapper, HeaderMenu, LeftWrapper, Logo, Search, SignLink } from './HeaderStyled';
+import { HeaderWrapper, LeftWrapper, Search } from './HeaderStyled';
+import UnSignInMenu from './UnSignInMenu';
 
 const Header = () => {
   return (
     <HeaderWrapper>
-      <HeaderMenu mode="horizontal">
+      <div>
         <LeftWrapper>
-          <Logo key="index">
-            <Link href="/">
-              <a>
-                <img src="/logo_main.svg" alt="logo" />
-              </a>
-            </Link>
-          </Logo>
-          <Menu.Item key="search">
-            <Search />
-          </Menu.Item>
+          <Link href="/">
+            <a>
+              <img src="/logo_main.svg" alt="logo" />
+            </a>
+          </Link>
+          <Search />
         </LeftWrapper>
-        <SignLink key="signin">
-          <Link href="/signin">
-            <a>
-              <span>로그인</span>
-            </a>
-          </Link>
-        </SignLink>
-        <SignLink key="signup">
-          <Link href="/signup">
-            <a>
-              <span>회원가입</span>
-            </a>
-          </Link>
-        </SignLink>
-      </HeaderMenu>
+        <UnSignInMenu />
+      </div>
     </HeaderWrapper>
   );
 };

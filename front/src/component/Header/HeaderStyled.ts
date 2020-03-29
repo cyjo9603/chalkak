@@ -1,78 +1,72 @@
 import styled from 'styled-components';
 import { Input, Menu } from 'antd';
 
-import { Theme } from '../../theme';
-
-export const HeaderWrapper = styled.div`
-  background-color: ${(props) => props.theme.PRIMARY_COLOR};
+export const HeaderWrapper = styled.header`
   position: fixed;
+  background-color: ${(props) => props.theme.PRIMARY_COLOR};
   width: 100%;
   height: 50px;
+
+  & > div {
+    margin: 0 auto;
+    display: flex;
+    width: 1200px;
+  }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.HDPC}px) {
+    & > div {
+      padding: 0 10px;
+      width: 100%;
+    }
+  }
 `;
 
-export const HeaderMenu = styled(Menu)<{ theme: Theme }>`
-  background-color: ${(props) => props.theme.PRIMARY_COLOR};
-  margin: 0 auto;
-  width: 1200px;
-  height: calc(100% + 1px);
-  display: flex;
-  justify-content: flex-end;
-
-  & img {
-    height: 32px;
-  }
-
-  & > li {
-    padding: 0;
-  }
-
-  @media (max-width: 1200px) {
-    width: 100%;
-  }
+export const HeaderMenu = styled(Menu)`
+  background-color: inherit;
 `;
 
 export const LeftWrapper = styled.div`
   display: flex;
-  margin-right: auto;
+  align-items: center;
+  flex: 1;
 
-  @media (max-width: 1200px) {
-    padding-left: 10px;
+  & img {
+    height: 32px;
   }
-
-  @media (max-width: 768px) {
-    & > li:last-child > span {
-      width: 500px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    & > li:last-child > span {
-      width: 300px;
-    }
-  }
-`;
-
-export const Logo = styled(Menu.Item)`
-  margin-right: 10px;
 `;
 
 export const Search = styled(Input.Search)`
-  width: 500px;
+  margin-left: 10px;
   height: 30px;
+  width: 500px;
 
   & input {
     color: black;
   }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.PC}px) {
+    width: 400px;
+  }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.TABLET}px) {
+    width: 200px;
+  }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.MOBILE}px) {
+    flex: 1;
+  }
 `;
 
-export const SignLink = styled(Menu.Item)<{ theme: Theme }>`
-  width: 100px;
+export const SignLink = styled(Menu.Item)`
   text-align: center;
   font-weight: 900;
+  width: 100px;
 
-  @media (max-width: 1200px) {
-    & > li:last-child {
-      padding-right: 10px;
-    }
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.TABLET}px) {
+    width: 80px;
+  }
+
+  @media (max-width: ${(props) => props.theme.BREAK_POINT.MOBILE}px) {
+    width: 100%;
   }
 `;
