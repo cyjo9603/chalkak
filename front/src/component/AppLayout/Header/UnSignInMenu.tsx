@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { MenuOutlined } from '@ant-design/icons';
 
-import { HeaderMenu, SignLink } from './HeaderStyled';
+import { HeaderMenu, SignLink } from './styled';
 
 const UnSignInMenu = () => (
   <HeaderMenu mode="horizontal" theme="dark" overflowedIndicator={<MenuOutlined />}>

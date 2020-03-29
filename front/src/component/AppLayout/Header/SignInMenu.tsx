@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { Avatar, Menu, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
-import { HeaderMenu, UserAvatar } from './HeaderStyled';
+import { HeaderMenu, UserAvatar } from './styled';
 
-import dummy from '../../dummy';
+import dummy from '../../../dummy';
 
 const SignInMenu = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

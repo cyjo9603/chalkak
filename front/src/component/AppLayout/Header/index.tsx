@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { HeaderWrapper, LeftWrapper, Search } from './HeaderStyled';
+import { HeaderWrapper, LeftWrapper, Search } from './styled';
 import UnSignInMenu from './UnSignInMenu';
 import SignInMenu from './SignInMenu';
 
-import dummy from '../../dummy';
+import dummy from '../../../dummy';
 
 const Header = () => {
   return (
