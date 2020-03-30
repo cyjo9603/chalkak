@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import InputWrapper from './styled';
 
 interface Props {
-  placeholder: string;
+  placeholder?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type: 'text' | 'password';
@@ -23,7 +23,7 @@ const Input = ({ placeholder, value, onChange, type }: Props) => {
   return (
     <InputWrapper focus={isFocus}>
       <input
-        placeholder={placeholder}
+        placeholder={placeholder || ''}
         onFocus={onFocus}
         onBlur={onBlur}
         value={value}
