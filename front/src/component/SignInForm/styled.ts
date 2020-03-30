@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export default styled.form`
   position: relative;
   top: 50%;
   width: 600px;
@@ -34,18 +34,5 @@ export const Form = styled.form`
 
   @media (max-width: ${(props) => props.theme.BREAK_POINT.TABLET}px) {
     top: 20px;
-  }
-`;
-
-export const InputWrapper = styled.div<{ focus: boolean }>`
-  border: 1px solid ${(props) => (props.focus ? props.theme.INPUT_FOCUS_COLOR : props.theme.LIGHT_GREY)};
-  padding: 10px 14px;
-  margin-bottom: 14px;
-
-  & > input {
-    width: 100%;
-    height: 28px;
-    border: none;
-    cursor: pointer;
   }
 `;

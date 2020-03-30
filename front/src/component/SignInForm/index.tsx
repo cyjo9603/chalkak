@@ -2,34 +2,25 @@ import React, { useState, useCallback } from 'react';
 import { Button } from 'antd';
 import Link from 'next/link';
 
-import { Form, InputWrapper } from './styled';
+import Form from './styled';
+import Input from '../Input';
 
 const SignInForm = () => {
-  const [isFocusId, setIsFocusId] = useState(false);
-  const [isFocusPW, setIsFocusPW] = useState(false);
+  const [inputId, setInputId] = useState('');
+  const [inputPassword, setInputPassword] = useState('');
 
-  const focusId = useCallback(() => {
-    setIsFocusId(true);
-  }, []);
-  const blurId = useCallback(() => {
-    setIsFocusId(false);
+  const onChangeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputId(e.target.value);
   }, []);
 
-  const focusPW = useCallback(() => {
-    setIsFocusPW(true);
-  }, []);
-  const blurPW = useCallback(() => {
-    setIsFocusPW(false);
+  const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputPassword(e.target.value);
   }, []);
 
   return (
     <Form>
-      <InputWrapper focus={isFocusId}>
-        <input placeholder="아이디" onFocus={focusId} onBlur={blurId}></input>
-      </InputWrapper>
-      <InputWrapper focus={isFocusPW}>
-        <input placeholder="비밀번호" onFocus={focusPW} onBlur={blurPW}></input>
-      </InputWrapper>
+      <Input placeholder="아이디" value={inputId} onChange={onChangeId} type="text" />
+      <Input placeholder="비밀번호" value={inputPassword} onChange={onChangePassword} type="password" />
       <Button type="primary">로그인</Button>
       <div>
         <Link href="/find/id">
