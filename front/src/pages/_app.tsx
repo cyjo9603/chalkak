@@ -22,6 +22,7 @@ const GolbalStyle = createGlobalStyle`
 body {
   @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
   font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 900;
 }
 `;
 
