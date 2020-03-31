@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { Row, Col } from 'antd';
 
 import Header from './Header';
-import Section from './styled';
+import { Layout, Section } from './styled';
+import Footer from './Footer';
 
 import dummy from '../../dummy';
 
@@ -18,7 +19,7 @@ const AppLayout: FC<Props> = ({ children }: Props) => {
   const mainSectionSize = dummy.user.userInfo ? MAINSECTION_SIZE : MAX_SIZE;
 
   return (
-    <>
+    <Layout>
       <Header />
       <Section>
         <Row gutter={8}>
@@ -32,7 +33,8 @@ const AppLayout: FC<Props> = ({ children }: Props) => {
           )}
         </Row>
       </Section>
-    </>
+      <Footer />
+    </Layout>
   );
 };
 
