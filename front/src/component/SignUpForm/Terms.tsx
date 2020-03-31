@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Checkbox } from 'antd';
 
 import { ModalWrapper } from './styled';
@@ -17,7 +17,7 @@ const Terms = ({ termsCheck, onTermsCheck }: Props) => {
     if (modalRef.current.scrollHeight === modalRef.current.clientHeight + modalRef.current.scrollTop) {
       setOkAvailable(false);
     }
-  }, [modalRef.current]);
+  }, []);
 
   const showModal = useCallback(() => {
     setModalVisible(true);
@@ -33,8 +33,18 @@ const Terms = ({ termsCheck, onTermsCheck }: Props) => {
 
   const setRef = useCallback((ref: HTMLDivElement) => {
     modalRef.current = ref;
-    modalRef.current.addEventListener('scroll', onScroll);
+    if (modalRef.current) {
+      modalRef.current.addEventListener('scroll', onScroll);
+    }
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (modalRef.current) {
+        modalRef.current.removeEventListener('scroll', onScroll);
+      }
+    };
+  }, [modalRef.current]);
 
   return (
     <>
