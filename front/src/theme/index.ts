@@ -1,5 +1,7 @@
 const theme = {
   PRIMARY_COLOR: '#272343',
+  BACKGROUND_COLOR: '#f0f2f5',
+  WHITE_COLOR: '#ffffff',
   INPUT_FOCUS_COLOR: '#1089ff',
   DARK_GREY: '#888888',
   LIGHT_GREY: '#cccccc',

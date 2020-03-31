@@ -21,6 +21,7 @@ import 'antd/dist/antd.less';
 const GolbalStyle = createGlobalStyle`
 body {
   @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+  background-color: #f0f2f5;
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: 900;
 }
