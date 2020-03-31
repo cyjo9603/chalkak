@@ -6,6 +6,7 @@ export const HeaderWrapper = styled.header`
   background-color: ${(props) => props.theme.PRIMARY_COLOR};
   width: 100%;
   height: 50px;
+  z-index: 1001;
 
   & > div {
     margin: 0 auto;
