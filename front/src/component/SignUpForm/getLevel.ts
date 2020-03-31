@@ -25,3 +25,23 @@ export const getPwWarningLevel = (value: string) => {
   }
   return 3;
 };
+
+export const getPhoneWarningLevel = (value: string) => {
+  if (value.length === 0) {
+    return 0;
+  }
+  if (!PATTERN.signUp.phone.test(value)) {
+    return 1;
+  }
+  return 3;
+};
+
+export const getMailWarningLevel = (value: string) => {
+  if (value.length === 0) {
+    return 0;
+  }
+  if (!PATTERN.signUp.mail.test(value)) {
+    return 1;
+  }
+  return 3;
+};
