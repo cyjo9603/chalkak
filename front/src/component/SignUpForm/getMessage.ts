@@ -40,3 +40,29 @@ export const getPwReWarningMsg = (level: number) => {
       return '';
   }
 };
+
+export const getPhoneWarningMsg = (level: number) => {
+  switch (level) {
+    case 0:
+      return '';
+    case 1:
+      return '알맞은 전화번호가 아닙니다 TT';
+    case 3:
+      return '올바른 전화번호 입니다 :)';
+    default:
+      return '';
+  }
+};
+
+export const getMailWarningMsg = (level: number) => {
+  switch (level) {
+    case 0:
+      return '';
+    case 1:
+      return '알맞은 이메일이 아닙니다 TT';
+    case 3:
+      return '올바른 이메일 입니다 :)';
+    default:
+      return '';
+  }
+};
