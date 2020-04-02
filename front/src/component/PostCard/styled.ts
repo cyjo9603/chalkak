@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   width: 400px;
+  margin-bottom: 16px;
 
   & .ant-card-head-title {
     font-weight: 600;

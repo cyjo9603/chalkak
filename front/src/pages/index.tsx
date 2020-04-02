@@ -1,11 +1,19 @@
 import React from 'react';
 
+import WritePostForm from '../component/WritePostForm';
 import PostCard from '../component/PostCard';
 
+import dummy from '../dummy';
+
 const Home = () => {
+  const { mainPosts } = dummy.post;
+
   return (
     <>
-      <PostCard />
+      <WritePostForm />
+      {mainPosts.map((v) => (
+        <PostCard key={`post_${v.id}`} />
+      ))}
     </>
   );
 };
