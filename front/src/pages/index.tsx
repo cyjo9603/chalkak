@@ -1,7 +1,13 @@
 import React from 'react';
 
+import PostCard from '../component/PostCard';
+
 const Home = () => {
-  return <>init</>;
+  return (
+    <>
+      <PostCard />
+    </>
+  );
 };
 
 export default Home;

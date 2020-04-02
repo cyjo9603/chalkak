@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 
-import { MoreImageWrapeer } from '../styled';
+import { ImageWrapper, MoreImageWrapeer } from '../styled';
 
 interface Props {
   images: string[];
@@ -20,23 +20,23 @@ const PostImages = ({ images }: Props) => {
 
   if (images.length === 1) {
     return (
-      <>
+      <ImageWrapper>
         <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
-      </>
+      </ImageWrapper>
     );
   }
 
   if (images.length === 2) {
     return (
-      <div>
+      <ImageWrapper>
         <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
         <img src={images[1]} alt="게시글 이미지" onClick={onZoom} />
-      </div>
+      </ImageWrapper>
     );
   }
 
   return (
-    <>
+    <ImageWrapper>
       <MoreImageWrapeer>
         <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
         <div>
@@ -45,7 +45,7 @@ const PostImages = ({ images }: Props) => {
           {images.length - 1}개의 사진 더보기
         </div>
       </MoreImageWrapeer>
-    </>
+    </ImageWrapper>
   );
 };
 

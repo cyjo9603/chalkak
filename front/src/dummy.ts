@@ -35,8 +35,6 @@ export default {
             id: 1,
             nickname: '조찬영',
           },
-          content: 'retweet test',
-          images: ['/github.png'],
           createdAt: '2020-04-01',
         },
       },
