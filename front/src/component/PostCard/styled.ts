@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
-  width: 400px;
+  width: 100%;
   margin-bottom: 16px;
 
   & .ant-card-head-title {
