@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const FormWrapper = styled.form`
   width: 100%;
-  margin: 10px 0 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.WHITE_COLOR};

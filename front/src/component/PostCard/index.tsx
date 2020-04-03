@@ -5,16 +5,19 @@ import { UserOutlined, HeartFilled, ShareAltOutlined, CommentOutlined, EllipsisO
 import { CardWrapper } from './styled';
 import PostImages from './PostImages';
 
-import dummy from '../../dummy';
+import { PostData } from '../../dummy';
 
 const { Meta } = Card;
 
-const PostCard = () => {
-  const post = dummy.post.mainPosts[0];
+interface Props {
+  postData: PostData;
+}
+
+const PostCard = ({ postData }: Props) => {
   return (
     <CardWrapper>
       <Card
-        cover={post.images[0] && <PostImages images={post.images} />}
+        cover={postData.images[0] && <PostImages images={postData.images} />}
         actions={[
           <HeartFilled key="heart" />,
           <ShareAltOutlined key="share" />,
@@ -24,7 +27,7 @@ const PostCard = () => {
         title={
           <>
             <Avatar icon={<UserOutlined />} />
-            {post.user.nickname}
+            {postData.user.nickname}
           </>
         }
       >

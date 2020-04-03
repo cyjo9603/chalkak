@@ -12,7 +12,7 @@ const Home = () => {
     <>
       <WritePostForm />
       {mainPosts.map((v) => (
-        <PostCard key={`post_${v.id}`} />
+        <PostCard key={`post_${v.id}`} postData={v} />
       ))}
     </>
   );
