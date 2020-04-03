@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import Header from './Header';
 import { Layout, Section, MainContents, Notify } from './styled';
 import Footer from './Footer';
+import SideNotification from '../SideNotification';
 
 import dummy from '../../dummy';
 
@@ -17,7 +18,13 @@ const AppLayout: FC<Props> = ({ children }: Props) => {
       <Section>
         <div>
           <MainContents> {children}</MainContents>
-          {dummy.user.userInfo && <Notify>{'notify message'}</Notify>}
+          {dummy.user.userInfo && (
+            <Notify>
+              {dummy.user.notifyList.map((v, i) => (
+                <SideNotification key={`notify-${v.type}-${i}`} notify={v} />
+              ))}
+            </Notify>
+          )}
         </div>
       </Section>
       <Footer />
