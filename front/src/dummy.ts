@@ -1,3 +1,4 @@
+// notify
 export const NOTIFY_REQUEST_FRIEND = 'NOTIFY_REQUEST_FRIEND' as const;
 export const NOTIFY_WELCOME = 'NOTIFY_WELCOME' as const;
 export const NOTIFY_POST_COMMENTS = 'NOTIFY_POST_COMMENTS' as const;
@@ -18,7 +19,47 @@ interface NotifyPostComment {
 
 export type NotifyType = NotifyRequestFriend | NotifyWelcome | NotifyPostComment;
 
-export default {
+// post
+interface User {
+  id: number;
+  nickname: string;
+}
+
+export interface PostData {
+  id: number;
+  user: User;
+  content: string;
+  images: string[];
+  comment: {
+    id: number;
+    user: User;
+  }[];
+  createdAt: string;
+  Likers: User[];
+  RetweetId: number;
+  Retweet: {
+    id: number;
+    user: User;
+    createdAt: string;
+  };
+}
+
+//  main
+interface InitialState {
+  user: {
+    userInfo: {
+      userId: number;
+      userFirstName: string;
+      userFamilyName: string;
+    } | null;
+    notifyList: NotifyType[];
+  };
+  post: {
+    mainPosts: PostData[];
+  };
+}
+
+const initialState: InitialState = {
   user: {
     userInfo: {
       userId: 1,
@@ -46,7 +87,7 @@ export default {
           nickname: '조찬영',
         },
         content: 'test',
-        images: ['/github.png'],
+        images: ['/github.png', '/typescript.png'],
         comment: [
           {
             id: 1,
@@ -57,7 +98,7 @@ export default {
           },
         ],
         createdAt: '2020-04-01',
-        Likers: [{ id: 1 }],
+        Likers: [{ id: 1, nickname: '조찬영' }],
         RetweetId: 1,
         Retweet: {
           id: 1,
@@ -86,7 +127,36 @@ export default {
           },
         ],
         createdAt: '2020-04-01',
-        Likers: [{ id: 1 }],
+        Likers: [{ id: 1, nickname: '조찬영' }],
+        RetweetId: 1,
+        Retweet: {
+          id: 1,
+          user: {
+            id: 1,
+            nickname: '조찬영',
+          },
+          createdAt: '2020-04-01',
+        },
+      },
+      {
+        id: 1,
+        user: {
+          id: 1,
+          nickname: '홍길동',
+        },
+        content: 'test',
+        images: ['/github.png', '/typescript.png', '/logo_main.svg'],
+        comment: [
+          {
+            id: 1,
+            user: {
+              id: 1,
+              nickname: '조찬영',
+            },
+          },
+        ],
+        createdAt: '2020-04-01',
+        Likers: [{ id: 1, nickname: '조찬영' }],
         RetweetId: 1,
         Retweet: {
           id: 1,
@@ -100,3 +170,5 @@ export default {
     ],
   },
 };
+
+export default initialState;
