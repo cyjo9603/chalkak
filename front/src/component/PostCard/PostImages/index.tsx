@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 
 import { ImageWrapper, MoreImageWrapeer } from '../styled';
+import ImageZoom from './ImagesZoom';
 
 interface Props {
   images: string[];
@@ -20,32 +21,43 @@ const PostImages = ({ images }: Props) => {
 
   if (images.length === 1) {
     return (
-      <ImageWrapper>
-        <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
-      </ImageWrapper>
+      <>
+        <ImageWrapper>
+          <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
+        </ImageWrapper>
+        {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
+      </>
     );
   }
 
   if (images.length === 2) {
     return (
-      <ImageWrapper>
-        <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
-        <img src={images[1]} alt="게시글 이미지" onClick={onZoom} />
-      </ImageWrapper>
+      <>
+        <ImageWrapper>
+          <MoreImageWrapeer>
+            <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
+            <img src={images[1]} alt="게시글 이미지" onClick={onZoom} />
+          </MoreImageWrapeer>
+        </ImageWrapper>
+        {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
+      </>
     );
   }
 
   return (
-    <ImageWrapper>
-      <MoreImageWrapeer>
-        <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
-        <div>
-          <PlusOutlined />
-          <br />
-          {images.length - 1}개의 사진 더보기
-        </div>
-      </MoreImageWrapeer>
-    </ImageWrapper>
+    <>
+      <ImageWrapper>
+        <MoreImageWrapeer>
+          <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
+          <div>
+            <PlusOutlined />
+            <br />
+            {images.length - 1}개의 사진 더보기
+          </div>
+        </MoreImageWrapeer>
+      </ImageWrapper>
+      {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
+    </>
   );
 };
 
