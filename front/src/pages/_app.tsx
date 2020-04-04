@@ -27,11 +27,14 @@ body {
   @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
   background-color: #f0f2f5;
   height: 100%;
-  font-family: 'Nanum Gothic', sans-serif;
   font-weight: 900;
 
   & > div {
     height: 100%;
+  }
+
+  &  * {
+    font-family: 'Nanum Gothic', sans-serif;
   }
 }
 `;
