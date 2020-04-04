@@ -36,17 +36,17 @@ const SignInMenu = () => {
       <Drawer title="Menu" placement="right" closable={false} onClose={onClose} visible={drawerOpen}>
         <p>
           <Link href="/mypage">
-            <a>마이페이지</a>
+            <a onClick={onClose}>마이페이지</a>
           </Link>
         </p>
         <p>
           <Link href="/friends">
-            <a>친구 목록</a>
+            <a onClick={onClose}>친구 목록</a>
           </Link>
         </p>
         <p>
           <Link href="/settings">
-            <a>설정</a>
+            <a onClick={onClose}>설정</a>
           </Link>
         </p>
       </Drawer>
