@@ -24,8 +24,8 @@ const SignInMenu = () => {
         <UserAvatar key="Avatar">
           <Link href="/profile">
             <a>
-              <Avatar size={30}>{dummy.user.userInfo.userFirstName}</Avatar>
-              <div>{`${dummy.user.userInfo.userFamilyName}${dummy.user.userInfo.userFirstName}`}</div>
+              <Avatar size={30}>{dummy.user.userInfo.firstName}</Avatar>
+              <div>{`${dummy.user.userInfo.familyName}${dummy.user.userInfo.firstName}`}</div>
             </a>
           </Link>
         </UserAvatar>

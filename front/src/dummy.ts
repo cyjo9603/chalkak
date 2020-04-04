@@ -48,9 +48,16 @@ export interface PostData {
 interface InitialState {
   user: {
     userInfo: {
-      userId: number;
-      userFirstName: string;
-      userFamilyName: string;
+      id: number;
+      firstName: string;
+      familyName: string;
+      birth: string;
+      phone: string;
+      mail: string;
+      friends: {
+        total: number;
+        lists: User[];
+      };
     } | null;
     notifyList: NotifyType[];
   };
@@ -62,9 +69,37 @@ interface InitialState {
 const initialState: InitialState = {
   user: {
     userInfo: {
-      userId: 1,
-      userFirstName: '찬영',
-      userFamilyName: '조',
+      id: 1,
+      firstName: '찬영',
+      familyName: '조',
+      birth: '1996-03-30',
+      phone: '010-0000-0000',
+      mail: 'test@test.com',
+      friends: {
+        total: 5,
+        lists: [
+          {
+            id: 2,
+            nickname: '홍길동',
+          },
+          {
+            id: 3,
+            nickname: '김김김',
+          },
+          {
+            id: 4,
+            nickname: '테스트',
+          },
+          {
+            id: 5,
+            nickname: '김김김',
+          },
+          {
+            id: 6,
+            nickname: '홍홍홍',
+          },
+        ],
+      },
     },
     // userInfo: null,
 
