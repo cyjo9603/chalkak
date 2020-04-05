@@ -80,7 +80,7 @@ const initialState: InitialState = {
       phone: '010-0000-0000',
       mail: 'test@test.com',
       friends: {
-        total: 5,
+        total: 8,
         lists: [
           {
             id: 2,
