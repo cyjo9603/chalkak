@@ -20,7 +20,7 @@ interface NotifyPostComment {
 export type NotifyType = NotifyRequestFriend | NotifyWelcome | NotifyPostComment;
 
 // post
-interface User {
+export interface User {
   id: number;
   firstName: string;
   familyName: string;
