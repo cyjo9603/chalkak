@@ -87,3 +87,8 @@ export const UserAvatar = styled(Menu.Item)`
     }
   }
 `;
+
+export const LogoutWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;

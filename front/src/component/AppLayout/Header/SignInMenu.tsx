@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
-import { Avatar, Menu, Drawer } from 'antd';
+import { Avatar, Menu, Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
-import { HeaderMenu, UserAvatar } from './styled';
+import { HeaderMenu, UserAvatar, LogoutWrapper } from './styled';
 
 import dummy from '../../../dummy';
 
@@ -33,7 +33,18 @@ const SignInMenu = () => {
           <MenuOutlined />
         </Menu.Item>
       </HeaderMenu>
-      <Drawer title="Menu" placement="right" closable={false} onClose={onClose} visible={drawerOpen}>
+      <Drawer
+        title="Menu"
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        visible={drawerOpen}
+        footer={
+          <LogoutWrapper>
+            <Button>로그아웃</Button>
+          </LogoutWrapper>
+        }
+      >
         <p>
           <Link href="/mypage">
             <a onClick={onClose}>마이페이지</a>
