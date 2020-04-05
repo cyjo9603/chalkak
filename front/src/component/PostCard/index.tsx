@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Card, Avatar } from 'antd';
 import { UserOutlined, HeartFilled, ShareAltOutlined, CommentOutlined, EllipsisOutlined } from '@ant-design/icons';
 
 import { CardWrapper } from './styled';
 import PostImages from './PostImages';
+import CommentForm from './CommentForm';
 
 import { PostData } from '../../dummy';
 
@@ -14,6 +15,12 @@ interface Props {
 }
 
 const PostCard = ({ postData }: Props) => {
+  const [openCommentForm, setOpenCommentForm] = useState(false);
+
+  const onClickCommentForm = useCallback(() => {
+    setOpenCommentForm(!openCommentForm);
+  }, [openCommentForm]);
+
   return (
     <CardWrapper>
       <Card
@@ -21,20 +28,20 @@ const PostCard = ({ postData }: Props) => {
         actions={[
           <HeartFilled key="heart" />,
           <ShareAltOutlined key="share" />,
-          <CommentOutlined key="comment" />,
+          <CommentOutlined key="comment" onClick={onClickCommentForm} />,
           <EllipsisOutlined key="ellipsis" />,
         ]}
         title={
           <>
             <Avatar icon={<UserOutlined />} />
-            {postData.user.nickname}
+            {`${postData.user.familyName}${postData.user.firstName}`}
           </>
         }
       >
-        {'tag'}
         <Meta title="post title" />
         {'test'}
       </Card>
+      {openCommentForm && <CommentForm comments={postData.comment} />}
     </CardWrapper>
   );
 };

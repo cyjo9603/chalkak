@@ -22,7 +22,14 @@ export type NotifyType = NotifyRequestFriend | NotifyWelcome | NotifyPostComment
 // post
 interface User {
   id: number;
-  nickname: string;
+  firstName: string;
+  familyName: string;
+}
+
+export interface CommentInfo {
+  id: number;
+  user: User;
+  contents: string;
 }
 
 export interface PostData {
@@ -30,10 +37,7 @@ export interface PostData {
   user: User;
   content: string;
   images: string[];
-  comment: {
-    id: number;
-    user: User;
-  }[];
+  comment: CommentInfo[];
   createdAt: string;
   Likers: User[];
   RetweetId: number;
@@ -80,23 +84,28 @@ const initialState: InitialState = {
         lists: [
           {
             id: 2,
-            nickname: '홍길동',
+            firstName: '길동',
+            familyName: '홍',
           },
           {
             id: 3,
-            nickname: '김김김',
+            firstName: '김김',
+            familyName: '김',
           },
           {
             id: 4,
-            nickname: '테스트',
+            firstName: '스트',
+            familyName: '테',
           },
           {
             id: 5,
-            nickname: '김김김',
+            firstName: '이이',
+            familyName: '이',
           },
           {
             id: 6,
-            nickname: '홍홍홍',
+            firstName: '홍홍',
+            familyName: '홍',
           },
         ],
       },
@@ -119,7 +128,8 @@ const initialState: InitialState = {
         id: 1,
         user: {
           id: 1,
-          nickname: '조찬영',
+          firstName: '찬영',
+          familyName: '조',
         },
         content: 'test',
         images: ['/github.png', '/typescript.png'],
@@ -128,18 +138,36 @@ const initialState: InitialState = {
             id: 1,
             user: {
               id: 1,
-              nickname: '조찬영',
+              firstName: '찬영',
+              familyName: '조',
             },
+            contents: 'dummy test',
+          },
+          {
+            id: 1,
+            user: {
+              id: 1,
+              firstName: '찬영',
+              familyName: '조',
+            },
+            contents: 'dummy test2',
           },
         ],
         createdAt: '2020-04-01',
-        Likers: [{ id: 1, nickname: '조찬영' }],
+        Likers: [
+          {
+            id: 1,
+            firstName: '찬영',
+            familyName: '조',
+          },
+        ],
         RetweetId: 1,
         Retweet: {
           id: 1,
           user: {
             id: 1,
-            nickname: '조찬영',
+            firstName: '찬영',
+            familyName: '조',
           },
           createdAt: '2020-04-01',
         },
@@ -148,7 +176,8 @@ const initialState: InitialState = {
         id: 1,
         user: {
           id: 1,
-          nickname: '조찬영',
+          firstName: '찬영',
+          familyName: '조',
         },
         content: 'test',
         images: ['/github.png'],
@@ -157,18 +186,27 @@ const initialState: InitialState = {
             id: 1,
             user: {
               id: 1,
-              nickname: '조찬영',
+              firstName: '찬영',
+              familyName: '조',
             },
+            contents: 'dummy test',
           },
         ],
         createdAt: '2020-04-01',
-        Likers: [{ id: 1, nickname: '조찬영' }],
+        Likers: [
+          {
+            id: 1,
+            firstName: '찬영',
+            familyName: '조',
+          },
+        ],
         RetweetId: 1,
         Retweet: {
           id: 1,
           user: {
             id: 1,
-            nickname: '조찬영',
+            firstName: '찬영',
+            familyName: '조',
           },
           createdAt: '2020-04-01',
         },
@@ -177,7 +215,8 @@ const initialState: InitialState = {
         id: 1,
         user: {
           id: 1,
-          nickname: '홍길동',
+          firstName: '길동',
+          familyName: '홍',
         },
         content: 'test',
         images: ['/github.png', '/typescript.png', '/logo_main.svg'],
@@ -186,18 +225,27 @@ const initialState: InitialState = {
             id: 1,
             user: {
               id: 1,
-              nickname: '조찬영',
+              firstName: '찬영',
+              familyName: '조',
             },
+            contents: 'dummy test',
           },
         ],
         createdAt: '2020-04-01',
-        Likers: [{ id: 1, nickname: '조찬영' }],
+        Likers: [
+          {
+            id: 1,
+            firstName: '찬영',
+            familyName: '조',
+          },
+        ],
         RetweetId: 1,
         Retweet: {
           id: 1,
           user: {
             id: 1,
-            nickname: '조찬영',
+            firstName: '찬영',
+            familyName: '조',
           },
           createdAt: '2020-04-01',
         },

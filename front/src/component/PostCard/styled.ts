@@ -103,3 +103,20 @@ export const ImageZoomWrapper = styled.div`
     max-height: 750px;
   }
 `;
+
+export const CommentFormWrapper = styled.div`
+  background-color: ${(props) => props.theme.WHITE_COLOR};
+  padding: 10px 16px;
+
+  & > form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+
+    & > textarea {
+      width: calc(100% - 70px);
+      height: 40px;
+    }
+  }
+`;
