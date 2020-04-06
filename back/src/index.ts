@@ -8,12 +8,22 @@ import passport from 'passport';
 import hpp from 'hpp';
 import helmet from 'helmet';
 
+import { sequelize } from '../models';
+
 dotenv.config();
 
 const app = express();
 const prod = process.env.NODE_ENV === 'production';
 
 app.set('port', prod ? process.env.PORT : 3065);
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('db connect success');
+  })
+  .catch((err: Error) => {
+    console.error(err);
+  });
 
 if (prod) {
   app.use(hpp());
