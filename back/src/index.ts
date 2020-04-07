@@ -9,6 +9,11 @@ import hpp from 'hpp';
 import helmet from 'helmet';
 
 import { sequelize } from './sequelize/models';
+import hashtagAPIRouter from './routes/hashtag';
+import notifyAPIRouter from './routes/notify';
+import postAPIRouter from './routes/post';
+import postsAPIRouter from './routes/posts';
+import userAPIRouter from './routes/user';
 
 dotenv.config();
 
@@ -63,6 +68,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// router
+app.use('/api/hashtag', hashtagAPIRouter);
+app.use('/api/notify', notifyAPIRouter);
+app.use('/api/post', postAPIRouter);
+app.use('/api/posts', postsAPIRouter);
+app.use('/api/user', userAPIRouter);
+
+// server start
 app.listen(app.get('port'), () => {
   console.log(`server is running on ${app.get('port')}`);
 });
