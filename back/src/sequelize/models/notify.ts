@@ -26,6 +26,9 @@ Notify.init(
   },
 );
 
-export const associate = (db: dbType) => {};
+export const associate = (db: dbType) => {
+  db.Notify.belongsTo(db.User, { as: 'target' });
+  db.Notify.belongsTo(db.User, { as: 'requetor' });
+};
 
 export default Notify;

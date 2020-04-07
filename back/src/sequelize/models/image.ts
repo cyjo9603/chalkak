@@ -26,6 +26,8 @@ Image.init(
   },
 );
 
-export const associate = (db: dbType) => {};
+export const associate = (db: dbType) => {
+  db.Image.belongsTo(db.Post);
+};
 
 export default Image;
