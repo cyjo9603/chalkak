@@ -8,7 +8,7 @@ import passport from 'passport';
 import hpp from 'hpp';
 import helmet from 'helmet';
 
-import { sequelize } from '../models';
+import { sequelize } from './sequelize/models';
 
 dotenv.config();
 

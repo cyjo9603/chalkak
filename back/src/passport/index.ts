@@ -1,5 +1,5 @@
 import passport from 'passport';
-import User from '../../models/user';
+import User from '../sequelize/models/user';
 
 export default () => {
   passport.serializeUser((user: User, done) => {
