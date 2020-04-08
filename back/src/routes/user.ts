@@ -1,12 +1,12 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 
+import passport from 'passport';
 import User from '../sequelize/models/user';
 import { isNotLoggedIn } from './middleware';
+import Post from '../sequelize/models/post';
 
 const router = express.Router();
-
-router.get('/', async (req, res, next) => {});
 
 router.post('/idcheck', isNotLoggedIn, async (req, res, next) => {
   try {
@@ -46,6 +46,40 @@ router.post('/signup', isNotLoggedIn, async (req, res, next) => {
     });
 
     return res.json({ result: 'success' });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
+router.post('/signin', isNotLoggedIn, async (req, res, next) => {
+  try {
+    passport.authenticate('local', (e, user, info) => {
+      if (e) {
+        return next(e);
+      }
+      if (info) {
+        return res.status(401).send(info.reason);
+      }
+      return req.login(user, async (loginErr) => {
+        if (loginErr) {
+          return next(loginErr);
+        }
+        console.log('login success', user);
+        const fullUser = await User.findOne({
+          where: { id: user.id },
+          include: [
+            {
+              model: Post,
+              as: 'Posts',
+              attributes: ['id'],
+            },
+          ],
+          attributes: ['id', 'familyName', 'firstName'],
+        });
+        return res.json(fullUser);
+      });
+    })(req, res, next);
   } catch (e) {
     console.error(e);
     next(e);
