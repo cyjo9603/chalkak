@@ -79,4 +79,9 @@ router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
   }
 });
 
+router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
+  const images = req.files as Express.Multer.File[];
+  return res.json(images.map((v) => v.filename));
+});
+
 export default router;
