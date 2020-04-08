@@ -8,6 +8,32 @@ import Post from '../sequelize/models/post';
 
 const router = express.Router();
 
+router.get('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+    const fullUser = await User.findOne({
+      where: { id },
+      include: [
+        {
+          model: Post,
+          as: 'Posts',
+          attributes: ['id'],
+        },
+        {
+          model: User,
+          as: 'Friends',
+          attributes: ['id'],
+        },
+      ],
+      attributes: ['id', 'familyName', 'firstName', 'userId', 'phone', 'mail'],
+    });
+    return res.json(fullUser);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 router.post('/idcheck', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
@@ -65,7 +91,6 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
         if (loginErr) {
           return next(loginErr);
         }
-        console.log('login success', user);
         const fullUser = await User.findOne({
           where: { id: user.id },
           include: [
