@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 import passport from 'passport';
 import User from '../sequelize/models/user';
-import { isNotLoggedIn } from './middleware';
+import { isNotLoggedIn, isLoggedIn } from './middleware';
 import Post from '../sequelize/models/post';
 
 const router = express.Router();
@@ -84,6 +84,16 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
     console.error(e);
     next(e);
   }
+});
+
+router.post('/logout', isLoggedIn, (req, res) => {
+  req.logout();
+  if (req.session) {
+    req.session.destroy((e) => {
+      console.error(e);
+    });
+  }
+  res.send('logout success');
 });
 
 export default router;
