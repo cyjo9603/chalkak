@@ -13,7 +13,7 @@ class Notify extends Model {
 Notify.init(
   {
     notifyType: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(15),
       allowNull: false,
     },
   },
@@ -28,7 +28,7 @@ Notify.init(
 
 export const associate = (db: dbType) => {
   db.Notify.belongsTo(db.User, { as: 'target' });
-  db.Notify.belongsTo(db.User, { as: 'requetor' });
+  db.Notify.belongsTo(db.User, { as: 'requestor' });
 };
 
 export default Notify;
