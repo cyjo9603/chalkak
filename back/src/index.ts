@@ -9,6 +9,7 @@ import hpp from 'hpp';
 import helmet from 'helmet';
 
 import { sequelize } from './sequelize/models';
+import passportConfig from './passport';
 import hashtagAPIRouter from './routes/hashtag';
 import notifyAPIRouter from './routes/notify';
 import postAPIRouter from './routes/post';
@@ -16,6 +17,7 @@ import postsAPIRouter from './routes/posts';
 import userAPIRouter from './routes/user';
 
 dotenv.config();
+passportConfig();
 
 const app = express();
 const prod = process.env.NODE_ENV === 'production';
