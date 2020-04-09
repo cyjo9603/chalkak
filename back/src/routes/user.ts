@@ -34,6 +34,38 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: parseInt(req.params.id, 10),
+      },
+      include: [
+        {
+          model: Post,
+          as: 'Posts',
+          attributes: ['id'],
+        },
+        {
+          model: User,
+          as: 'Friends',
+          attributes: ['id'],
+        },
+      ],
+      attributes: ['id', 'familyName', 'firstName'],
+    });
+
+    const jsonUser = user.toJSON();
+    jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0;
+    jsonUser.Friends = jsonUser.Friends ? jsonUser.Friends.length : 0;
+
+    return res.json(jsonUser);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 router.post('/idcheck', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
