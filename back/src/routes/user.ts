@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import { Op } from 'sequelize';
 
 import passport from 'passport';
 import User from '../sequelize/models/user';
@@ -158,9 +159,7 @@ router.delete('/friend', isLoggedIn, async (req, res, next) => {
     const { id } = req.user as User;
 
     const user = await User.findOne({
-      where: {
-        id,
-      },
+      where: { id },
     });
 
     await user.removeFriends(req.body.friendId);
@@ -177,6 +176,30 @@ router.delete('/friend', isLoggedIn, async (req, res, next) => {
       userId: id,
       friendId: req.body.friendId,
     });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
+router.post('/friends', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+    const user = await User.findOne({
+      where: { id },
+    });
+
+    const friends = await user.getFriends({
+      where: {
+        id: {
+          [Op.lt]: parseInt(req.query.lastId, 10),
+        },
+      },
+      attributes: ['id', 'familyName', 'firstName'],
+      limit: parseInt(req.query.limit, 10),
+    });
+
+    return res.json(friends);
   } catch (e) {
     console.error(e);
     next(e);
