@@ -153,4 +153,34 @@ router.post('/logout', isLoggedIn, (req, res) => {
   res.send('logout success');
 });
 
+router.delete('/friend', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    await user.removeFriends(req.body.friendId);
+
+    const friend = await User.findOne({
+      where: {
+        id: req.body.friendId,
+      },
+    });
+
+    await friend.removeFriends(id);
+
+    return res.json({
+      userId: id,
+      friendId: req.body.friendId,
+    });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 export default router;
