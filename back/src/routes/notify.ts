@@ -1,6 +1,5 @@
 import express from 'express';
 
-import { runInNewContext } from 'vm';
 import Notify from '../sequelize/models/notify';
 import User from '../sequelize/models/user';
 import { isLoggedIn } from './middleware';
