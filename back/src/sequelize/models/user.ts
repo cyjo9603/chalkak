@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable lines-between-class-members */
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize';
