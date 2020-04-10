@@ -225,4 +225,28 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.delete('/:id', isLoggedIn, async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!post) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+
+    await Post.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    return res.json({ PostId: req.params.id });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 export default router;
