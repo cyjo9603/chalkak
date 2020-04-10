@@ -1,6 +1,4 @@
 import express from 'express';
-import multer from 'multer';
-import path from 'path';
 
 import Post from '../sequelize/models/post';
 import User from '../sequelize/models/user';
@@ -8,25 +6,9 @@ import { isLoggedIn } from './middleware';
 import Hashtag from '../sequelize/models/hashtag';
 import Image from '../sequelize/models/image';
 import Comment from '../sequelize/models/comment';
+import upload from '../util/imageUploads';
 
 const router = express.Router();
-
-const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, 'uploads');
-    },
-
-    filename(req, file, done) {
-      const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname);
-      done(null, basename + new Date().valueOf() + ext);
-    },
-  }),
-  limits: {
-    fileSize: 20 * 1024 * 1024,
-  },
-});
 
 router.get('/:id', async (req, res, next) => {
   try {
