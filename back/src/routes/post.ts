@@ -27,6 +27,30 @@ const upload = multer({
   },
 });
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'familyName', 'firstName'],
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
+
+    return res.json(post);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
     const { id } = req.user as User;
