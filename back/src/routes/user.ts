@@ -7,6 +7,7 @@ import User from '../sequelize/models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
 import Post from '../sequelize/models/post';
 import Image from '../sequelize/models/image';
+import upload from '../util/imageUploads';
 
 const router = express.Router();
 
@@ -299,6 +300,10 @@ router.patch('/password', isLoggedIn, async (req, res, next) => {
     console.error(e);
     next(e);
   }
+});
+
+router.post('/image', isLoggedIn, upload.single('image'), (req, res) => {
+  return res.json(req.file.filename);
 });
 
 export default router;
