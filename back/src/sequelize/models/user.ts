@@ -12,6 +12,7 @@ class User extends Model {
   public password!: string;
   public phone!: string;
   public mail!: string;
+  public profilePhoto?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -42,6 +43,10 @@ User.init(
     mail: {
       type: DataTypes.STRING(20),
       allowNull: false,
+    },
+    profilePhoto: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
     },
   },
   {
