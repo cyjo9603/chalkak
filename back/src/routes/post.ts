@@ -52,6 +52,78 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.post('/:id/share', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: Post,
+          as: 'SharePost',
+        },
+      ],
+    });
+
+    if (!post) {
+      return res.status(404).send('포스트가 존재하지 않습니다.');
+    }
+
+    if (id === post.UserId || (post.SharePost && post.SharePost.UserId === id)) {
+      return res.status(403).send('자신의 글은 공유할 수 없습니다.');
+    }
+
+    const shareTargetId = post.SharePost || post.id;
+    const exPost = await Post.findOne({
+      where: {
+        UserId: id,
+        SharePostId: shareTargetId,
+      },
+    });
+
+    if (exPost) {
+      return res.status(403).send('이미 공유한 게시글입니다.');
+    }
+
+    const share = await Post.create({
+      UserId: id,
+      SharePostId: shareTargetId,
+      content: 'share',
+    });
+
+    const shareWithPrePost = await Post.findOne({
+      where: {
+        id: share.id,
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Post,
+          as: 'SharePost',
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'familyName', 'firstName'],
+            },
+            {
+              model: Image,
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(shareWithPrePost);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
     const { id } = req.user as User;
