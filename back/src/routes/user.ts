@@ -275,4 +275,30 @@ router.get('/:id/posts', async (req, res, next) => {
   }
 });
 
+router.patch('/password', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    const result = await bcrypt.compare(req.body.originalPassword, user.password);
+    if (!result) {
+      return res.status(402).send('입력한 비밀번호가 맞지 않습니다.');
+    }
+
+    const newHashedPassword = await bcrypt.hash(req.body.newPassword, 12);
+
+    await User.update({ password: newHashedPassword }, { where: { id } });
+
+    return res.json({ result: 'success' });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 export default router;
