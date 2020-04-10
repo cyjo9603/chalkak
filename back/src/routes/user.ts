@@ -213,16 +213,18 @@ interface UpdateInfo {
   firstName?: string;
   phone?: string;
   mail?: string;
+  profilePhoto?: string;
 }
 
 router.patch('/info', isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.user as User;
     const updateInfo: UpdateInfo = {};
-    updateInfo.familyName = req.body.familyName && req.body.familyName;
-    updateInfo.firstName = req.body.firstName && req.body.firstName;
-    updateInfo.phone = req.body.phone && req.body.phone;
-    updateInfo.mail = req.body.mail && req.body.mail;
+    updateInfo.familyName = req.body.familyName;
+    updateInfo.firstName = req.body.firstName;
+    updateInfo.phone = req.body.phone;
+    updateInfo.mail = req.body.mail;
+    updateInfo.profilePhoto = req.body.profilePhoto;
 
     await User.update(updateInfo, { where: { id } });
 
