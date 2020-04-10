@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
           attributes: ['id'],
         },
       ],
-      attributes: ['id', 'familyName', 'firstName', 'userId', 'phone', 'mail'],
+      attributes: ['id', 'familyName', 'firstName', 'userId', 'phone', 'mail', 'profilePhoto'],
     });
     return res.json(fullUser);
   } catch (e) {
