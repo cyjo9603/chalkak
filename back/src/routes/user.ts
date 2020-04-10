@@ -6,6 +6,7 @@ import passport from 'passport';
 import User from '../sequelize/models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
 import Post from '../sequelize/models/post';
+import Image from '../sequelize/models/image';
 
 const router = express.Router();
 
@@ -225,6 +226,49 @@ router.patch('/info', isLoggedIn, async (req, res, next) => {
     await User.update(updateInfo, { where: { id } });
 
     return res.json(updateInfo);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
+router.get('/:id/posts', async (req, res, next) => {
+  try {
+    let where = {};
+    if (req.query.lastUpdatedAt) {
+      where = {
+        userId: parseInt(req.params.id, 10) || 0,
+        updatedAt: {
+          [Op.lt]: new Date(req.query.lastUpdatedAt),
+        },
+      };
+    } else {
+      where = {
+        userId: parseInt(req.params.id, 10) || 0,
+      };
+    }
+
+    const posts = await Post.findAll({
+      where,
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'familyName', 'firstName'],
+        },
+        {
+          model: Image,
+        },
+        {
+          model: User,
+          as: 'Likers',
+          attributes: ['id'],
+        },
+      ],
+      order: [['updatedAt', 'DESC']],
+      limit: parseInt(req.query.limit, 10),
+    });
+
+    return res.json(posts);
   } catch (e) {
     console.error(e);
     next(e);
