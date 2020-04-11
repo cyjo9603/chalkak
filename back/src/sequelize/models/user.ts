@@ -5,7 +5,17 @@ import { sequelize } from './sequelize';
 import { dbType } from './index';
 
 export const DEFAULT_USER_ATTRIBUTES = ['id', 'familyName', 'firstName', 'profilePhoto'];
-export const FULL_USER_ATTRIBUTES = ['id', 'familyName', 'firstName', 'userId', 'phone', 'mail', 'profilePhoto'];
+export const FULL_USER_ATTRIBUTES = [
+  'id',
+  'familyName',
+  'firstName',
+  'userId',
+  'gender',
+  'phone',
+  'phone',
+  'mail',
+  'profilePhoto',
+];
 
 class User extends Model {
   public readonly id!: number;
@@ -13,6 +23,8 @@ class User extends Model {
   public firstName!: string;
   public userId!: string;
   public password!: string;
+  public birth!: string;
+  public gender!: string;
   public phone!: string;
   public mail!: string;
   public profilePhoto?: string;
@@ -37,6 +49,14 @@ User.init(
     },
     password: {
       type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    birth: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    gender: {
+      type: DataTypes.STRING(10),
       allowNull: false,
     },
     phone: {

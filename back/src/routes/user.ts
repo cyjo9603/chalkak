@@ -100,6 +100,8 @@ router.post('/signup', isNotLoggedIn, async (req, res, next) => {
       firstName: req.body.firstName,
       userId: req.body.userId,
       password: hashedPassword,
+      birth: req.body.birth,
+      gender: req.body.gender,
       phone: req.body.phone,
       mail: req.body.mail,
     });

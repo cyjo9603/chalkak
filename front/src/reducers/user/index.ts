@@ -1,6 +1,7 @@
 import produce from 'immer';
 
-import { notifyType } from './values';
+import { notifyType, loadingType, LOADING_SIGNUP_SUBMIT } from './values';
+import { SignUp, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './signup';
 
 export interface UserInfo {
   id: number;
@@ -8,6 +9,7 @@ export interface UserInfo {
   firstName: string;
   userId: string;
   birth: string;
+  gender: string;
   phone: string;
   mail: string;
   profilePhoto: string | null;
@@ -51,6 +53,10 @@ export interface UserInitialState {
   notify: UserNotify[] | null;
   Friends: UserFriends[] | null;
   otherUserInfo: UserInitialState | null;
+  isLoading: {
+    id: number | null;
+    name: loadingType | null;
+  };
 }
 
 const initialState: UserInitialState = {
@@ -58,11 +64,27 @@ const initialState: UserInitialState = {
   notify: null,
   Friends: null,
   otherUserInfo: null,
+  isLoading: {
+    id: null,
+    name: null,
+  },
 };
 
-const user = (state: UserInitialState = initialState, action: any) => {
+type ReducerAction = SignUp;
+
+const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
     switch (action.type) {
+      // sign up
+      case SIGNUP_REQUEST:
+        draft.isLoading.name = LOADING_SIGNUP_SUBMIT;
+        break;
+      case SIGNUP_SUCCESS:
+      case SIGNUP_FAILURE:
+        draft.isLoading.id = null;
+        draft.isLoading.name = null;
+        break;
+
       default:
         break;
     }
