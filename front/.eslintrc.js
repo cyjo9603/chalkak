@@ -21,6 +21,7 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'no-undef': 0,
     'no-param-reassign': 0,
+    'consistent-return': 0,
   },
   settings: {
     'import/resolver': {
