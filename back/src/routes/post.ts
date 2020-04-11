@@ -1,7 +1,7 @@
 import express from 'express';
 
 import Post from '../sequelize/models/post';
-import User from '../sequelize/models/user';
+import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isLoggedIn } from './middleware';
 import Hashtag from '../sequelize/models/hashtag';
 import Image from '../sequelize/models/image';
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'familyName', 'firstName'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
         {
           model: Image,
@@ -89,7 +89,7 @@ router.post('/:id/share', isLoggedIn, async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ['id', 'familyName', 'firstName'],
+              attributes: DEFAULT_USER_ATTRIBUTES,
             },
             {
               model: Image,
@@ -143,7 +143,7 @@ router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'familyName', 'firstName', 'userId'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
         {
           model: Image,
@@ -227,7 +227,7 @@ router.get('/:id/comments', async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'familyName', 'firstName'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
       ],
     });
@@ -267,7 +267,7 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'familyName', 'firstName'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
       ],
     });

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 
 import passport from 'passport';
-import User from '../sequelize/models/user';
+import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
 import Post from '../sequelize/models/post';
 import Image from '../sequelize/models/image';
@@ -55,7 +55,7 @@ router.get('/:id', async (req, res, next) => {
           attributes: ['id'],
         },
       ],
-      attributes: ['id', 'familyName', 'firstName'],
+      attributes: DEFAULT_USER_ATTRIBUTES,
     });
 
     const jsonUser = user.toJSON();
@@ -135,7 +135,7 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
               attributes: ['id'],
             },
           ],
-          attributes: ['id', 'familyName', 'firstName'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         });
         return res.json(fullUser);
       });
@@ -197,7 +197,7 @@ router.post('/friends', isLoggedIn, async (req, res, next) => {
           [Op.lt]: parseInt(req.query.lastId, 10),
         },
       },
-      attributes: ['id', 'familyName', 'firstName'],
+      attributes: DEFAULT_USER_ATTRIBUTES,
       limit: parseInt(req.query.limit, 10),
     });
 
@@ -256,7 +256,7 @@ router.get('/:id/posts', async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'familyName', 'firstName'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
         {
           model: Image,

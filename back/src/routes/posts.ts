@@ -2,7 +2,7 @@ import express from 'express';
 import { Op } from 'sequelize';
 
 import Post from '../sequelize/models/post';
-import User from '../sequelize/models/user';
+import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
 import Image from '../sequelize/models/image';
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'familyName', 'firstName'],
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
         {
           model: Image,
@@ -39,7 +39,7 @@ router.get('/', async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ['id', 'familyName', 'firstName'],
+              attributes: DEFAULT_USER_ATTRIBUTES,
             },
             {
               model: Image,
