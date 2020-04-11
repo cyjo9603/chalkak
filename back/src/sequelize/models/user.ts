@@ -5,6 +5,7 @@ import { sequelize } from './sequelize';
 import { dbType } from './index';
 
 export const DEFAULT_USER_ATTRIBUTES = ['id', 'familyName', 'firstName', 'profilePhoto'];
+export const FULL_USER_ATTRIBUTES = ['id', 'familyName', 'firstName', 'userId', 'phone', 'mail', 'profilePhoto'];
 
 class User extends Model {
   public readonly id!: number;

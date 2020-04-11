@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 
 import passport from 'passport';
-import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
+import User, { DEFAULT_USER_ATTRIBUTES, FULL_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
 import Post from '../sequelize/models/post';
 import Image from '../sequelize/models/image';
@@ -16,19 +16,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     const { id } = req.user as User;
     const fullUser = await User.findOne({
       where: { id },
-      include: [
-        {
-          model: Post,
-          as: 'Posts',
-          attributes: ['id'],
-        },
-        {
-          model: User,
-          as: 'Friends',
-          attributes: ['id'],
-        },
-      ],
-      attributes: ['id', 'familyName', 'firstName', 'userId', 'phone', 'mail', 'profilePhoto'],
+      attributes: FULL_USER_ATTRIBUTES,
     });
     return res.json(fullUser);
   } catch (e) {
@@ -128,14 +116,7 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
         }
         const fullUser = await User.findOne({
           where: { id: user.id },
-          include: [
-            {
-              model: Post,
-              as: 'Posts',
-              attributes: ['id'],
-            },
-          ],
-          attributes: DEFAULT_USER_ATTRIBUTES,
+          attributes: FULL_USER_ATTRIBUTES,
         });
         return res.json(fullUser);
       });
