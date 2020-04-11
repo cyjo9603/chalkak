@@ -4,6 +4,8 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize';
 import { dbType } from './index';
 
+export const DEFAULT_IMAGE_ATTRIBUTES = ['id', 'src'];
+
 class Image extends Model {
   public readonly id!: number;
   public src!: string;

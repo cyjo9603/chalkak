@@ -4,7 +4,7 @@ import Post from '../sequelize/models/post';
 import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isLoggedIn } from './middleware';
 import Hashtag from '../sequelize/models/hashtag';
-import Image from '../sequelize/models/image';
+import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
 import Comment from '../sequelize/models/comment';
 import upload from '../util/imageUploads';
 
@@ -93,6 +93,7 @@ router.post('/:id/share', isLoggedIn, async (req, res, next) => {
             },
             {
               model: Image,
+              attributes: DEFAULT_IMAGE_ATTRIBUTES,
             },
           ],
         },
@@ -147,6 +148,7 @@ router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
         },
         {
           model: Image,
+          attributes: DEFAULT_IMAGE_ATTRIBUTES,
         },
       ],
     });

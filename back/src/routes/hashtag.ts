@@ -4,7 +4,7 @@ import { Op } from 'sequelize';
 import Hashtag from '../sequelize/models/hashtag';
 import Post from '../sequelize/models/post';
 import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
-import Image from '../sequelize/models/image';
+import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
 
 const router = express.Router();
 
@@ -33,6 +33,7 @@ router.get('/:tag', async (req, res, next) => {
         },
         {
           model: Image,
+          attributes: DEFAULT_IMAGE_ATTRIBUTES,
         },
         {
           model: User,
@@ -49,6 +50,7 @@ router.get('/:tag', async (req, res, next) => {
             },
             {
               model: Image,
+              attributes: DEFAULT_IMAGE_ATTRIBUTES,
             },
           ],
         },

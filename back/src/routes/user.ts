@@ -6,7 +6,7 @@ import passport from 'passport';
 import User, { DEFAULT_USER_ATTRIBUTES, FULL_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
 import Post from '../sequelize/models/post';
-import Image from '../sequelize/models/image';
+import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
 import upload from '../util/imageUploads';
 
 const router = express.Router();
@@ -261,6 +261,7 @@ router.get('/:id/posts', async (req, res, next) => {
         },
         {
           model: Image,
+          attributes: DEFAULT_IMAGE_ATTRIBUTES,
         },
         {
           model: User,
