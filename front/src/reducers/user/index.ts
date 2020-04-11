@@ -14,7 +14,7 @@ export interface UserInfo {
   birth: string;
   phone: string;
   mail: string;
-  profilePhoto: string;
+  profilePhoto: string | null;
   friends: number;
 }
 
@@ -45,7 +45,7 @@ export interface OtherUserInfo {
   id: number;
   familyName: string;
   firstName: string;
-  profilePhoto?: string;
+  profilePhoto: string | null;
   Posts: number;
   Friends: number;
 }
