@@ -1,7 +1,7 @@
 import express from 'express';
 import { Op } from 'sequelize';
 
-import Post from '../sequelize/models/post';
+import Post, { DEFAULT_POST_ATTRIBUTES } from '../sequelize/models/post';
 import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
 import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
 
@@ -37,6 +37,7 @@ router.get('/', async (req, res, next) => {
         {
           model: Post,
           as: 'SharePost',
+          attributes: ['id', 'content', 'createdAt', 'updatedAt'],
           include: [
             {
               model: User,
@@ -49,7 +50,7 @@ router.get('/', async (req, res, next) => {
           ],
         },
       ],
-
+      attributes: DEFAULT_POST_ATTRIBUTES,
       order: [['updatedAt', 'DESC']],
       limit: parseInt(req.query.limit, 10),
     });

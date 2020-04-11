@@ -1,11 +1,11 @@
 import express from 'express';
 
-import Post from '../sequelize/models/post';
+import Post, { DEFAULT_POST_ATTRIBUTES } from '../sequelize/models/post';
 import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isLoggedIn } from './middleware';
 import Hashtag from '../sequelize/models/hashtag';
 import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
-import Comment from '../sequelize/models/comment';
+import Comment, { DEFAULT_COMMENT_ATTRIBUTES } from '../sequelize/models/comment';
 import upload from '../util/imageUploads';
 
 const router = express.Router();
@@ -25,6 +25,7 @@ router.get('/:id', async (req, res, next) => {
           model: Image,
         },
       ],
+      attributes: DEFAULT_POST_ATTRIBUTES,
     });
 
     return res.json(post);
@@ -45,6 +46,7 @@ router.post('/:id/share', isLoggedIn, async (req, res, next) => {
         {
           model: Post,
           as: 'SharePost',
+          attributes: ['id', 'content', 'createdAt', 'updatedAt'],
         },
       ],
     });
@@ -82,10 +84,12 @@ router.post('/:id/share', isLoggedIn, async (req, res, next) => {
       include: [
         {
           model: User,
+          attributes: DEFAULT_USER_ATTRIBUTES,
         },
         {
           model: Post,
           as: 'SharePost',
+          attributes: ['id', 'content', 'createdAt', 'updatedAt'],
           include: [
             {
               model: User,
@@ -98,6 +102,7 @@ router.post('/:id/share', isLoggedIn, async (req, res, next) => {
           ],
         },
       ],
+      attributes: DEFAULT_POST_ATTRIBUTES,
     });
 
     return res.json(shareWithPrePost);
@@ -151,6 +156,7 @@ router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
           attributes: DEFAULT_IMAGE_ATTRIBUTES,
         },
       ],
+      attributes: DEFAULT_POST_ATTRIBUTES,
     });
 
     return res.json(fullPost);
@@ -232,6 +238,7 @@ router.get('/:id/comments', async (req, res, next) => {
           attributes: DEFAULT_USER_ATTRIBUTES,
         },
       ],
+      attributes: DEFAULT_COMMENT_ATTRIBUTES,
     });
 
     return res.json(comments);
@@ -272,6 +279,7 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
           attributes: DEFAULT_USER_ATTRIBUTES,
         },
       ],
+      attributes: DEFAULT_COMMENT_ATTRIBUTES,
     });
 
     return res.json(comment);

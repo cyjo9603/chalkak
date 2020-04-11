@@ -4,6 +4,8 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize';
 import { dbType } from './index';
 
+export const DEFAULT_POST_ATTRIBUTES = ['id', 'content', 'createdAt', 'updatedAt', 'SharePostId'];
+
 class Post extends Model {
   public readonly id!: number;
   public content!: string;

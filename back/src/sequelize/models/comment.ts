@@ -4,6 +4,8 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize';
 import { dbType } from './index';
 
+export const DEFAULT_COMMENT_ATTRIBUTES = ['id', 'content', 'createdAt', 'updatedAt', 'PostId'];
+
 class Comment extends Model {
   public readonly id!: number;
   public content!: string;

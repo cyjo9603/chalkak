@@ -5,7 +5,7 @@ import { Op } from 'sequelize';
 import passport from 'passport';
 import User, { DEFAULT_USER_ATTRIBUTES, FULL_USER_ATTRIBUTES } from '../sequelize/models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
-import Post from '../sequelize/models/post';
+import Post, { DEFAULT_POST_ATTRIBUTES } from '../sequelize/models/post';
 import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
 import upload from '../util/imageUploads';
 
@@ -269,6 +269,7 @@ router.get('/:id/posts', async (req, res, next) => {
           attributes: ['id'],
         },
       ],
+      attributes: DEFAULT_POST_ATTRIBUTES,
       order: [['updatedAt', 'DESC']],
       limit: parseInt(req.query.limit, 10),
     });
