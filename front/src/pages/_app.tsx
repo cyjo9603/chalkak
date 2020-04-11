@@ -29,7 +29,7 @@ body {
   height: 100%;
   font-weight: 900;
 
-  & > div {
+  & > #__next {
     height: 100%;
   }
 
