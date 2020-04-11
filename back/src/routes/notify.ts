@@ -8,6 +8,22 @@ const REQUEST_FRIEND = 'REQUEST_FRIEND' as const;
 
 const router = express.Router();
 
+router.post('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+    const notify = await Notify.findAll({
+      where: {
+        targetId: id,
+      },
+    });
+
+    return res.json(notify);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 router.post('/friend/request', isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.user as User;
