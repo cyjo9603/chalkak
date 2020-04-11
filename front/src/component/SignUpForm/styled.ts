@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { DatePicker, Modal } from 'antd';
 
 export const Form = styled.form`
+  margin: 0 auto;
   margin-top: 60px;
   width: 400px;
 `;

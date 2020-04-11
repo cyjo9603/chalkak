@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default styled.form`
   position: relative;
-  top: 50%;
+  top: 20%;
   width: 600px;
   display: flex;
   flex-direction: column;
