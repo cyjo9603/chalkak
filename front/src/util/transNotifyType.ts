@@ -1,4 +1,5 @@
-import { NOTIFY_REQUEST_FRIEND, NOTIFY_WELCOME, NOTIFY_POST_COMMENTS, UserNotify } from '../reducers/user';
+import { UserNotify } from '../reducers/user';
+import { NOTIFY_REQUEST_FRIEND, NOTIFY_WELCOME, NOTIFY_POST_COMMENTS } from '../reducers/user/values';
 
 export default (notify: UserNotify) => {
   switch (notify.notifyType) {
