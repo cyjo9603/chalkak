@@ -18,7 +18,17 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       where: { id },
       attributes: FULL_USER_ATTRIBUTES,
     });
-    return res.json(fullUser);
+    const friendsCount = await User.count({
+      where: { id },
+      include: [
+        {
+          model: User,
+          as: 'Friends',
+        },
+      ],
+    });
+    const result = { ...fullUser.toJSON(), friends: friendsCount };
+    return res.json(result);
   } catch (e) {
     console.error(e);
     next(e);
@@ -118,7 +128,17 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
           where: { id: user.id },
           attributes: FULL_USER_ATTRIBUTES,
         });
-        return res.json(fullUser);
+        const friendsCount = await User.count({
+          where: { id: user.id },
+          include: [
+            {
+              model: User,
+              as: 'Friends',
+            },
+          ],
+        });
+        const result = { ...fullUser.toJSON(), friends: friendsCount };
+        return res.json(result);
       });
     })(req, res, next);
   } catch (e) {
