@@ -3,9 +3,10 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import { ImageWrapper, MoreImageWrapeer } from '../styled';
 import ImageZoom from './ImagesZoom';
+import { PostImage } from '../../../reducers/post';
 
 interface Props {
-  images: string[];
+  images: PostImage[];
 }
 
 const PostImages = ({ images }: Props) => {
@@ -23,7 +24,7 @@ const PostImages = ({ images }: Props) => {
     return (
       <>
         <ImageWrapper>
-          <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
+          <img src={images[0].src} alt="게시글 이미지" onClick={onZoom} />
         </ImageWrapper>
         {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
       </>
@@ -35,8 +36,8 @@ const PostImages = ({ images }: Props) => {
       <>
         <ImageWrapper>
           <MoreImageWrapeer>
-            <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
-            <img src={images[1]} alt="게시글 이미지" onClick={onZoom} />
+            <img src={images[0].src} alt="게시글 이미지" onClick={onZoom} />
+            <img src={images[1].src} alt="게시글 이미지" onClick={onZoom} />
           </MoreImageWrapeer>
         </ImageWrapper>
         {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
@@ -48,7 +49,7 @@ const PostImages = ({ images }: Props) => {
     <>
       <ImageWrapper>
         <MoreImageWrapeer>
-          <img src={images[0]} alt="게시글 이미지" onClick={onZoom} />
+          <img src={images[0].src} alt="게시글 이미지" onClick={onZoom} />
           <div>
             <PlusOutlined />
             <br />

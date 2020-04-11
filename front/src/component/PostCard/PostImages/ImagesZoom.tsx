@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Slick from 'react-slick';
 
 import { Overlay, CloseButton, ImageZoomWrapper } from '../styled';
+import { PostImage } from '../../../reducers/post';
 
 interface Props {
-  images: string[];
+  images: PostImage[];
   onClose: () => void;
 }
 
@@ -28,7 +29,7 @@ const ImagesZoom = ({ images, onClose }: Props) => {
         >
           {images.map((v) => (
             <ImageZoomWrapper key={`div${v}`}>
-              <img src={v} alt="post_image" />
+              <img src={v.src} alt="post_image" />
             </ImageZoomWrapper>
           ))}
         </Slick>

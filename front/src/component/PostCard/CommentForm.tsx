@@ -3,7 +3,7 @@ import { Avatar, Form, List, Button, Comment, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import { CommentFormWrapper } from './styled';
-import { CommentInfo } from '../../dummy';
+import { CommentInfo } from '../../reducers/post';
 
 interface Props {
   comments: CommentInfo[];
@@ -30,9 +30,9 @@ const CommentForm = ({ comments }: Props) => {
         renderItem={(item: CommentInfo) => (
           <li>
             <Comment
-              author={`${item.user.familyName}${item.user.firstName}`}
+              author={`${item.User.familyName}${item.User.firstName}`}
               avatar={<Avatar icon={<UserOutlined />} />}
-              content={item.contents}
+              content={item.content}
             />
           </li>
         )}

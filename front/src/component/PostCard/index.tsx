@@ -5,13 +5,12 @@ import { UserOutlined, HeartFilled, ShareAltOutlined, CommentOutlined, EllipsisO
 import { CardWrapper } from './styled';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
-
-import { PostData } from '../../dummy';
+import { PostInfo } from '../../reducers/post';
 
 const { Meta } = Card;
 
 interface Props {
-  postData: PostData;
+  postData: PostInfo;
 }
 
 const PostCard = ({ postData }: Props) => {
@@ -24,7 +23,7 @@ const PostCard = ({ postData }: Props) => {
   return (
     <CardWrapper>
       <Card
-        cover={postData.images[0] && <PostImages images={postData.images} />}
+        cover={postData.Images[0] && <PostImages images={postData.Images} />}
         actions={[
           <HeartFilled key="heart" />,
           <ShareAltOutlined key="share" />,
@@ -34,14 +33,14 @@ const PostCard = ({ postData }: Props) => {
         title={
           <>
             <Avatar icon={<UserOutlined />} />
-            {`${postData.user.familyName}${postData.user.firstName}`}
+            {`${postData.User.familyName}${postData.User.firstName}`}
           </>
         }
       >
         <Meta title="post title" />
         {'test'}
       </Card>
-      {openCommentForm && <CommentForm comments={postData.comment} />}
+      {openCommentForm && <CommentForm comments={postData.comments} />}
     </CardWrapper>
   );
 };

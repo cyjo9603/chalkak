@@ -49,7 +49,7 @@ export interface PostInfo {
   Images: PostImage[];
   Likers: PostLiker[];
   SharePostId: number | null;
-  SharePost: SharePostInfo;
+  SharePost?: SharePostInfo;
   comments?: CommentInfo[];
 }
 
@@ -59,7 +59,23 @@ export interface PostInitialState {
 }
 
 const initialState: PostInitialState = {
-  posts: [],
+  posts: [
+    {
+      id: 1,
+      content: '#테스트 #리액트 테스트 게시글',
+      createdAt: '2020-04-11',
+      updatedAt: '2020-04-11',
+      User: {
+        id: 1,
+        familyName: '조',
+        firstName: '찬영',
+        profilePhoto: 'github.png1586589872107.png',
+      },
+      Images: [],
+      Likers: [],
+      SharePostId: null,
+    },
+  ],
   post: null,
 };
 

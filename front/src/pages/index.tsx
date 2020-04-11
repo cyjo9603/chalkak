@@ -1,17 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import WritePostForm from '../component/WritePostForm';
 import PostCard from '../component/PostCard';
-
-import dummy from '../dummy';
+import { RootState } from '../reducers';
 
 const Home = () => {
-  const { mainPosts } = dummy.post;
+  const { posts } = useSelector((state: RootState) => state.post);
 
   return (
     <>
       <WritePostForm />
-      {mainPosts.map((v) => (
+      {posts.map((v) => (
         <PostCard key={`post_${v.id}`} postData={v} />
       ))}
     </>
