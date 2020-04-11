@@ -1,18 +1,20 @@
 import React, { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 import FriendsList from '../component/FriendsList';
 import MoreButton from '../component/MoreButton';
-
-import dummy from '../dummy';
+import { RootState } from '../reducers';
 
 const Friends = () => {
-  const { friends } = dummy.user.userInfo;
+  const { info } = useSelector((state: RootState) => state.user);
+  const friends = useSelector((state: RootState) => state.user.Friends);
 
   const onClickMoreButton = useCallback(() => null, []);
+
   return (
     <>
-      <FriendsList />
-      {friends.total === friends.lists.length ? null : <MoreButton onClick={onClickMoreButton} />}
+      <FriendsList list={friends} />
+      {info.friends === friends.length ? null : <MoreButton onClick={onClickMoreButton} />}
     </>
   );
 };

@@ -3,11 +3,12 @@ import { Avatar, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import { FriendCardWrapper } from './styled';
+import { UserFriends } from '../../reducers/user';
 
 import { User } from '../../dummy';
 
 interface Props {
-  data: User;
+  data: UserFriends;
 }
 
 const FriendCard = ({ data }: Props) => {

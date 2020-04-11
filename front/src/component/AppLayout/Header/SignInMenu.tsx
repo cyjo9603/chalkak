@@ -4,10 +4,13 @@ import { Avatar, Menu, Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
 import { HeaderMenu, UserAvatar, LogoutWrapper } from './styled';
+import { UserInfo } from '../../../reducers/user';
 
-import dummy from '../../../dummy';
+interface Props {
+  info: UserInfo;
+}
 
-const SignInMenu = () => {
+const SignInMenu = ({ info }: Props) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const onOpen = useCallback(() => {
@@ -24,8 +27,8 @@ const SignInMenu = () => {
         <UserAvatar key="Avatar">
           <Link href="/profile">
             <a>
-              <Avatar size={30}>{dummy.user.userInfo.firstName}</Avatar>
-              <div>{`${dummy.user.userInfo.familyName}${dummy.user.userInfo.firstName}`}</div>
+              <Avatar size={30}>{info.firstName}</Avatar>
+              <div>{`${info.familyName}${info.firstName}`}</div>
             </a>
           </Link>
         </UserAvatar>

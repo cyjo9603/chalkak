@@ -1,32 +1,32 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Avatar, Row, Col, Statistic } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import FormWrapper from './styled';
-
-import dummy from '../../dummy';
+import { RootState } from '../../reducers';
 
 const ProfileForm = () => {
-  const { userInfo } = dummy.user;
+  const { info } = useSelector((state: RootState) => state.user);
 
   return (
     <FormWrapper>
       <Avatar icon={<UserOutlined />} size={200} />
       <Row gutter={16}>
         <Col span={24}>
-          <Statistic title="이름" value={`${userInfo.familyName} ${userInfo.firstName}`} />
+          <Statistic title="이름" value={`${info.familyName} ${info.firstName}`} />
         </Col>
         <Col span={12}>
-          <Statistic title="생일" value={`3월 30일`} />
+          <Statistic title="생일" value={`${info.birth}`} />
         </Col>
         <Col span={12}>
-          <Statistic title="연락처" value={`${userInfo.phone}`} />
+          <Statistic title="연락처" value={`${info.phone}`} />
         </Col>
         <Col span={12}>
-          <Statistic title="이메일" value={`${userInfo.mail}`} />
+          <Statistic title="이메일" value={`${info.mail}`} />
         </Col>
         <Col span={12}>
-          <Statistic title="친구" value={`${userInfo.friends.total}명`} />
+          <Statistic title="친구" value={`${info.friends}명`} />
         </Col>
       </Row>
     </FormWrapper>

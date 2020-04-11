@@ -1,11 +1,11 @@
-import { NOTIFY_REQUEST_FRIEND, NOTIFY_WELCOME, NOTIFY_POST_COMMENTS, NotifyType } from '../dummy';
+import { NOTIFY_REQUEST_FRIEND, NOTIFY_WELCOME, NOTIFY_POST_COMMENTS, UserNotify } from '../reducers/user';
 
-export default (notify: NotifyType) => {
-  switch (notify.type) {
+export default (notify: UserNotify) => {
+  switch (notify.notifyType) {
     case NOTIFY_REQUEST_FRIEND:
       return {
         title: '친구 요청',
-        contents: `${notify.requestor}님이 친구 요청을 보냈습니다.`,
+        contents: `${notify.requestor.familyName}${notify.requestor.firstName}님이 친구 요청을 보냈습니다.`,
       };
 
     case NOTIFY_WELCOME:
@@ -17,7 +17,7 @@ export default (notify: NotifyType) => {
     case NOTIFY_POST_COMMENTS:
       return {
         title: '댓글을 달았습니다',
-        contents: `${notify.commentor}님이 게시글에 댓글을 달았습니다.`,
+        contents: `${notify.requestor.familyName}${notify.requestor.firstName}}님이 게시글에 댓글을 달았습니다.`,
       };
 
     default:

@@ -1,21 +1,21 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Button, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import { MyPageWrapper } from './styled';
 import NameBox from './NameBox';
 import BoxWrapper from './BoxWrapper';
-
-import dummy from '../../dummy';
+import { RootState } from '../../reducers';
 
 const MyPageForm = () => {
-  const { userInfo } = dummy.user;
+  const { info } = useSelector((state: RootState) => state.user);
   const [isEditing, setIsEditing] = useState(false);
-  const [familyName, setFamilyName] = useState(userInfo.familyName);
-  const [firstName, setFirstName] = useState(userInfo.firstName);
-  const [birth, setBirth] = useState(userInfo.birth);
-  const [phone, setPhone] = useState(userInfo.phone);
-  const [mail, setMail] = useState(userInfo.mail);
+  const [familyName, setFamilyName] = useState(info.familyName);
+  const [firstName, setFirstName] = useState(info.firstName);
+  const [birth, setBirth] = useState(info.birth);
+  const [phone, setPhone] = useState(info.phone);
+  const [mail, setMail] = useState(info.mail);
 
   const changeEditingMode = useCallback(() => {
     setIsEditing(!isEditing);
@@ -55,17 +55,17 @@ const MyPageForm = () => {
           <div>
             <NameBox
               isEditing={isEditing}
-              firstNameStore={userInfo.firstName}
+              firstNameStore={info.firstName}
               firstNameValue={firstName}
               onChangeFirstName={onChangeFirstName}
-              familyNameStore={userInfo.familyName}
+              familyNameStore={info.familyName}
               familyNameValue={familyName}
               onChangeFamilyName={onChangeFamilyName}
             />
             <BoxWrapper
               isEditing={isEditing}
               title="생년월일"
-              store={userInfo.birth}
+              store={info.birth}
               value={birth}
               onChange={onChangeBirth}
               size={100}
@@ -80,7 +80,7 @@ const MyPageForm = () => {
           <BoxWrapper
             isEditing={isEditing}
             title="연락처"
-            store={userInfo.phone}
+            store={info.phone}
             value={phone}
             onChange={onChangePhone}
             size={50}
@@ -88,7 +88,7 @@ const MyPageForm = () => {
           <BoxWrapper
             isEditing={isEditing}
             title="이메일"
-            store={userInfo.mail}
+            store={info.mail}
             value={mail}
             onChange={onChangeMail}
             size={50}

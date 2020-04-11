@@ -3,11 +3,10 @@ import React from 'react';
 import { BellOutlined, CloseOutlined } from '@ant-design/icons';
 import NotifyWrapper from './styled';
 import transNotifyType from '../../util/transNotifyType';
-
-import { NotifyType } from '../../dummy';
+import { UserNotify } from '../../reducers/user';
 
 interface Props {
-  notify: NotifyType;
+  notify: UserNotify;
 }
 
 const SideNotification = ({ notify }: Props) => {

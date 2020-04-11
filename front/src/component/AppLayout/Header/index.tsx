@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { HeaderWrapper, LeftWrapper, Search } from './styled';
 import UnSignInMenu from './UnSignInMenu';
 import SignInMenu from './SignInMenu';
+import { UserInfo } from '../../../reducers/user';
 
-import dummy from '../../../dummy';
+interface Props {
+  userInfo: UserInfo;
+}
 
-const Header = () => {
+const Header = ({ userInfo }: Props) => {
   return (
     <HeaderWrapper>
       <div>
@@ -19,7 +22,7 @@ const Header = () => {
           </Link>
           <Search />
         </LeftWrapper>
-        {dummy.user.userInfo ? <SignInMenu /> : <UnSignInMenu />}
+        {userInfo ? <SignInMenu info={userInfo} /> : <UnSignInMenu />}
       </div>
     </HeaderWrapper>
   );

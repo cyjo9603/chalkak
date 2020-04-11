@@ -3,19 +3,16 @@ import { List } from 'antd';
 
 import { ListWrapper } from './styled';
 import FriendCard from './FriendCard';
+import { UserFriends } from '../../reducers/user';
 
-import dummy, { User } from '../../dummy';
+interface Props {
+  list: UserFriends[];
+}
 
-const FriendsList = () => {
-  const { friends } = dummy.user.userInfo;
-
+const FriendsList = ({ list }: Props) => {
   return (
     <ListWrapper>
-      <List
-        header="친구 목록"
-        dataSource={friends.lists || []}
-        renderItem={(item: User) => <FriendCard data={item} />}
-      />
+      <List header="친구 목록" dataSource={list || []} renderItem={(item: UserFriends) => <FriendCard data={item} />} />
     </ListWrapper>
   );
 };
