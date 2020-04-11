@@ -15,6 +15,14 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       where: {
         targetId: id,
       },
+      include: [
+        {
+          model: User,
+          as: 'requestor',
+          attributes: ['familyName', 'firstName'],
+        },
+      ],
+      attributes: ['id', 'notifyType', 'requestorId'],
     });
 
     return res.json(notify);
@@ -27,18 +35,12 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 router.post('/friend/request', isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.user as User;
-    const targetId = await User.findOne({
-      where: {
-        userId: req.body.id,
-      },
-      attributes: ['id'],
-    });
 
     const exRequest = await Notify.findOrCreate({
       where: {
         notifyType: REQUEST_FRIEND,
         requestorId: id,
-        targetId: targetId.id,
+        targetId: req.body.id,
       },
     });
 
@@ -61,7 +63,7 @@ router.post('/friend/response', isLoggedIn, async (req, res, next) => {
     if (!notify) {
       return res.status(400).send('잘못된 요청입니다.');
     }
-    const [requestorId, targetId] = [notify.requestorId, notify.targetId];
+    const { requestorId, targetId } = notify;
 
     await Notify.destroy({
       where: {
