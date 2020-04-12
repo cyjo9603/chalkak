@@ -66,6 +66,7 @@ app.use(
       secure: false,
       domain: prod ? 'domainname.com' : undefined,
     },
+    name: 'cksnks',
   }),
 );
 app.use(passport.initialize());
