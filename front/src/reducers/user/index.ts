@@ -119,6 +119,8 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
         draft.isLoading.id = null;
         draft.isLoading.name = null;
         draft.info = null;
+        draft.Friends = null;
+        draft.notify = null;
         break;
       case LOGOUT_FAILURE:
         draft.isLoading.id = null;
