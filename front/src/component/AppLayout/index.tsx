@@ -21,7 +21,7 @@ const AppLayout: FC<Props> = ({ children }: Props) => {
       <Section>
         <div>
           <MainContents> {children}</MainContents>
-          {info && (
+          {notify && (
             <Notify>
               {notify.map((v, i) => (
                 <SideNotification key={`notify-${v.id}`} notify={v} />

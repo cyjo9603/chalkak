@@ -1,7 +1,9 @@
 import produce from 'immer';
 
-import { notifyType, loadingType, LOADING_SIGNUP_SUBMIT } from './values';
+import { notifyType, loadingType, LOADING_SIGNUP_SUBMIT, LOADING_SIGNIN_SUBMIT, LOADING_LOGOUT } from './values';
 import { SignUp, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './signup';
+import { SignIn, SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE } from './signin';
+import { LogOut, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './logout';
 
 export interface UserInfo {
   id: number;
@@ -70,7 +72,7 @@ const initialState: UserInitialState = {
   },
 };
 
-type ReducerAction = SignUp;
+type ReducerAction = SignUp | SignIn | LogOut;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -81,6 +83,34 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
         break;
       case SIGNUP_SUCCESS:
       case SIGNUP_FAILURE:
+        draft.isLoading.id = null;
+        draft.isLoading.name = null;
+        break;
+
+      // sign in
+      case SIGNIN_REQUEST:
+        draft.isLoading.name = LOADING_SIGNIN_SUBMIT;
+        break;
+      case SIGNIN_SUCCESS:
+        draft.isLoading.id = null;
+        draft.isLoading.name = null;
+        draft.info = action.data;
+        break;
+      case SIGNIN_FAILURE:
+        draft.isLoading.id = null;
+        draft.isLoading.name = null;
+        break;
+
+      // logout
+      case LOGOUT_REQUEST:
+        draft.isLoading.name = LOADING_LOGOUT;
+        break;
+      case LOGOUT_SUCCESS:
+        draft.isLoading.id = null;
+        draft.isLoading.name = null;
+        draft.info = null;
+        break;
+      case LOGOUT_FAILURE:
         draft.isLoading.id = null;
         draft.isLoading.name = null;
         break;

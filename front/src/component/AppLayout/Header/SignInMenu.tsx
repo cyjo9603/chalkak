@@ -1,17 +1,27 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { Avatar, Menu, Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
 import { HeaderMenu, UserAvatar, LogoutWrapper } from './styled';
+import { RootState } from '../../../reducers';
 import { UserInfo } from '../../../reducers/user';
+import { LOADING_LOGOUT } from '../../../reducers/user/values';
+import { logOutRequest } from '../../../reducers/user/logout';
 
 interface Props {
   info: UserInfo;
 }
 
 const SignInMenu = ({ info }: Props) => {
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state: RootState) => state.user);
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const onLogout = useCallback(() => {
+    dispatch(logOutRequest());
+  }, []);
 
   const onOpen = useCallback(() => {
     setDrawerOpen(true);
@@ -44,7 +54,9 @@ const SignInMenu = ({ info }: Props) => {
         visible={drawerOpen}
         footer={
           <LogoutWrapper>
-            <Button>로그아웃</Button>
+            <Button onClick={onLogout} loading={isLoading.name === LOADING_LOGOUT}>
+              로그아웃
+            </Button>
           </LogoutWrapper>
         }
       >
