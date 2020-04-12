@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Input, Button } from 'antd';
+import axios from 'axios';
 
 import CheckWrapper from './styled';
 
@@ -14,11 +15,12 @@ const PasswordCheck = ({ onCheck }: Props) => {
     setPassword(e.target.value);
   }, []);
 
-  const onSubmitPassword = useCallback(() => {
-    if (true) {
+  const onSubmitPassword = useCallback(async () => {
+    const getResult = await axios.post('/user/password', { password }, { withCredentials: true });
+    if (getResult.data.result) {
       onCheck();
     }
-  }, []);
+  }, [password]);
 
   return (
     <CheckWrapper>

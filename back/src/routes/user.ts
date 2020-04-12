@@ -288,6 +288,27 @@ router.get('/:id/posts', async (req, res, next) => {
   }
 });
 
+router.post('/password', isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.user as User;
+
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    const result = await bcrypt.compare(req.body.password, user.password);
+    if (!result) {
+      return res.status(402).send('입력한 비밀번호가 맞지 않습니다.');
+    }
+
+    return res.json({ result: true });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
 router.patch('/password', isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.user as User;
