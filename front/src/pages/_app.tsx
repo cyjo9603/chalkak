@@ -15,6 +15,7 @@ import reducer from '../reducers';
 import rootSaga from '../sagas/index';
 import AppLayout from '../component/AppLayout';
 import theme from '../theme';
+import { getUserInfoRequest } from '../reducers/user/getUserInfo';
 
 import 'antd/dist/antd.less';
 
@@ -84,9 +85,13 @@ const Chalkak = ({ Component, store, pageProps }: Props) => {
 Chalkak.getInitialProps = async (context: AppContext) => {
   const { ctx, Component } = context;
   let pageProps = {};
+  const state = ctx.store.getState();
   const cookie = ctx.isServer && ctx.req ? ctx.req.headers.cookie : null;
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie;
+  }
+  if (!state.user.info) {
+    ctx.store.dispatch(getUserInfoRequest());
   }
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);

@@ -4,6 +4,7 @@ import { notifyType, loadingType, LOADING_SIGNUP_SUBMIT, LOADING_SIGNIN_SUBMIT, 
 import { SignUp, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './signup';
 import { SignIn, SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE } from './signin';
 import { LogOut, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './logout';
+import { GetUserInfo, GET_USER_INFO_REQUEST, GET_USER_INFO_SUCCESS, GET_USER_INFO_FAILURE } from './getUserInfo';
 
 export interface UserInfo {
   id: number;
@@ -72,7 +73,7 @@ const initialState: UserInitialState = {
   },
 };
 
-type ReducerAction = SignUp | SignIn | LogOut;
+type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -113,6 +114,14 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
       case LOGOUT_FAILURE:
         draft.isLoading.id = null;
         draft.isLoading.name = null;
+        break;
+
+      // get user info
+      case GET_USER_INFO_REQUEST:
+      case GET_USER_INFO_FAILURE:
+        break;
+      case GET_USER_INFO_SUCCESS:
+        draft.info = action.data;
         break;
 
       default:
