@@ -159,7 +159,7 @@ router.post('/logout', isLoggedIn, (req, res) => {
   res.send('logout success');
 });
 
-router.delete('/friend', isLoggedIn, async (req, res, next) => {
+router.delete('/friend/:id', isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.user as User;
 
@@ -167,11 +167,11 @@ router.delete('/friend', isLoggedIn, async (req, res, next) => {
       where: { id },
     });
 
-    await user.removeFriends(req.body.friendId);
+    await user.removeFriends(req.params.id);
 
     const friend = await User.findOne({
       where: {
-        id: req.body.friendId,
+        id: req.params.id,
       },
     });
 
@@ -179,7 +179,7 @@ router.delete('/friend', isLoggedIn, async (req, res, next) => {
 
     return res.json({
       userId: id,
-      friendId: req.body.friendId,
+      friendId: req.params.id,
     });
   } catch (e) {
     console.error(e);

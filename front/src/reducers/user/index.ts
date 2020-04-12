@@ -1,11 +1,19 @@
 import produce from 'immer';
 
-import { notifyType, loadingType, LOADING_SIGNUP_SUBMIT, LOADING_SIGNIN_SUBMIT, LOADING_LOGOUT } from './values';
+import {
+  notifyType,
+  loadingType,
+  LOADING_SIGNUP_SUBMIT,
+  LOADING_SIGNIN_SUBMIT,
+  LOADING_LOGOUT,
+  LOADING_DELETE_FRIEND,
+} from './values';
 import { SignUp, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './signup';
 import { SignIn, SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE } from './signin';
 import { LogOut, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './logout';
 import { GetUserInfo, GET_USER_INFO_REQUEST, GET_USER_INFO_SUCCESS, GET_USER_INFO_FAILURE } from './getUserInfo';
 import { GetFriends, GET_FRIENDS_REQUEST, GET_FRIENDS_SUCCESS, GET_FRIENDS_FAILURE } from './getFriends';
+import { DeleteFriend, DELETE_FRIEND_REQUEST, DELETE_FRIEND_SUCCESS, DELETE_FRIEND_FAILURE } from './deleteFriend';
 
 export interface UserInfo {
   id: number;
@@ -74,7 +82,7 @@ const initialState: UserInitialState = {
   },
 };
 
-type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo | GetFriends;
+type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo | GetFriends | DeleteFriend;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -127,13 +135,35 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
 
       // get friends
       case GET_FRIENDS_REQUEST:
-      case GET_FRIENDS_FAILURE:
+        if (action.lastId === 0) {
+          draft.Friends = null;
+        }
         break;
       case GET_FRIENDS_SUCCESS:
         if (draft.Friends === null) {
           draft.Friends = [];
         }
         draft.Friends.push(...action.data);
+        break;
+      case GET_FRIENDS_FAILURE:
+        break;
+
+      // delete friend
+      case DELETE_FRIEND_REQUEST:
+        draft.isLoading.name = LOADING_DELETE_FRIEND;
+        draft.isLoading.id = action.deleteId;
+        break;
+      case DELETE_FRIEND_SUCCESS: {
+        const index = draft.Friends.findIndex((v) => v.Friend.FriendId === action.deleteId);
+        draft.Friends.splice(index, 1);
+        draft.info.friends--;
+        draft.isLoading.name = null;
+        draft.isLoading.id = null;
+        break;
+      }
+      case DELETE_FRIEND_FAILURE:
+        draft.isLoading.name = null;
+        draft.isLoading.id = null;
         break;
 
       default:
