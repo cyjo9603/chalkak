@@ -194,12 +194,17 @@ router.post('/friends', isLoggedIn, async (req, res, next) => {
       where: { id },
     });
 
-    const friends = await user.getFriends({
-      where: {
+    let where = {};
+    if (parseInt(req.query.lastId, 10) !== 0) {
+      where = {
         id: {
-          [Op.lt]: parseInt(req.query.lastId, 10),
+          [Op.gt]: parseInt(req.query.lastId, 10),
         },
-      },
+      };
+    }
+
+    const friends = await user.getFriends({
+      where,
       attributes: DEFAULT_USER_ATTRIBUTES,
       limit: parseInt(req.query.limit, 10),
     });

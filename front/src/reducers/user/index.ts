@@ -5,6 +5,7 @@ import { SignUp, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './signup
 import { SignIn, SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE } from './signin';
 import { LogOut, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './logout';
 import { GetUserInfo, GET_USER_INFO_REQUEST, GET_USER_INFO_SUCCESS, GET_USER_INFO_FAILURE } from './getUserInfo';
+import { GetFriends, GET_FRIENDS_REQUEST, GET_FRIENDS_SUCCESS, GET_FRIENDS_FAILURE } from './getFriends';
 
 export interface UserInfo {
   id: number;
@@ -73,7 +74,7 @@ const initialState: UserInitialState = {
   },
 };
 
-type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo;
+type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo | GetFriends;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -122,6 +123,17 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
         break;
       case GET_USER_INFO_SUCCESS:
         draft.info = action.data;
+        break;
+
+      // get friends
+      case GET_FRIENDS_REQUEST:
+      case GET_FRIENDS_FAILURE:
+        break;
+      case GET_FRIENDS_SUCCESS:
+        if (draft.Friends === null) {
+          draft.Friends = [];
+        }
+        draft.Friends.push(...action.data);
         break;
 
       default:
