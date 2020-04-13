@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { Avatar, Menu, Drawer, Button } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, UserOutlined } from '@ant-design/icons';
 
 import { HeaderMenu, UserAvatar, LogoutWrapper } from './styled';
 import { RootState } from '../../../reducers';
@@ -37,7 +37,11 @@ const SignInMenu = ({ info }: Props) => {
         <UserAvatar key="Avatar">
           <Link href="/profile">
             <a>
-              <Avatar size={30}>{info.firstName}</Avatar>
+              {info.profilePhoto ? (
+                <Avatar size={30} src={`http://localhost:3065/${info.profilePhoto}`} />
+              ) : (
+                <Avatar size={30} icon={<UserOutlined />} />
+              )}
               <div>{`${info.familyName}${info.firstName}`}</div>
             </a>
           </Link>

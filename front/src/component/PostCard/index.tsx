@@ -32,7 +32,11 @@ const PostCard = ({ postData }: Props) => {
         ]}
         title={
           <>
-            <Avatar icon={<UserOutlined />} />
+            {postData.User.profilePhoto ? (
+              <Avatar src={`http://localhost:3065/${postData.User.profilePhoto}`} />
+            ) : (
+              <Avatar icon={<UserOutlined />} />
+            )}
             {`${postData.User.familyName}${postData.User.firstName}`}
           </>
         }

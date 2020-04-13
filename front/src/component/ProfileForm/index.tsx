@@ -11,7 +11,12 @@ const ProfileForm = () => {
 
   return (
     <FormWrapper>
-      <Avatar icon={<UserOutlined />} size={200} />
+      {info.profilePhoto ? (
+        <Avatar src={`http://localhost:3065/${info.profilePhoto}`} size={200} />
+      ) : (
+        <Avatar icon={<UserOutlined />} size={200} />
+      )}
+
       <Row gutter={16}>
         <Col span={24}>
           <Statistic title="이름" value={`${info.familyName} ${info.firstName}`} />
