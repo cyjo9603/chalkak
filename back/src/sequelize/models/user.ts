@@ -10,6 +10,7 @@ export const FULL_USER_ATTRIBUTES = [
   'familyName',
   'firstName',
   'userId',
+  'birth',
   'gender',
   'phone',
   'phone',

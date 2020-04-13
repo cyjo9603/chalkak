@@ -20,7 +20,7 @@ const ProfileForm = () => {
           <Statistic title="생일" value={`${info.birth}`} />
         </Col>
         <Col span={12}>
-          <Statistic title="연락처" value={`${info.phone}`} />
+          <Statistic title="연락처" value={`${info.phone} `} />
         </Col>
         <Col span={12}>
           <Statistic title="이메일" value={`${info.mail}`} />
