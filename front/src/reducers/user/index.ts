@@ -26,6 +26,7 @@ import {
   GET_OTHER_USER_INFO_SUCCESS,
   GET_OTHER_USER_INFO_FAILURE,
 } from './getOtherUserInfo';
+import { FriendRequest, FRIEND_REQUEST_REQUEST, FRIEND_REQUEST_SUCCESS, FRIEND_REQUEST_FAILURE } from './friendRequest';
 
 export interface UserInfo {
   id: number;
@@ -102,7 +103,8 @@ type ReducerAction =
   | GetFriends
   | DeleteFriend
   | UpdateUserInfo
-  | GetOtherUserInfo;
+  | GetOtherUserInfo
+  | FriendRequest;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -202,6 +204,12 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
         break;
       case GET_OTHER_USER_INFO_SUCCESS:
         draft.otherUserInfo = action.data;
+        break;
+
+      // friend request
+      case FRIEND_REQUEST_REQUEST:
+      case FRIEND_REQUEST_FAILURE:
+      case FRIEND_REQUEST_SUCCESS:
         break;
 
       default:
