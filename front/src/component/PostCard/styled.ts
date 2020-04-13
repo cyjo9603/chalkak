@@ -8,7 +8,7 @@ export const CardWrapper = styled.div`
   & .ant-card-head-title {
     font-weight: 600;
 
-    & > span {
+    & span {
       margin-right: 10px;
     }
   }

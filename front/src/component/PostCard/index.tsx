@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Card, Avatar } from 'antd';
+import Link from 'next/link';
 import { UserOutlined, HeartFilled, ShareAltOutlined, CommentOutlined, EllipsisOutlined } from '@ant-design/icons';
 
 import { CardWrapper } from './styled';
@@ -32,12 +33,16 @@ const PostCard = ({ postData }: Props) => {
         ]}
         title={
           <>
-            {postData.User.profilePhoto ? (
-              <Avatar src={`http://localhost:3065/${postData.User.profilePhoto}`} />
-            ) : (
-              <Avatar icon={<UserOutlined />} />
-            )}
-            {`${postData.User.familyName}${postData.User.firstName}`}
+            <Link href={`/user/${postData.User.id}`}>
+              <a>
+                {postData.User.profilePhoto ? (
+                  <Avatar src={`http://localhost:3065/${postData.User.profilePhoto}`} />
+                ) : (
+                  <Avatar icon={<UserOutlined />} />
+                )}
+                {`${postData.User.familyName}${postData.User.firstName}`}
+              </a>
+            </Link>
           </>
         }
       >

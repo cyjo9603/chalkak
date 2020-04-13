@@ -20,6 +20,12 @@ import {
   UPDATE_USER_INFO_SUCCESS,
   UPDATE_USER_INFO_FAILURE,
 } from './updateUserInfo';
+import {
+  GetOtherUserInfo,
+  GET_OTHER_USER_INFO_REQUEST,
+  GET_OTHER_USER_INFO_SUCCESS,
+  GET_OTHER_USER_INFO_FAILURE,
+} from './getOtherUserInfo';
 
 export interface UserInfo {
   id: number;
@@ -70,7 +76,7 @@ export interface UserInitialState {
   info: UserInfo | null;
   notify: UserNotify[] | null;
   Friends: UserFriends[] | null;
-  otherUserInfo: UserInitialState | null;
+  otherUserInfo: OtherUserInfo | null;
   isLoading: {
     id: number | null;
     name: loadingType | null;
@@ -88,7 +94,15 @@ const initialState: UserInitialState = {
   },
 };
 
-type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo | GetFriends | DeleteFriend | UpdateUserInfo;
+type ReducerAction =
+  | SignUp
+  | SignIn
+  | LogOut
+  | GetUserInfo
+  | GetFriends
+  | DeleteFriend
+  | UpdateUserInfo
+  | GetOtherUserInfo;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -180,6 +194,14 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
         break;
       case UPDATE_USER_INFO_SUCCESS:
         draft.info = Object.assign(draft.info, action.data);
+        break;
+
+      // get other user info
+      case GET_OTHER_USER_INFO_REQUEST:
+      case GET_OTHER_USER_INFO_FAILURE:
+        break;
+      case GET_OTHER_USER_INFO_SUCCESS:
+        draft.otherUserInfo = action.data;
         break;
 
       default:
