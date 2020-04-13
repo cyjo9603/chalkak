@@ -6,6 +6,7 @@ import watchLogOut from './logout';
 import watchGetUserInfo from './getUserInfo';
 import watchGetFriends from './getFriends';
 import watchDeleteFriend from './deleteFriend';
+import watchUpdateUserInfo from './updateUserInfo';
 
 export default function* userSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* userSaga() {
     fork(watchGetUserInfo),
     fork(watchGetFriends),
     fork(watchDeleteFriend),
+    fork(watchUpdateUserInfo),
   ]);
 }

@@ -1,14 +1,17 @@
-import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 import { MyPageWrapper } from './styled';
 import NameBox from './NameBox';
 import BoxWrapper from './BoxWrapper';
 import { RootState } from '../../reducers';
+import { updateUserInfoRequest, UpdateInfo } from '../../reducers/user/updateUserInfo';
 
 const MyPageForm = () => {
+  const dispatch = useDispatch();
   const { info } = useSelector((state: RootState) => state.user);
   const [isEditing, setIsEditing] = useState(false);
   const [familyName, setFamilyName] = useState(info.familyName);
@@ -16,10 +19,35 @@ const MyPageForm = () => {
   const [birth, setBirth] = useState(info.birth);
   const [phone, setPhone] = useState(info.phone);
   const [mail, setMail] = useState(info.mail);
+  const [profilePhoto, setProfilePhoto] = useState<null | string>(info.profilePhoto);
+  const imageInput = useRef<HTMLInputElement>();
 
   const changeEditingMode = useCallback(() => {
-    setIsEditing(!isEditing);
-  }, [isEditing]);
+    if (!isEditing) {
+      return setIsEditing(true);
+    }
+    const updateInfo: UpdateInfo = {};
+    if (familyName !== info.familyName) {
+      updateInfo.familyName = familyName;
+    }
+    if (firstName !== info.firstName) {
+      updateInfo.firstName = firstName;
+    }
+    if (birth !== info.birth) {
+      updateInfo.birth = birth;
+    }
+    if (phone !== info.phone) {
+      updateInfo.phone = phone;
+    }
+    if (mail !== info.mail) {
+      updateInfo.mail = mail;
+    }
+    if (profilePhoto !== info.profilePhoto) {
+      updateInfo.profilePhoto = profilePhoto;
+    }
+    dispatch(updateUserInfoRequest(updateInfo));
+    setIsEditing(false);
+  }, [isEditing, familyName, firstName, birth, phone, mail, profilePhoto]);
 
   const onChangeFirstName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
@@ -40,6 +68,23 @@ const MyPageForm = () => {
   const onChangeMail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setMail(e.target.value);
   }, []);
+
+  const onChangeProfilePhoto = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('test');
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, (f) => {
+      imageFormData.append('image', f);
+    });
+
+    const result = await axios.post('/user/image', imageFormData, { withCredentials: true });
+    setProfilePhoto(result.data);
+  }, []);
+
+  const onClickImageUpload = useCallback(() => {
+    if (imageInput.current) {
+      imageInput.current.click();
+    }
+  }, [imageInput.current]);
 
   return (
     <MyPageWrapper>
@@ -72,8 +117,18 @@ const MyPageForm = () => {
             />
           </div>
           <div>
-            <Avatar icon={<UserOutlined />} size={130} />
-            <Button type="dashed">편집</Button>
+            <input type="file" multiple hidden ref={imageInput} onChange={onChangeProfilePhoto} />
+            {profilePhoto ? (
+              <Avatar src={`http://localhost:3065/${profilePhoto}`} size={130} />
+            ) : (
+              <Avatar icon={<UserOutlined />} size={130} />
+            )}
+
+            {isEditing && (
+              <Button type="dashed" onClick={onClickImageUpload}>
+                편집
+              </Button>
+            )}
           </div>
         </div>
         <div>

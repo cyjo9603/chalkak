@@ -219,6 +219,7 @@ router.post('/friends', isLoggedIn, async (req, res, next) => {
 interface UpdateInfo {
   familyName?: string;
   firstName?: string;
+  birth?: string;
   phone?: string;
   mail?: string;
   profilePhoto?: string;
@@ -230,6 +231,7 @@ router.patch('/info', isLoggedIn, async (req, res, next) => {
     const updateInfo: UpdateInfo = {};
     updateInfo.familyName = req.body.familyName;
     updateInfo.firstName = req.body.firstName;
+    updateInfo.birth = req.body.birth;
     updateInfo.phone = req.body.phone;
     updateInfo.mail = req.body.mail;
     updateInfo.profilePhoto = req.body.profilePhoto;

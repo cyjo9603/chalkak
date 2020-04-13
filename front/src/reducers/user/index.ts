@@ -14,6 +14,12 @@ import { LogOut, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './logout
 import { GetUserInfo, GET_USER_INFO_REQUEST, GET_USER_INFO_SUCCESS, GET_USER_INFO_FAILURE } from './getUserInfo';
 import { GetFriends, GET_FRIENDS_REQUEST, GET_FRIENDS_SUCCESS, GET_FRIENDS_FAILURE } from './getFriends';
 import { DeleteFriend, DELETE_FRIEND_REQUEST, DELETE_FRIEND_SUCCESS, DELETE_FRIEND_FAILURE } from './deleteFriend';
+import {
+  UpdateUserInfo,
+  UPDATE_USER_INFO_REQUEST,
+  UPDATE_USER_INFO_SUCCESS,
+  UPDATE_USER_INFO_FAILURE,
+} from './updateUserInfo';
 
 export interface UserInfo {
   id: number;
@@ -82,7 +88,7 @@ const initialState: UserInitialState = {
   },
 };
 
-type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo | GetFriends | DeleteFriend;
+type ReducerAction = SignUp | SignIn | LogOut | GetUserInfo | GetFriends | DeleteFriend | UpdateUserInfo;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -166,6 +172,14 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
       case DELETE_FRIEND_FAILURE:
         draft.isLoading.name = null;
         draft.isLoading.id = null;
+        break;
+
+      // update user info
+      case UPDATE_USER_INFO_REQUEST:
+      case UPDATE_USER_INFO_FAILURE:
+        break;
+      case UPDATE_USER_INFO_SUCCESS:
+        draft.info = Object.assign(draft.info, action.data);
         break;
 
       default:
