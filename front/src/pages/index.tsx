@@ -38,8 +38,8 @@ const Home = () => {
   return (
     <>
       {info && <WritePostForm />}
-      {posts.map((v) => (
-        <PostCard key={`post_${v.id}`} postData={v} />
+      {posts.map((v, i) => (
+        <PostCard key={`post_${v.id}`} postIndex={i} postData={v} />
       ))}
     </>
   );

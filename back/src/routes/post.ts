@@ -186,7 +186,7 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
 
     await post.addLiker(id);
 
-    return res.json({ userId: id });
+    return res.json({ id });
   } catch (e) {
     console.error(e);
     next(e);
@@ -208,7 +208,7 @@ router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
 
     await post.removeLiker(id);
 
-    return res.json({ userId: id });
+    return res.json({ id });
   } catch (e) {
     console.error(e);
     next(e);

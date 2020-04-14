@@ -2,6 +2,7 @@ import produce from 'immer';
 
 import { GetAllPosts, GET_ALL_POSTS_REQUEST, GET_ALL_POSTS_SUCCESS, GET_ALL_POSTS_FAILURE } from './getAllPosts';
 import { WritePost, WRITE_POST_REQUEST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE } from './writePost';
+import { LikePost, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE } from './likePost';
 
 export interface PostImage {
   id: number;
@@ -17,12 +18,6 @@ export interface PostUserInfo {
 
 export interface PostLiker {
   id: number;
-  Like: {
-    createdAt: string;
-    updatedAt: string;
-    PostId: number;
-    UserId: number;
-  };
 }
 
 export interface CommentInfo {
@@ -68,7 +63,7 @@ const initialState: PostInitialState = {
   hasMorePost: false,
 };
 
-type ReducerAction = GetAllPosts | WritePost;
+type ReducerAction = GetAllPosts | WritePost | LikePost;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -92,6 +87,15 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
       case WRITE_POST_SUCCESS:
         draft.posts.unshift(action.data);
         break;
+
+      // like post
+      case LIKE_POST_REQUEST:
+      case LIKE_POST_FAILURE:
+        break;
+      case LIKE_POST_SUCCESS: {
+        draft.posts[action.postIndex].Likers.push(action.data);
+        break;
+      }
 
       default:
         break;
