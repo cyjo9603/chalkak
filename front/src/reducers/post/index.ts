@@ -1,5 +1,7 @@
 import produce from 'immer';
 
+import { GetAllPosts, GET_ALL_POSTS_REQUEST, GET_ALL_POSTS_SUCCESS, GET_ALL_POSTS_FAILURE } from './getAllPosts';
+
 export interface PostImage {
   id: number;
   src: string;
@@ -56,32 +58,32 @@ export interface PostInfo {
 export interface PostInitialState {
   posts: PostInfo[];
   post: PostInfo | null;
+  hasMorePost: boolean;
 }
 
 const initialState: PostInitialState = {
-  posts: [
-    {
-      id: 1,
-      content: '#테스트 #리액트 테스트 게시글',
-      createdAt: '2020-04-11',
-      updatedAt: '2020-04-11',
-      User: {
-        id: 1,
-        familyName: '조',
-        firstName: '찬영',
-        profilePhoto: 'github.png1586589872107.png',
-      },
-      Images: [],
-      Likers: [],
-      SharePostId: null,
-    },
-  ],
+  posts: [],
   post: null,
+  hasMorePost: false,
 };
 
-const post = (state: PostInitialState = initialState, action: any) => {
+type ReducerAction = GetAllPosts;
+
+const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
     switch (action.type) {
+      // get all posts
+      case GET_ALL_POSTS_REQUEST:
+        draft.posts = action.lastUpdatedAt === '' ? [] : draft.posts;
+        draft.hasMorePost = action.lastUpdatedAt !== '' ? draft.hasMorePost : true;
+        break;
+      case GET_ALL_POSTS_SUCCESS:
+        action.data.forEach((v) => draft.posts.push(v));
+        draft.hasMorePost = action.data.length === 10;
+        break;
+      case GET_ALL_POSTS_FAILURE:
+        break;
+
       default:
         break;
     }

@@ -7,8 +7,7 @@ import { CardWrapper } from './styled';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import { PostInfo } from '../../reducers/post';
-
-const { Meta } = Card;
+import PostCardContent from './PostCardContent';
 
 interface Props {
   postData: PostInfo;
@@ -46,8 +45,7 @@ const PostCard = ({ postData }: Props) => {
           </>
         }
       >
-        <Meta title="post title" />
-        {'test'}
+        <PostCardContent postContent={postData.content} />
       </Card>
       {openCommentForm && <CommentForm comments={postData.comments} />}
     </CardWrapper>
