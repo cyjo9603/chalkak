@@ -1,6 +1,7 @@
 import produce from 'immer';
 
 import { GetAllPosts, GET_ALL_POSTS_REQUEST, GET_ALL_POSTS_SUCCESS, GET_ALL_POSTS_FAILURE } from './getAllPosts';
+import { WritePost, WRITE_POST_REQUEST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE } from './writePost';
 
 export interface PostImage {
   id: number;
@@ -67,7 +68,7 @@ const initialState: PostInitialState = {
   hasMorePost: false,
 };
 
-type ReducerAction = GetAllPosts;
+type ReducerAction = GetAllPosts | WritePost;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -82,6 +83,14 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
         draft.hasMorePost = action.data.length === 10;
         break;
       case GET_ALL_POSTS_FAILURE:
+        break;
+
+      // write post
+      case WRITE_POST_REQUEST:
+      case WRITE_POST_FAILURE:
+        break;
+      case WRITE_POST_SUCCESS:
+        draft.posts.unshift(action.data);
         break;
 
       default:
