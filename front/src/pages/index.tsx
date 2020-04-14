@@ -9,6 +9,7 @@ import { getAllPostsRequest } from '../reducers/post/getAllPosts';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { info } = useSelector((state: RootState) => state.user);
   const { posts } = useSelector((state: RootState) => state.post);
   const { hasMorePost } = useSelector((state: RootState) => state.post);
   const countRef = useRef<string[]>([]);
@@ -36,7 +37,7 @@ const Home = () => {
 
   return (
     <>
-      <WritePostForm />
+      {info && <WritePostForm />}
       {posts.map((v) => (
         <PostCard key={`post_${v.id}`} postData={v} />
       ))}
