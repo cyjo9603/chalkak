@@ -12,6 +12,7 @@ import PostCardContent from './PostCardContent';
 import { RootState } from '../../reducers';
 import { likePostRequest } from '../../reducers/post/likePost';
 import { unLikePostRequest } from '../../reducers/post/unLikePost';
+import { getCommentsRequest } from '../../reducers/post/getComments';
 
 interface Props {
   postData: PostInfo;
@@ -26,6 +27,9 @@ const PostCard = ({ postData, postIndex }: Props) => {
   const heartStyle = liked && { color: 'red' };
 
   const onClickCommentForm = useCallback(() => {
+    if (!openCommentForm) {
+      dispatch(getCommentsRequest(postData.id, postIndex));
+    }
     setOpenCommentForm(!openCommentForm);
   }, [openCommentForm]);
 

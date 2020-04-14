@@ -4,6 +4,7 @@ import { GetAllPosts, GET_ALL_POSTS_REQUEST, GET_ALL_POSTS_SUCCESS, GET_ALL_POST
 import { WritePost, WRITE_POST_REQUEST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE } from './writePost';
 import { LikePost, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE } from './likePost';
 import { UnLikePost, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE } from './unLikePost';
+import { GetComments, GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_FAILURE } from './getComments';
 
 export interface PostImage {
   id: number;
@@ -64,7 +65,7 @@ const initialState: PostInitialState = {
   hasMorePost: false,
 };
 
-type ReducerAction = GetAllPosts | WritePost | LikePost | UnLikePost;
+type ReducerAction = GetAllPosts | WritePost | LikePost | UnLikePost | GetComments;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -105,6 +106,15 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
       case UNLIKE_POST_SUCCESS: {
         const index = draft.posts[action.postIndex].Likers.findIndex((v) => v.id === action.data.id);
         draft.posts[action.postIndex].Likers.splice(index, 1);
+        break;
+      }
+
+      // get comments
+      case GET_COMMENTS_REQUEST:
+      case GET_COMMENTS_FAILURE:
+        break;
+      case GET_COMMENTS_SUCCESS: {
+        draft.posts[action.postIndex].comments = action.data;
         break;
       }
 
