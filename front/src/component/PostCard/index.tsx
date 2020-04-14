@@ -11,6 +11,7 @@ import post, { PostInfo } from '../../reducers/post';
 import PostCardContent from './PostCardContent';
 import { RootState } from '../../reducers';
 import { likePostRequest } from '../../reducers/post/likePost';
+import { unLikePostRequest } from '../../reducers/post/unLikePost';
 
 interface Props {
   postData: PostInfo;
@@ -30,6 +31,7 @@ const PostCard = ({ postData, postIndex }: Props) => {
 
   const onClickLike = useCallback(() => {
     if (liked) {
+      dispatch(unLikePostRequest(postData.id, postIndex));
     } else {
       dispatch(likePostRequest(postData.id, postIndex));
     }

@@ -3,6 +3,7 @@ import produce from 'immer';
 import { GetAllPosts, GET_ALL_POSTS_REQUEST, GET_ALL_POSTS_SUCCESS, GET_ALL_POSTS_FAILURE } from './getAllPosts';
 import { WritePost, WRITE_POST_REQUEST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE } from './writePost';
 import { LikePost, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE } from './likePost';
+import { UnLikePost, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE } from './unLikePost';
 
 export interface PostImage {
   id: number;
@@ -63,7 +64,7 @@ const initialState: PostInitialState = {
   hasMorePost: false,
 };
 
-type ReducerAction = GetAllPosts | WritePost | LikePost;
+type ReducerAction = GetAllPosts | WritePost | LikePost | UnLikePost;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -94,6 +95,16 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
         break;
       case LIKE_POST_SUCCESS: {
         draft.posts[action.postIndex].Likers.push(action.data);
+        break;
+      }
+
+      // unlike post
+      case UNLIKE_POST_REQUEST:
+      case UNLIKE_POST_FAILURE:
+        break;
+      case UNLIKE_POST_SUCCESS: {
+        const index = draft.posts[action.postIndex].Likers.findIndex((v) => v.id === action.data.id);
+        draft.posts[action.postIndex].Likers.splice(index, 1);
         break;
       }
 
