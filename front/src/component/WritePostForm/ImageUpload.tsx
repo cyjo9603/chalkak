@@ -1,44 +1,51 @@
-import React, { useState } from 'react';
-import { Upload, Modal } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useRef, useCallback } from 'react';
+import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { ModalImage } from './styled';
+import axios from 'axios';
+import { UploadWrapper, UploadButtonWrapper, PreviewWrapper } from './styled';
 
-const getBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};
+interface Props {
+  addUploadImages: (imgSrc: string[]) => void;
+  removeUploadImage: (index: number) => () => void;
+  uploadImages: string[];
+}
 
-const ImageUpload = () => {
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
+const ImageUpload = ({ addUploadImages, removeUploadImage, uploadImages }: Props) => {
+  const imageInput = useRef<HTMLInputElement>();
 
-  const handleCancel = () => setPreviewVisible(false);
+  const onChangeImageUpload = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const imageFormData = new FormData();
+      [].forEach.call(e.target.files, (f) => {
+        imageFormData.append('image', f);
+      });
 
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+      const result = await axios.post('/post/images', imageFormData, { withCredentials: true });
+      addUploadImages(result.data);
+    },
+    [uploadImages],
+  );
+
+  const onClickImageUpload = useCallback(() => {
+    if (imageInput.current) {
+      imageInput.current.click();
     }
-
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
-  };
+  }, [imageInput.current]);
 
   return (
-    <div className="clearfix">
-      <Upload listType="picture-card" onPreview={handlePreview}>
-        <div>
+    <div>
+      <input type="file" multiple hidden ref={imageInput} onChange={onChangeImageUpload} />
+      <UploadWrapper>
+        {uploadImages.map((v, i) => (
+          <PreviewWrapper key={v} imgSrc={v}>
+            <CloseOutlined onClick={removeUploadImage(i)} />
+          </PreviewWrapper>
+        ))}
+        <UploadButtonWrapper onClick={onClickImageUpload}>
           <PlusOutlined />
-          <div className="ant-upload-text">업로드</div>
-        </div>
-      </Upload>
-      <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
-        <ModalImage alt="upload image" style={{ width: '100%' }} src={previewImage} />
-      </Modal>
+          <div>업로드</div>
+        </UploadButtonWrapper>
+      </UploadWrapper>
     </div>
   );
 };
