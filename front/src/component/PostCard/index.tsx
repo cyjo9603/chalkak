@@ -13,6 +13,7 @@ import { RootState } from '../../reducers';
 import { likePostRequest } from '../../reducers/post/likePost';
 import { unLikePostRequest } from '../../reducers/post/unLikePost';
 import { getCommentsRequest } from '../../reducers/post/getComments';
+import { sharePostRequest } from '../../reducers/post/sharePost';
 
 interface Props {
   postData: PostInfo;
@@ -41,13 +42,17 @@ const PostCard = ({ postData, postIndex }: Props) => {
     }
   }, [liked, postData.id]);
 
+  const onClickShare = useCallback(() => {
+    dispatch(sharePostRequest(postData.id));
+  }, []);
+
   return (
     <CardWrapper>
       <Card
         cover={postData.Images[0] && <PostImages images={postData.Images} />}
         actions={[
           <HeartFilled key="heart" onClick={onClickLike} style={heartStyle} />,
-          <ShareAltOutlined key="share" />,
+          <ShareAltOutlined key="share" onClick={onClickShare} />,
           <CommentOutlined key="comment" onClick={onClickCommentForm} />,
           <EllipsisOutlined key="ellipsis" />,
         ]}
@@ -60,13 +65,35 @@ const PostCard = ({ postData, postIndex }: Props) => {
                 ) : (
                   <Avatar icon={<UserOutlined />} />
                 )}
-                {`${postData.User.familyName}${postData.User.firstName}`}
+                {`${postData.User.familyName}${postData.User.firstName}${
+                  postData.SharePostId ? '님이 공유한 게시글 입니다.' : ''
+                }`}
               </a>
             </Link>
           </>
         }
       >
-        <PostCardContent postContent={postData.content} />
+        {postData.SharePostId && postData.SharePost ? (
+          <Card
+            cover={postData.SharePost.Images[0] && <PostImages images={postData.SharePost.Images} />}
+            title={
+              <>
+                <Link href={`/post/${postData.SharePost.id}`}>
+                  <a>
+                    {postData.SharePost.User.profilePhoto ? (
+                      <Avatar src={`http://localhost:3065/${postData.SharePost.User.profilePhoto}`} />
+                    ) : (
+                      <Avatar icon={<UserOutlined />} />
+                    )}
+                    {`${postData.SharePost.User.familyName}${postData.SharePost.User.firstName}`}
+                  </a>
+                </Link>
+              </>
+            }
+          />
+        ) : (
+          <PostCardContent postContent={postData.content} />
+        )}
       </Card>
       {openCommentForm && <CommentForm comments={postData.comments} postId={postData.id} postIndex={postIndex} />}
     </CardWrapper>

@@ -14,6 +14,7 @@ import {
   GET_HASHTAG_POSTS_SUCCESS,
   GET_HASHTAG_POSTS_FAILURE,
 } from './getHashtagPosts';
+import { SharePost, SHARE_POST_REQUEST, SHARE_POST_SUCCESS, SHARE_POST_FAILURE } from './sharePost';
 
 export interface PostImage {
   id: number;
@@ -46,7 +47,7 @@ export interface SharePostInfo {
   createdAt: string;
   updatedAt: string;
   User: PostUserInfo;
-  Images: PostImage;
+  Images: PostImage[];
 }
 
 export interface PostInfo {
@@ -83,7 +84,8 @@ type ReducerAction =
   | GetUserPosts
   | GetPost
   | WriteComment
-  | GetHashtagPosts;
+  | GetHashtagPosts
+  | SharePost;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -159,6 +161,14 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
         draft.posts[action.postIndex].comments.push(action.data);
         break;
       }
+
+      // share post
+      case SHARE_POST_REQUEST:
+      case SHARE_POST_FAILURE:
+        break;
+      case SHARE_POST_SUCCESS:
+        draft.posts.unshift(action.data);
+        break;
 
       default:
         break;
