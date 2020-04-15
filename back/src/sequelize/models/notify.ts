@@ -14,7 +14,7 @@ class Notify extends Model {
 Notify.init(
   {
     notifyType: {
-      type: DataTypes.STRING(15),
+      type: DataTypes.STRING(25),
       allowNull: false,
     },
   },

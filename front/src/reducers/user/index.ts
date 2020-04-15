@@ -27,6 +27,7 @@ import {
   GET_OTHER_USER_INFO_FAILURE,
 } from './getOtherUserInfo';
 import { FriendRequest, FRIEND_REQUEST_REQUEST, FRIEND_REQUEST_SUCCESS, FRIEND_REQUEST_FAILURE } from './friendRequest';
+import { GetNotify, GET_NOTIFY_REQUEST, GET_NOTIFY_SUCCESS, GET_NOTIFY_FAILURE } from './getNotify';
 
 export interface UserInfo {
   id: number;
@@ -104,7 +105,8 @@ type ReducerAction =
   | DeleteFriend
   | UpdateUserInfo
   | GetOtherUserInfo
-  | FriendRequest;
+  | FriendRequest
+  | GetNotify;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -210,6 +212,14 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
       case FRIEND_REQUEST_REQUEST:
       case FRIEND_REQUEST_FAILURE:
       case FRIEND_REQUEST_SUCCESS:
+        break;
+
+      // get notify
+      case GET_NOTIFY_REQUEST:
+      case GET_NOTIFY_FAILURE:
+        break;
+      case GET_NOTIFY_SUCCESS:
+        draft.notify = action.data;
         break;
 
       default:

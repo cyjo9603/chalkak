@@ -4,7 +4,7 @@ import Notify from '../sequelize/models/notify';
 import User from '../sequelize/models/user';
 import { isLoggedIn } from './middleware';
 
-const REQUEST_FRIEND = 'REQUEST_FRIEND' as const;
+const NOTIFY_REQUEST_FRIEND = 'NOTIFY_REQUEST_FRIEND' as const;
 
 const router = express.Router();
 
@@ -38,7 +38,7 @@ router.post('/friend/request', isLoggedIn, async (req, res, next) => {
 
     const exRequest = await Notify.findOrCreate({
       where: {
-        notifyType: REQUEST_FRIEND,
+        notifyType: NOTIFY_REQUEST_FRIEND,
         requestorId: id,
         targetId: req.body.id,
       },
@@ -55,7 +55,7 @@ router.post('/friend/response', isLoggedIn, async (req, res, next) => {
   try {
     const notify = await Notify.findOne({
       where: {
-        notifyType: REQUEST_FRIEND,
+        notifyType: NOTIFY_REQUEST_FRIEND,
         id: req.body.notifyId,
       },
     });

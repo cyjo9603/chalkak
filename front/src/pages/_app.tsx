@@ -16,6 +16,7 @@ import rootSaga from '../sagas/index';
 import AppLayout from '../component/AppLayout';
 import theme from '../theme';
 import { getUserInfoRequest } from '../reducers/user/getUserInfo';
+import { getNotifyRequest } from '../reducers/user/getNotify';
 
 import 'antd/dist/antd.less';
 
@@ -92,6 +93,9 @@ Chalkak.getInitialProps = async (context: AppContext) => {
   }
   if (!state.user.info) {
     ctx.store.dispatch(getUserInfoRequest());
+  }
+  if (!state.user.notify) {
+    ctx.store.dispatch(getNotifyRequest());
   }
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
