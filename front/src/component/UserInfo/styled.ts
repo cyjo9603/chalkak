@@ -5,6 +5,7 @@ export default styled.div`
   display: flex;
   padding: 20px 30px;
   width: 100%;
+  margin-bottom: 16px;
 
   & > div {
     width: 50%;

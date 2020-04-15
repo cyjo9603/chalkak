@@ -5,6 +5,7 @@ import { WritePost, WRITE_POST_REQUEST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE }
 import { LikePost, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE } from './likePost';
 import { UnLikePost, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE } from './unLikePost';
 import { GetComments, GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_FAILURE } from './getComments';
+import { GetUserPosts, GET_USER_POSTS_REQUEST, GET_USER_POSTS_SUCCESS, GET_USER_POSTS_FAILURE } from './getUserPosts';
 
 export interface PostImage {
   id: number;
@@ -65,21 +66,24 @@ const initialState: PostInitialState = {
   hasMorePost: false,
 };
 
-type ReducerAction = GetAllPosts | WritePost | LikePost | UnLikePost | GetComments;
+type ReducerAction = GetAllPosts | WritePost | LikePost | UnLikePost | GetComments | GetUserPosts;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
     switch (action.type) {
       // get all posts
       case GET_ALL_POSTS_REQUEST:
+      case GET_USER_POSTS_REQUEST:
         draft.posts = action.lastUpdatedAt === '' ? [] : draft.posts;
         draft.hasMorePost = action.lastUpdatedAt !== '' ? draft.hasMorePost : true;
         break;
       case GET_ALL_POSTS_SUCCESS:
+      case GET_USER_POSTS_SUCCESS:
         action.data.forEach((v) => draft.posts.push(v));
         draft.hasMorePost = action.data.length === 10;
         break;
       case GET_ALL_POSTS_FAILURE:
+      case GET_USER_POSTS_FAILURE:
         break;
 
       // write post
