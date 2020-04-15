@@ -21,7 +21,6 @@ export default function* postSaga() {
     fork(watchGetUserPosts),
     fork(watchGetPost),
     fork(watchWriteComment),
-    fork(watchWriteComment),
     fork(watchGetHashtagPosts),
     fork(watchSharePost),
   ]);
