@@ -68,7 +68,7 @@ const PostCard = ({ postData, postIndex }: Props) => {
       >
         <PostCardContent postContent={postData.content} />
       </Card>
-      {openCommentForm && <CommentForm comments={postData.comments} />}
+      {openCommentForm && <CommentForm comments={postData.comments} postId={postData.id} postIndex={postIndex} />}
     </CardWrapper>
   );
 };
