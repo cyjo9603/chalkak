@@ -24,6 +24,14 @@ router.get('/:id', async (req, res, next) => {
         {
           model: Image,
         },
+        {
+          model: User,
+          through: {
+            attributes: [],
+          },
+          as: 'Likers',
+          attributes: ['id'],
+        },
       ],
       attributes: DEFAULT_POST_ATTRIBUTES,
     });

@@ -16,7 +16,7 @@ import { getCommentsRequest } from '../../reducers/post/getComments';
 
 interface Props {
   postData: PostInfo;
-  postIndex: number;
+  postIndex?: number;
 }
 
 const PostCard = ({ postData, postIndex }: Props) => {
@@ -34,7 +34,7 @@ const PostCard = ({ postData, postIndex }: Props) => {
   }, [openCommentForm]);
 
   const onClickLike = useCallback(() => {
-    if (liked) {
+    if (liked && postIndex) {
       dispatch(unLikePostRequest(postData.id, postIndex));
     } else {
       dispatch(likePostRequest(postData.id, postIndex));
