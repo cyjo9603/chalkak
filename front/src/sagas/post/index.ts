@@ -8,6 +8,7 @@ import watchGetComments from './getComments';
 import watchGetUserPosts from './getUserPosts';
 import watchGetPost from './getPost';
 import watchWriteComment from './writeComment';
+import watchGetHashtagPosts from './getHashtagPosts';
 
 export default function* postSaga() {
   yield all([
@@ -19,5 +20,7 @@ export default function* postSaga() {
     fork(watchGetUserPosts),
     fork(watchGetPost),
     fork(watchWriteComment),
+    fork(watchWriteComment),
+    fork(watchGetHashtagPosts),
   ]);
 }

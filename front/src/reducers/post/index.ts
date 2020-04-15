@@ -8,6 +8,12 @@ import { GetComments, GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_F
 import { GetUserPosts, GET_USER_POSTS_REQUEST, GET_USER_POSTS_SUCCESS, GET_USER_POSTS_FAILURE } from './getUserPosts';
 import { GetPost, GET_POST_REQUEST, GET_POST_SUCCESS, GET_POST_FAILURE } from './getPost';
 import { WriteComment, WRITE_COMMENT_REQUEST, WRITE_COMMENT_SUCCESS, WRITE_COMMENT_FAILURE } from './writeComment';
+import {
+  GetHashtagPosts,
+  GET_HASHTAG_POSTS_REQUEST,
+  GET_HASHTAG_POSTS_SUCCESS,
+  GET_HASHTAG_POSTS_FAILURE,
+} from './getHashtagPosts';
 
 export interface PostImage {
   id: number;
@@ -76,7 +82,8 @@ type ReducerAction =
   | GetComments
   | GetUserPosts
   | GetPost
-  | WriteComment;
+  | WriteComment
+  | GetHashtagPosts;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -84,16 +91,19 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
       // get all posts
       case GET_ALL_POSTS_REQUEST:
       case GET_USER_POSTS_REQUEST:
+      case GET_HASHTAG_POSTS_REQUEST:
         draft.posts = action.lastUpdatedAt === '' ? [] : draft.posts;
         draft.hasMorePost = action.lastUpdatedAt !== '' ? draft.hasMorePost : true;
         break;
       case GET_ALL_POSTS_SUCCESS:
       case GET_USER_POSTS_SUCCESS:
+      case GET_HASHTAG_POSTS_SUCCESS:
         action.data.forEach((v) => draft.posts.push(v));
         draft.hasMorePost = action.data.length === 10;
         break;
       case GET_ALL_POSTS_FAILURE:
       case GET_USER_POSTS_FAILURE:
+      case GET_HASHTAG_POSTS_FAILURE:
         break;
 
       // write post

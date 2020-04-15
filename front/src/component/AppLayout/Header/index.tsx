@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 
 import { HeaderWrapper, LeftWrapper, Search } from './styled';
 import UnSignInMenu from './UnSignInMenu';
@@ -11,6 +12,10 @@ interface Props {
 }
 
 const Header = ({ userInfo }: Props) => {
+  const onSearchText = useCallback((value) => {
+    Router.push({ pathname: '/hashtag', query: { tag: value } }, `/hashtag/${value}`);
+  }, []);
+
   return (
     <HeaderWrapper>
       <div>
@@ -20,7 +25,7 @@ const Header = ({ userInfo }: Props) => {
               <img src="/logo_main.svg" alt="logo" />
             </a>
           </Link>
-          <Search />
+          <Search onSearch={onSearchText} />
         </LeftWrapper>
         {userInfo ? <SignInMenu info={userInfo} /> : <UnSignInMenu />}
       </div>
