@@ -18,6 +18,7 @@ const Hashtag = ({ tag }: Props) => {
 
   const onScroll = useCallback(() => {
     if (
+      posts.length !== 0 &&
       hasMorePost &&
       window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300
     ) {
@@ -33,6 +34,7 @@ const Hashtag = ({ tag }: Props) => {
     window.addEventListener('scroll', onScroll);
 
     return () => {
+      countRef.current = [];
       window.removeEventListener('scroll', onScroll);
     };
   }, [hasMorePost, posts.length]);
