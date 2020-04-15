@@ -34,7 +34,7 @@ const PostCard = ({ postData, postIndex }: Props) => {
   }, [openCommentForm]);
 
   const onClickLike = useCallback(() => {
-    if (liked && postIndex) {
+    if (liked && (postIndex || postIndex === 0)) {
       dispatch(unLikePostRequest(postData.id, postIndex));
     } else {
       dispatch(likePostRequest(postData.id, postIndex));
