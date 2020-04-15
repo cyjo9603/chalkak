@@ -71,6 +71,10 @@ router.post('/friend/response', isLoggedIn, async (req, res, next) => {
       },
     });
 
+    if (!req.body.response) {
+      return res.json({ notifyId: req.body.notifyId });
+    }
+
     const requestor = await User.findOne({
       where: {
         id: requestorId,
@@ -86,7 +90,7 @@ router.post('/friend/response', isLoggedIn, async (req, res, next) => {
     await requestor.addFriend(targetId);
     await target.addFriend(requestorId);
 
-    return res.json({ requestorId, targetId });
+    return res.json({ notifyId: req.body.notifyId });
   } catch (e) {
     console.error(e);
     next(e);

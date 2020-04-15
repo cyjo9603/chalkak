@@ -10,6 +10,7 @@ import watchUpdateUserInfo from './updateUserInfo';
 import watchGetOtherUserInfo from './getOtherUserInfo';
 import watchFriendRequest from './friendRequest';
 import watchGetNotify from './getNotify';
+import watchFriendResponse from './friendResponse';
 
 export default function* userSaga() {
   yield all([
@@ -23,5 +24,6 @@ export default function* userSaga() {
     fork(watchGetOtherUserInfo),
     fork(watchFriendRequest),
     fork(watchGetNotify),
+    fork(watchFriendResponse),
   ]);
 }

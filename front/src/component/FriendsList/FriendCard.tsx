@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 import { FriendCardWrapper } from './styled';
 import { RootState } from '../../reducers';
@@ -26,7 +27,15 @@ const FriendCard = ({ data }: Props) => {
 
   return (
     <FriendCardWrapper>
-      <Avatar size={60} icon={<UserOutlined />} />
+      <Link href={`/user/${data.id}`}>
+        <a>
+          {data.profilePhoto ? (
+            <Avatar size={60} src={`http://localhost:3065/${data.profilePhoto}`} />
+          ) : (
+            <Avatar size={60} icon={<UserOutlined />} />
+          )}
+        </a>
+      </Link>
       <div>{`${data.familyName}${data.firstName}`}</div>
       <Button
         onClick={onDeleteFriend(data.Friend.FriendId)}

@@ -28,6 +28,12 @@ import {
 } from './getOtherUserInfo';
 import { FriendRequest, FRIEND_REQUEST_REQUEST, FRIEND_REQUEST_SUCCESS, FRIEND_REQUEST_FAILURE } from './friendRequest';
 import { GetNotify, GET_NOTIFY_REQUEST, GET_NOTIFY_SUCCESS, GET_NOTIFY_FAILURE } from './getNotify';
+import {
+  FriendResponse,
+  FRIEND_RESPONSE_REQUEST,
+  FRIEND_RESPONSE_SUCCESS,
+  FRIEND_RESPONSE_FAILURE,
+} from './friendResponse';
 
 export interface UserInfo {
   id: number;
@@ -56,7 +62,7 @@ export interface UserFriends {
   id: number;
   familyName: string;
   firstName: string;
-  profilePthoto: string;
+  profilePhoto: string;
   Friend: {
     createdAt: string;
     updatedAt: string;
@@ -106,7 +112,8 @@ type ReducerAction =
   | UpdateUserInfo
   | GetOtherUserInfo
   | FriendRequest
-  | GetNotify;
+  | GetNotify
+  | FriendResponse;
 
 const user = (state: UserInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
@@ -221,6 +228,19 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
       case GET_NOTIFY_SUCCESS:
         draft.notify = action.data;
         break;
+
+      // accept friend
+      case FRIEND_RESPONSE_REQUEST:
+      case FRIEND_RESPONSE_FAILURE:
+        break;
+      case FRIEND_RESPONSE_SUCCESS: {
+        const index = draft.notify.findIndex((v) => v.id === action.data.notifyId);
+        draft.notify.splice(index, 1);
+        if (action.response) {
+          draft.info.friends++;
+        }
+        break;
+      }
 
       default:
         break;
