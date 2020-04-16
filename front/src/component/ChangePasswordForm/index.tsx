@@ -1,24 +1,24 @@
-import React, { useState, useCallback } from 'react';
-import { Button } from 'antd';
-import axios from 'axios';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import Router from 'next/router';
+import axios from 'axios';
+import { Button } from 'antd';
 
 import ChangeFormWrapper from './styled';
-import { InputWrapper } from '../../container/SignUpForm/styled';
 import Input from '../Input';
+import { InputWrapper } from '../../container/SignUpForm/styled';
 import WarningMessage from '../../container/SignUpForm/WarningMessage';
 import { getPwWarningLevel } from '../../container/SignUpForm/getLevel';
 import { getPwWarningMsg, getPwReWarningMsg } from '../../container/SignUpForm/getMessage';
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = memo(() => {
   const [originalPassword, setOriginalPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordRe, setNewPasswordRe] = useState('');
   const [pwWarnLevel, setPwWarnLevel] = useState(0);
   const [pwReWarnLevel, setPwReWarnLevel] = useState(0);
 
-  const passwordWarnMessage = getPwWarningMsg(pwWarnLevel);
-  const passwordReWarnMessage = getPwReWarningMsg(pwReWarnLevel);
+  const passwordWarnMessage = useMemo(() => getPwWarningMsg(pwWarnLevel), [pwWarnLevel]);
+  const passwordReWarnMessage = useMemo(() => getPwReWarningMsg(pwReWarnLevel), [pwReWarnLevel]);
 
   const onSubmitForm = useCallback(
     async (e: React.FormEvent) => {
@@ -95,6 +95,6 @@ const ChangePasswordForm = () => {
       </form>
     </ChangeFormWrapper>
   );
-};
+});
 
 export default ChangePasswordForm;
