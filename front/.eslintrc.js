@@ -23,6 +23,7 @@ module.exports = {
     'no-param-reassign': 0,
     'consistent-return': 0,
     'no-plusplus': 0,
+    'react/display-name': 0,
   },
   settings: {
     'import/resolver': {
