@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import FooterWrapper from './styled';
 
-const Footer = () => (
+const Footer = memo(() => (
   <FooterWrapper>
     <div>
       <div>
@@ -13,6 +13,6 @@ const Footer = () => (
       <div>CopyRight 2020. 조찬영. All rights reserved.</div>
     </div>
   </FooterWrapper>
-);
+));
 
 export default Footer;

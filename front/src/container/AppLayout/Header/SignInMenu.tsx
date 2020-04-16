@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { Avatar, Menu, Drawer, Button } from 'antd';
@@ -14,7 +14,7 @@ interface Props {
   info: UserInfo;
 }
 
-const SignInMenu = ({ info }: Props) => {
+const SignInMenu = memo(({ info }: Props) => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state: RootState) => state.user);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -87,6 +87,6 @@ const SignInMenu = ({ info }: Props) => {
       </Drawer>
     </>
   );
-};
+});
 
 export default SignInMenu;

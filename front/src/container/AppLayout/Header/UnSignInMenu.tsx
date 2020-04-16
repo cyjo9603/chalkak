@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { MenuOutlined } from '@ant-design/icons';
 
 import { HeaderMenu, SignLink } from './styled';
 
-const UnSignInMenu = () => (
+const UnSignInMenu = memo(() => (
   <HeaderMenu mode="horizontal" theme="dark" overflowedIndicator={<MenuOutlined />}>
     <SignLink key="signin">
       <Link href="/signin">
@@ -21,6 +21,6 @@ const UnSignInMenu = () => (
       </Link>
     </SignLink>
   </HeaderMenu>
-);
+));
 
 export default UnSignInMenu;

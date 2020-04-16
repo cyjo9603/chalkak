@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 
@@ -11,7 +11,7 @@ interface Props {
   userInfo: UserInfo;
 }
 
-const Header = ({ userInfo }: Props) => {
+const Header = memo(({ userInfo }: Props) => {
   const onSearchText = useCallback((value) => {
     Router.push({ pathname: '/hashtag', query: { tag: value } }, `/hashtag/${value}`);
   }, []);
@@ -31,6 +31,6 @@ const Header = ({ userInfo }: Props) => {
       </div>
     </HeaderWrapper>
   );
-};
+});
 
 export default Header;

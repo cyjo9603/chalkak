@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 
 import Header from './Header';
@@ -11,7 +11,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const AppLayout: FC<Props> = ({ children }: Props) => {
+const AppLayout = memo(({ children }: Props) => {
   const { info } = useSelector((state: RootState) => state.user);
   const { notify } = useSelector((state: RootState) => state.user);
 
@@ -23,7 +23,7 @@ const AppLayout: FC<Props> = ({ children }: Props) => {
           <MainContents> {children}</MainContents>
           {notify && (
             <Notify>
-              {notify.map((v, i) => (
+              {notify.map((v) => (
                 <SideNotification key={`notify-${v.id}`} notify={v} />
               ))}
             </Notify>
@@ -33,6 +33,6 @@ const AppLayout: FC<Props> = ({ children }: Props) => {
       <Footer />
     </Layout>
   );
-};
+});
 
 export default AppLayout;
