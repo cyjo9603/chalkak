@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 
 import SelectWrapper from './styled';
 
@@ -8,7 +8,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Input = ({ value, option, onChange }: Props) => {
+const Input = memo(({ value, option, onChange }: Props) => {
   const [isFocus, setIsFocus] = useState(false);
 
   const onFocus = useCallback(() => {
@@ -31,6 +31,6 @@ const Input = ({ value, option, onChange }: Props) => {
       </select>
     </SelectWrapper>
   );
-};
+});
 
 export default Input;

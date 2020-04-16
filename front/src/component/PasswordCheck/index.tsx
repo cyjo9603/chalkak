@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { Input, Button } from 'antd';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ interface Props {
   onCheck: () => void;
 }
 
-const PasswordCheck = ({ onCheck }: Props) => {
+const PasswordCheck = memo(({ onCheck }: Props) => {
   const [password, setPassword] = useState('');
 
   const onPassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +33,6 @@ const PasswordCheck = ({ onCheck }: Props) => {
       </div>
     </CheckWrapper>
   );
-};
+});
 
 export default PasswordCheck;

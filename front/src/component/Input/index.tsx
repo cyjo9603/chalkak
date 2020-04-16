@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 
 import InputWrapper from './styled';
 
@@ -9,7 +9,7 @@ interface Props {
   type: 'text' | 'password';
 }
 
-const Input = ({ placeholder, value, onChange, type }: Props) => {
+const Input = memo(({ placeholder, value, onChange, type }: Props) => {
   const [isFocus, setIsFocus] = useState(false);
 
   const onFocus = useCallback(() => {
@@ -32,6 +32,6 @@ const Input = ({ placeholder, value, onChange, type }: Props) => {
       />
     </InputWrapper>
   );
-};
+});
 
 export default Input;
