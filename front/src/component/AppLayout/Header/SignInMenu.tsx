@@ -70,6 +70,11 @@ const SignInMenu = ({ info }: Props) => {
           </Link>
         </p>
         <p>
+          <Link href="/changePassword">
+            <a onClick={onClose}>비밀번호 변경</a>
+          </Link>
+        </p>
+        <p>
           <Link href="/friends">
             <a onClick={onClose}>친구 목록</a>
           </Link>
