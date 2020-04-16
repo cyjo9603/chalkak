@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
 
 import UserInfo from '../component/UserInfo';
-import FriendRequestForm from '../component/FriendRequestForm';
+import FriendRequestForm from '../container/FriendRequestForm';
 import { GetOtherUserInfoRequest } from '../reducers/user/getOtherUserInfo';
 import { RootState } from '../reducers';
-import PostCard from '../component/PostCard';
+import PostCard from '../container/PostCard';
 import { getUserPostsRequest } from '../reducers/post/getUserPosts';
 
 const User = () => {

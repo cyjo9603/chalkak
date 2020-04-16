@@ -13,7 +13,7 @@ import axios from 'axios';
 
 import reducer from '../reducers';
 import rootSaga from '../sagas/index';
-import AppLayout from '../component/AppLayout';
+import AppLayout from '../container/AppLayout';
 import theme from '../theme';
 import { getUserInfoRequest } from '../reducers/user/getUserInfo';
 import { getNotifyRequest } from '../reducers/user/getNotify';

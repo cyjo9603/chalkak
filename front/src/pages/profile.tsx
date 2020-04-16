@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
 
 import ProfileForm from '../component/ProfileForm';
-import PostCard from '../component/PostCard';
+import PostCard from '../container/PostCard';
 import { RootState } from '../reducers';
 import { getUserPostsRequest } from '../reducers/post/getUserPosts';
 

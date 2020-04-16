@@ -2,8 +2,8 @@ import React, { useEffect, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
 
-import WritePostForm from '../component/WritePostForm';
-import PostCard from '../component/PostCard';
+import WritePostForm from '../container/WritePostForm';
+import PostCard from '../container/PostCard';
 import { RootState } from '../reducers';
 import { getAllPostsRequest } from '../reducers/post/getAllPosts';
 

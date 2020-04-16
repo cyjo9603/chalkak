@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -70,7 +70,6 @@ const MyPageForm = () => {
   }, []);
 
   const onChangeProfilePhoto = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('test');
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append('image', f);

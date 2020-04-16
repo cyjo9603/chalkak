@@ -4,11 +4,11 @@ import axios from 'axios';
 import Router from 'next/router';
 
 import ChangeFormWrapper from './styled';
-import { InputWrapper } from '../SignUpForm/styled';
+import { InputWrapper } from '../../container/SignUpForm/styled';
 import Input from '../Input';
-import WarningMessage from '../SignUpForm/WarningMessage';
-import { getPwWarningLevel } from '../SignUpForm/getLevel';
-import { getPwWarningMsg, getPwReWarningMsg } from '../SignUpForm/getMessage';
+import WarningMessage from '../../container/SignUpForm/WarningMessage';
+import { getPwWarningLevel } from '../../container/SignUpForm/getLevel';
+import { getPwWarningMsg, getPwReWarningMsg } from '../../container/SignUpForm/getMessage';
 
 const ChangePasswordForm = () => {
   const [originalPassword, setOriginalPassword] = useState('');

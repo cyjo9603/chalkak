@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, message } from 'antd';
 
 import { Form, DoubleWrapper, DateWrapper, InputWrapper, GenderWrapper, TermWrapper, SubmitWrapper } from './styled';
-import Input from '../Input';
+import Input from '../../component/Input';
 import WarningMessage from './WarningMessage';
-import Select from '../Select';
+import Select from '../../component/Select';
 import Terms from './Terms';
 import {
   getIdWarningMsg,

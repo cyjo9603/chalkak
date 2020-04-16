@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import PasswordCheck from '../component/PasswordCheck';
-import MyPageForm from '../component/MyPageForm';
+import MyPageForm from '../container/MyPageForm';
 
 const MyPage = () => {
   const [userCheck, setUserCheck] = useState(false);

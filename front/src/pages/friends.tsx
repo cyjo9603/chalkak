@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
 
-import FriendsList from '../component/FriendsList';
+import FriendsList from '../container/FriendsList';
 import MoreButton from '../component/MoreButton';
 import { RootState } from '../reducers';
 import { getFriendsRequest } from '../reducers/user/getFriends';

@@ -3,7 +3,7 @@ import { NextPageContext } from 'next';
 import { useSelector } from 'react-redux';
 
 import { getPostRequest } from '../reducers/post/getPost';
-import PostCard from '../component/PostCard';
+import PostCard from '../container/PostCard';
 import { RootState } from '../reducers';
 
 const Post = () => {

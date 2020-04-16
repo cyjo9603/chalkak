@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 
 import Form from './styled';
-import Input from '../Input';
+import Input from '../../component/Input';
 import { RootState } from '../../reducers';
 import { signInRequest } from '../../reducers/user/signin';
 import { LOADING_SIGNIN_SUBMIT } from '../../reducers/user/values';

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useCallback, FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
 
-import PostCard from '../component/PostCard';
+import PostCard from '../container/PostCard';
 import { RootState } from '../reducers';
 import { getHashtagPostsRequest } from '../reducers/post/getHashtagPosts';
 
