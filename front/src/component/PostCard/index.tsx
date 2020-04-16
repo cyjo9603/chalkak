@@ -2,7 +2,14 @@ import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, Avatar } from 'antd';
 import Link from 'next/link';
-import { UserOutlined, HeartFilled, ShareAltOutlined, CommentOutlined, EllipsisOutlined } from '@ant-design/icons';
+import {
+  UserOutlined,
+  HeartFilled,
+  ShareAltOutlined,
+  CommentOutlined,
+  AlertOutlined,
+  DeleteOutlined,
+} from '@ant-design/icons';
 
 import { CardWrapper } from './styled';
 import PostImages from './PostImages';
@@ -14,6 +21,7 @@ import { likePostRequest } from '../../reducers/post/likePost';
 import { unLikePostRequest } from '../../reducers/post/unLikePost';
 import { getCommentsRequest } from '../../reducers/post/getComments';
 import { sharePostRequest } from '../../reducers/post/sharePost';
+import { removePostRequest } from '../../reducers/post/removePost';
 
 interface Props {
   postData: PostInfo;
@@ -46,6 +54,10 @@ const PostCard = ({ postData, postIndex }: Props) => {
     dispatch(sharePostRequest(postData.id));
   }, []);
 
+  const onClickRemove = useCallback(() => {
+    dispatch(removePostRequest(postData.id, postIndex));
+  }, [postData.id, postIndex]);
+
   return (
     <CardWrapper>
       <Card
@@ -54,7 +66,7 @@ const PostCard = ({ postData, postIndex }: Props) => {
           <HeartFilled key="heart" onClick={onClickLike} style={heartStyle} />,
           <ShareAltOutlined key="share" onClick={onClickShare} />,
           <CommentOutlined key="comment" onClick={onClickCommentForm} />,
-          <EllipsisOutlined key="ellipsis" />,
+          info ? <DeleteOutlined key="delete" onClick={onClickRemove} /> : <AlertOutlined key="report" />,
         ]}
         title={
           <>

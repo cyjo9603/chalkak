@@ -15,6 +15,7 @@ import {
   GET_HASHTAG_POSTS_FAILURE,
 } from './getHashtagPosts';
 import { SharePost, SHARE_POST_REQUEST, SHARE_POST_SUCCESS, SHARE_POST_FAILURE } from './sharePost';
+import { RemovePost, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE } from './removePost';
 
 export interface PostImage {
   id: number;
@@ -85,7 +86,8 @@ type ReducerAction =
   | GetPost
   | WriteComment
   | GetHashtagPosts
-  | SharePost;
+  | SharePost
+  | RemovePost;
 
 const post = (state: PostInitialState = initialState, action: ReducerAction) => {
   return produce(state, (draft: PostInitialState) => {
@@ -168,6 +170,14 @@ const post = (state: PostInitialState = initialState, action: ReducerAction) => 
         break;
       case SHARE_POST_SUCCESS:
         draft.posts.unshift(action.data);
+        break;
+
+      // remove post
+      case REMOVE_POST_REQUEST:
+      case REMOVE_POST_FAILURE:
+        break;
+      case REMOVE_POST_SUCCESS:
+        draft.posts.splice(action.postIndex, 1);
         break;
 
       default:

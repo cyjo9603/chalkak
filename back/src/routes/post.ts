@@ -299,9 +299,11 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
 
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
+    const { id } = req.user as User;
     const post = await Post.findOne({
       where: {
         id: req.params.id,
+        userId: id,
       },
     });
     if (!post) {
