@@ -19,11 +19,11 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       attributes: FULL_USER_ATTRIBUTES,
     });
     const friendsCount = await User.count({
-      where: { id },
       include: [
         {
           model: User,
           as: 'Friends',
+          where: { userId: id },
         },
       ],
     });
