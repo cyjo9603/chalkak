@@ -86,6 +86,24 @@ const SignUpForm = memo(() => {
     [idWarnLevel, pwWarnLevel, pwReWarnLevel, familyName, firstName, birth, gender, phoneLevel, mailLevel, termsCheck],
   );
 
+  const onReset = useCallback(() => {
+    setUserId('');
+    setPassword('');
+    setPasswordRe('');
+    setFamilyName('');
+    setFirstName('');
+    setBirth('');
+    setGender('');
+    setPhone('');
+    setMail('');
+    setTermsCheck(false);
+    setIdWarnLevel(0);
+    setPwWarnLevel(0);
+    setPwReWarnLevel(0);
+    setPhoneLevel(0);
+    setMailLevel(0);
+  }, []);
+
   const onChangeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const level = getIdWarningLevel(value);
@@ -198,7 +216,7 @@ const SignUpForm = memo(() => {
         <Terms termsCheck={termsCheck} onTermsCheck={onTermsCheck} />
       </TermWrapper>
       <SubmitWrapper>
-        <Button>초기화</Button>
+        <Button onClick={onReset}>초기화</Button>
         <Button type="primary" htmlType="submit" loading={isLoading.name === LOADING_SIGNUP_SUBMIT}>
           가입
         </Button>
