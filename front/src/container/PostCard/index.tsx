@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, message } from 'antd';
 import Link from 'next/link';
 import {
   UserOutlined,
@@ -46,20 +46,29 @@ const PostCard = memo(({ postData, postIndex }: Props) => {
   }, [openCommentForm]);
 
   const onClickLike = useCallback(() => {
+    if (!info) {
+      return message.error('로그인한 사용자만 가능합니다.');
+    }
     if (liked && (postIndex || postIndex === 0)) {
       dispatch(unLikePostRequest(postData.id, postIndex));
     } else {
       dispatch(likePostRequest(postData.id, postIndex));
     }
-  }, [liked, postData.id]);
+  }, [info, liked, postData.id]);
 
   const onClickShare = useCallback(() => {
+    if (!info) {
+      return message.error('로그인한 사용자만 가능합니다.');
+    }
     dispatch(sharePostRequest(postData.id));
-  }, []);
+  }, [info]);
 
   const onClickRemove = useCallback(() => {
+    if (postData.User.id !== info.id) {
+      return message.error(`${info.firstName}님이 작성한 게시글이 아닙니다.`);
+    }
     dispatch(removePostRequest(postData.id, postIndex));
-  }, [postData.id, postIndex]);
+  }, [postData, postIndex, info]);
 
   return (
     <CardWrapper>
