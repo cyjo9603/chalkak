@@ -1,4 +1,8 @@
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
 const withLess = require('@zeit/next-less');
 const lessToJS = require('less-vars-to-js');
 const fs = require('fs');
@@ -16,25 +20,20 @@ module.exports = withBundleAnalyzer(
       javascriptEnabled: true,
       modifyVars: themeVariables,
     },
-    analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
-    analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
-    bundleAnalyzerConfig: {
-      server: {
-        analyzerMode: 'static',
-        reportFilename: '../../bundles/server.html',
-      },
-      browser: {
-        analyzerMode: 'static',
-        reportFilename: '../bundles/client.html',
-      },
-    },
     webpack: (config) => {
       const prod = process.env.NODE_ENV === 'production';
+
+      const plugins = [...config.plugins, new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/)];
+
+      if (prod) {
+        plugins.push(new CompressionPlugin());
+      }
 
       return {
         ...config,
         mode: prod ? 'production' : 'development',
         devtool: prod ? 'hidden-soure-map' : 'eval',
+        plugins,
       };
     },
   }),
