@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import axios from 'axios';
 
 import CheckWrapper from './styled';
@@ -15,22 +15,31 @@ const PasswordCheck = memo(({ onCheck }: Props) => {
     setPassword(e.target.value);
   }, []);
 
-  const onSubmitPassword = useCallback(async () => {
-    const getResult = await axios.post('/user/password', { password }, { withCredentials: true });
-    if (getResult.data.result) {
-      onCheck();
-    }
-  }, [password]);
+  const onSubmitPassword = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      try {
+        const getResult = await axios.post('/user/password', { password }, { withCredentials: true });
+        if (getResult.data.result) {
+          onCheck();
+        }
+      } catch (e) {
+        setPassword('');
+        message.error('비밀번호가 틀립니다!');
+      }
+    },
+    [password],
+  );
 
   return (
     <CheckWrapper>
-      <div>
+      <form onSubmit={onSubmitPassword}>
         <div>비밀번호를 입력해 주세요 :)</div>
         <Input type="password" value={password} onChange={onPassword} />
-        <Button type="primary" onClick={onSubmitPassword}>
+        <Button type="primary" htmlType="submit">
           입력
         </Button>
-      </div>
+      </form>
     </CheckWrapper>
   );
 });

@@ -7,7 +7,7 @@ export default styled.div`
   justify-content: center;
   padding-top: 100px;
 
-  & > div {
+  & > form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
