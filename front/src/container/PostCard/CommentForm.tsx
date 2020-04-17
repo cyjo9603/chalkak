@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
-import { Avatar, Form, List, Button, Comment, Input } from 'antd';
+import { Avatar, Form, List, Button, Comment, Input, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
@@ -21,6 +21,9 @@ const CommentForm = memo(({ comments, postId, postIndex }: Props) => {
   const onSubmitForm = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
+      if (!commentText || !commentText.trim()) {
+        return message.error('댓글의 내용을 입력해주세요!');
+      }
       dispatch(writeCommentRequest(commentText, postId, postIndex));
     },
     [commentText],
