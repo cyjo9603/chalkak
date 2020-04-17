@@ -24,6 +24,7 @@ module.exports = {
     'consistent-return': 0,
     'no-plusplus': 0,
     'react/display-name': 0,
+    'no-shadow': 0,
   },
   settings: {
     'import/resolver': {
