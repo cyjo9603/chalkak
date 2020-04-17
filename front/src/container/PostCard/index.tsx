@@ -73,7 +73,7 @@ const PostCard = memo(({ postData, postIndex }: Props) => {
   return (
     <CardWrapper>
       <Card
-        cover={postData.Images[0] && <PostImages images={postData.Images} />}
+        cover={postData.Images && postData.Images[0] && <PostImages images={postData.Images} />}
         actions={[
           <HeartFilled key="heart" onClick={onClickLike} style={heartStyle} />,
           <ShareAltOutlined key="share" onClick={onClickShare} />,
@@ -114,7 +114,9 @@ const PostCard = memo(({ postData, postIndex }: Props) => {
                 </Link>
               </>
             }
-          />
+          >
+            <PostCardContent postContent={postData.SharePost.content} />
+          </Card>
         ) : (
           <PostCardContent postContent={postData.content} />
         )}
