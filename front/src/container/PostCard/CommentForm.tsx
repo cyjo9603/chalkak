@@ -1,11 +1,12 @@
 import React, { useState, useCallback, memo } from 'react';
 import { Avatar, Form, List, Button, Comment, Input, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 
 import { CommentFormWrapper } from './styled';
 import { CommentInfo } from '../../reducers/post';
+import { RootState } from '../../reducers';
 import { writeCommentRequest } from '../../reducers/post/writeComment';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 
 const CommentForm = memo(({ comments, postId, postIndex }: Props) => {
   const dispatch = useDispatch();
+  const { info } = useSelector((state: RootState) => state.user);
   const [commentText, setCommentText] = useState('');
 
   const onSubmitForm = useCallback(
@@ -35,12 +37,14 @@ const CommentForm = memo(({ comments, postId, postIndex }: Props) => {
 
   return (
     <CommentFormWrapper>
-      <Form onSubmitCapture={onSubmitForm}>
-        <Input.TextArea rows={4} value={commentText} onChange={onChangeCommentText} />
-        <Button type="primary" htmlType="submit">
-          작성
-        </Button>
-      </Form>
+      {info && (
+        <Form onSubmitCapture={onSubmitForm}>
+          <Input.TextArea rows={4} value={commentText} onChange={onChangeCommentText} />
+          <Button type="primary" htmlType="submit">
+            작성
+          </Button>
+        </Form>
+      )}
       <List
         header={`${comments ? comments.length : 0}개의 댓글`}
         dataSource={comments || []}
