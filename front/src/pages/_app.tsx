@@ -73,6 +73,7 @@ const Chalkak = ({ Component, store, pageProps }: Props) => {
             type="text/css"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
           />
+          <link rel="shortcut icon" href="/favicon2.ico" />
         </Helmet>
         <GolbalStyle />
         <AppLayout>
