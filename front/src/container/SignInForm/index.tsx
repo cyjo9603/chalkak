@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, memo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 import Link from 'next/link';
@@ -16,6 +16,7 @@ const SignInForm = memo(() => {
   const { info } = useSelector((state: RootState) => state.user);
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
+  const onDisabled = useMemo(() => !(userId && userId.trim() && password && password.trim()), [userId, password]);
 
   useEffect(() => {
     if (info) {
@@ -43,7 +44,7 @@ const SignInForm = memo(() => {
     <Form onSubmit={onSubmitForm}>
       <Input placeholder="아이디" value={userId} onChange={onChangeUserId} type="text" />
       <Input placeholder="비밀번호" value={password} onChange={onChangePassword} type="password" />
-      <Button type="primary" htmlType="submit" loading={isLoading.name === LOADING_SIGNIN_SUBMIT}>
+      <Button type="primary" htmlType="submit" loading={isLoading.name === LOADING_SIGNIN_SUBMIT} disabled={onDisabled}>
         로그인
       </Button>
       <div>
