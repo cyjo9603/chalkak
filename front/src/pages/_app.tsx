@@ -8,7 +8,7 @@ import withReduxSaga from 'next-redux-saga';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, Store, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 
 import reducer from '../reducers';
@@ -19,27 +19,6 @@ import { getUserInfoRequest } from '../reducers/user/getUserInfo';
 import { getNotifyRequest } from '../reducers/user/getNotify';
 
 import 'antd/dist/antd.less';
-
-const GolbalStyle = createGlobalStyle`
-html {
-  height: 100%;
-}
-
-body {
-  @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
-  background-color: #f0f2f5;
-  height: 100%;
-  font-weight: 900;
-
-  & > #__next {
-    height: 100%;
-  }
-
-  &  * {
-    font-family: 'Nanum Gothic', sans-serif;
-  }
-}
-`;
 
 interface Props {
   Component: AppProps['Component'];
@@ -75,7 +54,6 @@ const Chalkak = ({ Component, store, pageProps }: Props) => {
           />
           <link rel="shortcut icon" href="/favicon2.ico" />
         </Helmet>
-        <GolbalStyle />
         <AppLayout>
           <Component {...pageProps} />
         </AppLayout>
