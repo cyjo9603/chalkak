@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec node server.js"
+  },
   "dependencies": {
     "@ant-design/icons": "4.0.3",
+    "@zeit/next-bundle-analyzer": "0.1.2",
     "antd": "4.1.0",
     "axios": "0.19.2",
     "babel-plugin-import": "1.13.0",
@@ -53,10 +57,6 @@
     "prettier": "1.19.1",
     "typescript": "3.8.2",
     "webpack": "4.41.6"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec node server.js"
   },
   "keywords": [],
   "author": "",
