@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { Avatar, Form, List, Button, Comment, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ interface Props {
   postIndex: number;
 }
 
-const CommentForm = ({ comments, postId, postIndex }: Props) => {
+const CommentForm = memo(({ comments, postId, postIndex }: Props) => {
   const dispatch = useDispatch();
   const [commentText, setCommentText] = useState('');
 
@@ -63,6 +63,6 @@ const CommentForm = ({ comments, postId, postIndex }: Props) => {
       />
     </CommentFormWrapper>
   );
-};
+});
 
 export default CommentForm;

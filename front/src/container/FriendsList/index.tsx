@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { List } from 'antd';
 
 import { ListWrapper } from './styled';
@@ -9,12 +9,10 @@ interface Props {
   list: UserFriends[];
 }
 
-const FriendsList = ({ list }: Props) => {
-  return (
-    <ListWrapper>
-      <List header="친구 목록" dataSource={list || []} renderItem={(item: UserFriends) => <FriendCard data={item} />} />
-    </ListWrapper>
-  );
-};
+const FriendsList = memo(({ list }: Props) => (
+  <ListWrapper>
+    <List header="친구 목록" dataSource={list || []} renderItem={(item: UserFriends) => <FriendCard data={item} />} />
+  </ListWrapper>
+));
 
 export default FriendsList;

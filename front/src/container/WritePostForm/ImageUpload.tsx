@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, memo } from 'react';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
@@ -10,7 +10,7 @@ interface Props {
   uploadImages: string[];
 }
 
-const ImageUpload = ({ addUploadImages, removeUploadImage, uploadImages }: Props) => {
+const ImageUpload = memo(({ addUploadImages, removeUploadImage, uploadImages }: Props) => {
   const imageInput = useRef<HTMLInputElement>();
 
   const onChangeImageUpload = useCallback(
@@ -48,6 +48,6 @@ const ImageUpload = ({ addUploadImages, removeUploadImage, uploadImages }: Props
       </UploadWrapper>
     </div>
   );
-};
+});
 
 export default ImageUpload;

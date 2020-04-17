@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect, memo } from 'react';
 import { Checkbox } from 'antd';
 
 import { ModalWrapper } from './styled';
@@ -8,7 +8,7 @@ interface Props {
   onTermsCheck: () => void;
 }
 
-const Terms = ({ termsCheck, onTermsCheck }: Props) => {
+const Terms = memo(({ termsCheck, onTermsCheck }: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [okAvailable, setOkAvailable] = useState(true);
   const modalRef = useRef<HTMLDivElement>();
@@ -89,6 +89,6 @@ const Terms = ({ termsCheck, onTermsCheck }: Props) => {
       </ModalWrapper>
     </>
   );
-};
+});
 
 export default Terms;

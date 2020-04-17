@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo, memo } from 'react';
 import { Button } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
@@ -12,9 +12,9 @@ interface Props {
   notify: UserNotify;
 }
 
-const SideNotification = ({ notify }: Props) => {
+const SideNotification = memo(({ notify }: Props) => {
   const dispatch = useDispatch();
-  const notifyContents = transNotifyType(notify);
+  const notifyContents = useMemo(() => transNotifyType(notify), [notify]);
 
   const onClickAccept = useCallback(() => {
     dispatch(
@@ -51,6 +51,6 @@ const SideNotification = ({ notify }: Props) => {
       </DoubleButtonWrapper>
     </NotifyWrapper>
   );
-};
+});
 
 export default SideNotification;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 
 import { ImageWrapper, MoreImageWrapeer } from '../styled';
@@ -9,7 +9,7 @@ interface Props {
   images: PostImage[];
 }
 
-const PostImages = ({ images }: Props) => {
+const PostImages = memo(({ images }: Props) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
 
   const onZoom = useCallback(() => {
@@ -60,6 +60,6 @@ const PostImages = ({ images }: Props) => {
       {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
     </>
   );
-};
+});
 
 export default PostImages;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
 
@@ -8,7 +8,7 @@ import { writePostRequest } from '../../reducers/post/writePost';
 
 const { TextArea } = Input;
 
-const WritePostForm = () => {
+const WritePostForm = memo(() => {
   const dispatch = useDispatch();
   const [imageUploadVisible, setImageUploadVisible] = useState(false);
   const [postContent, setPostContent] = useState('');
@@ -67,6 +67,6 @@ const WritePostForm = () => {
       )}
     </FormWrapper>
   );
-};
+});
 
 export default WritePostForm;

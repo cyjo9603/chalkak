@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Input } from 'antd';
 
 import { Box } from './styled';
@@ -12,13 +12,11 @@ interface Props {
   size: number;
 }
 
-const BoxWrapper = ({ isEditing, title, store, value, onChange, size }: Props) => {
-  return (
-    <Box size={size}>
-      <h1>{title}</h1>
-      <div>{isEditing ? <Input value={value} onChange={onChange} /> : store}</div>
-    </Box>
-  );
-};
+const BoxWrapper = memo(({ isEditing, title, store, value, onChange, size }: Props) => (
+  <Box size={size}>
+    <h1>{title}</h1>
+    <div>{isEditing ? <Input value={value} onChange={onChange} /> : store}</div>
+  </Box>
+));
 
 export default BoxWrapper;

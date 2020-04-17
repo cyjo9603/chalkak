@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import BoxWrapper from './BoxWrapper';
 import { RootState } from '../../reducers';
 import { updateUserInfoRequest, UpdateInfo } from '../../reducers/user/updateUserInfo';
 
-const MyPageForm = () => {
+const MyPageForm = memo(() => {
   const dispatch = useDispatch();
   const { info } = useSelector((state: RootState) => state.user);
   const [isEditing, setIsEditing] = useState(false);
@@ -151,6 +151,6 @@ const MyPageForm = () => {
       </section>
     </MyPageWrapper>
   );
-};
+});
 
 export default MyPageForm;

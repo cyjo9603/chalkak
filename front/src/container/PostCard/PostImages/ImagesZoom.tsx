@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import Slick from 'react-slick';
 
 import { Overlay, CloseButton, ImageZoomWrapper } from '../styled';
@@ -9,7 +9,7 @@ interface Props {
   onClose: () => void;
 }
 
-const ImagesZoom = ({ images, onClose }: Props) => {
+const ImagesZoom = memo(({ images, onClose }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
@@ -41,6 +41,6 @@ const ImagesZoom = ({ images, onClose }: Props) => {
       </div>
     </Overlay>
   );
-};
+});
 
 export default ImagesZoom;

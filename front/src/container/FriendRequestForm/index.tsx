@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
 
@@ -9,7 +9,7 @@ interface Props {
   id: number;
 }
 
-const FriendRequestForm = ({ id }: Props) => {
+const FriendRequestForm = memo(({ id }: Props) => {
   const dispatch = useDispatch();
 
   const onFriendRequest = useCallback(() => {
@@ -23,6 +23,6 @@ const FriendRequestForm = ({ id }: Props) => {
       </Button>
     </RequestWrapper>
   );
-};
+});
 
 export default FriendRequestForm;

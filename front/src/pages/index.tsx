@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
 
@@ -7,7 +7,7 @@ import PostCard from '../container/PostCard';
 import { RootState } from '../reducers';
 import { getAllPostsRequest } from '../reducers/post/getAllPosts';
 
-const Home = () => {
+const Home: any = memo(() => {
   const dispatch = useDispatch();
   const { info } = useSelector((state: RootState) => state.user);
   const { posts } = useSelector((state: RootState) => state.post);
@@ -45,7 +45,7 @@ const Home = () => {
       ))}
     </>
   );
-};
+});
 
 Home.getInitialProps = async (context: NextPageContext) => {
   const { post } = context.store.getState();

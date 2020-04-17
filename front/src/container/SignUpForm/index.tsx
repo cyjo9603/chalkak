@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, message } from 'antd';
 
@@ -19,7 +19,7 @@ import { RootState } from '../../reducers';
 import { LOADING_SIGNUP_SUBMIT } from '../../reducers/user/values';
 import { signUpRequest } from '../../reducers/user/signup';
 
-const SignUpForm = () => {
+const SignUpForm = memo(() => {
   const dispatch = useDispatch();
 
   const { isLoading } = useSelector((state: RootState) => state.user);
@@ -40,11 +40,11 @@ const SignUpForm = () => {
   const [phoneLevel, setPhoneLevel] = useState(0);
   const [mailLevel, setMailLevel] = useState(0);
 
-  const idWarnMessage = getIdWarningMsg(idWarnLevel);
-  const passwordWarnMessage = getPwWarningMsg(pwWarnLevel);
-  const passwordReWarnMessage = getPwReWarningMsg(pwReWarnLevel);
-  const phoneWarnMessage = getPhoneWarningMsg(phoneLevel);
-  const mailWarnMessage = getMailWarningMsg(mailLevel);
+  const idWarnMessage = useMemo(() => getIdWarningMsg(idWarnLevel), [idWarnLevel]);
+  const passwordWarnMessage = useMemo(() => getPwWarningMsg(pwWarnLevel), [pwWarnLevel]);
+  const passwordReWarnMessage = useMemo(() => getPwReWarningMsg(pwReWarnLevel), [pwReWarnLevel]);
+  const phoneWarnMessage = useMemo(() => getPhoneWarningMsg(phoneLevel), [phoneLevel]);
+  const mailWarnMessage = useMemo(() => getMailWarningMsg(mailLevel), [mailLevel]);
 
   const onSubmitForm = useCallback(
     (e: React.FormEvent) => {
@@ -205,6 +205,6 @@ const SignUpForm = () => {
       </SubmitWrapper>
     </Form>
   );
-};
+});
 
 export default SignUpForm;

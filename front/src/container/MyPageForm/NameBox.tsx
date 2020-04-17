@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Input } from 'antd';
 
 import { NameBoxWrapper } from './styled';
@@ -13,16 +13,16 @@ interface Props {
   onChangeFamilyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const NameBox = ({
-  isEditing,
-  firstNameStore,
-  firstNameValue,
-  onChangeFirstName,
-  familyNameStore,
-  familyNameValue,
-  onChangeFamilyName,
-}: Props) => {
-  return (
+const NameBox = memo(
+  ({
+    isEditing,
+    firstNameStore,
+    firstNameValue,
+    onChangeFirstName,
+    familyNameStore,
+    familyNameValue,
+    onChangeFamilyName,
+  }: Props) => (
     <NameBoxWrapper size={100}>
       <h1>이름</h1>
       <div>
@@ -36,7 +36,7 @@ const NameBox = ({
         )}
       </div>
     </NameBoxWrapper>
-  );
-};
+  ),
+);
 
 export default NameBox;

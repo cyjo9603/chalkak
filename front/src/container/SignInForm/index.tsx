@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import { RootState } from '../../reducers';
 import { signInRequest } from '../../reducers/user/signin';
 import { LOADING_SIGNIN_SUBMIT } from '../../reducers/user/values';
 
-const SignInForm = () => {
+const SignInForm = memo(() => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state: RootState) => state.user);
   const { info } = useSelector((state: RootState) => state.user);
@@ -57,6 +57,6 @@ const SignInForm = () => {
       </div>
     </Form>
   );
-};
+});
 
 export default SignInForm;

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -14,7 +14,7 @@ interface Props {
   data: UserFriends;
 }
 
-const FriendCard = ({ data }: Props) => {
+const FriendCard = memo(({ data }: Props) => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state: RootState) => state.user);
 
@@ -45,6 +45,6 @@ const FriendCard = ({ data }: Props) => {
       </Button>
     </FriendCardWrapper>
   );
-};
+});
 
 export default FriendCard;

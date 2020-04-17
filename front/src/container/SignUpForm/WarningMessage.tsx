@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, memo } from 'react';
 
 import { WarningWrapper } from './styled';
 
@@ -25,8 +25,8 @@ interface Props {
   message: string;
 }
 
-const WarningMessage = ({ level, message }: Props) => {
-  const color = getWarningColor(level);
+const WarningMessage = memo(({ level, message }: Props) => {
+  const color = useMemo(() => getWarningColor(level), [level]);
 
   return (
     <WarningWrapper level={level} color={color}>
@@ -37,6 +37,6 @@ const WarningMessage = ({ level, message }: Props) => {
       <div>{message}</div>
     </WarningWrapper>
   );
-};
+});
 
 export default WarningMessage;

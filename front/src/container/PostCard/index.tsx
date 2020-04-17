@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, Avatar } from 'antd';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ import {
 import { CardWrapper } from './styled';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
-import post, { PostInfo } from '../../reducers/post';
+import { PostInfo } from '../../reducers/post';
 import PostCardContent from './PostCardContent';
 import { RootState } from '../../reducers';
 import { likePostRequest } from '../../reducers/post/likePost';
@@ -28,12 +28,15 @@ interface Props {
   postIndex?: number;
 }
 
-const PostCard = ({ postData, postIndex }: Props) => {
+const PostCard = memo(({ postData, postIndex }: Props) => {
   const dispatch = useDispatch();
   const { info } = useSelector((state: RootState) => state.user);
   const [openCommentForm, setOpenCommentForm] = useState(false);
-  const liked = info && postData.Likers && postData.Likers.find((v) => v.id === info.id);
-  const heartStyle = liked && { color: 'red' };
+  const liked = useMemo(() => info && postData.Likers && postData.Likers.find((v) => v.id === info.id), [
+    info && info.id,
+    postData && postData.Likers,
+  ]);
+  const heartStyle = useMemo(() => liked && { color: 'red' }, [liked]);
 
   const onClickCommentForm = useCallback(() => {
     if (!openCommentForm) {
@@ -110,6 +113,6 @@ const PostCard = ({ postData, postIndex }: Props) => {
       {openCommentForm && <CommentForm comments={postData.comments} postId={postData.id} postIndex={postIndex} />}
     </CardWrapper>
   );
-};
+});
 
 export default PostCard;
