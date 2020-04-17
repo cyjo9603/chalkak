@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
 
 import { FormWrapper } from './styled';
@@ -17,6 +17,9 @@ const WritePostForm = memo(() => {
   const onSubmitForm = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
+      if ((!postContent || !postContent.trim()) && uploadImages.length === 0) {
+        return message.error('빈 게시물은 작성할 수 없습니다!');
+      }
       dispatch(writePostRequest({ content: postContent, image: uploadImages }));
       setImageUploadVisible(false);
       setPostContent('');
