@@ -9,10 +9,5 @@ export type notifyType = typeof NOTIFY_REQUEST_FRIEND | typeof NOTIFY_WELCOME | 
 export const LOADING_SIGNUP_SUBMIT = 'LOADING_SIGNUP_SUBMIT' as const;
 export const LOADING_SIGNIN_SUBMIT = 'LOADING_SIGNIN_SUBMIT' as const;
 export const LOADING_LOGOUT = 'LOADING_LOGOUT' as const;
-export const LOADING_DELETE_FRIEND = 'LOADING_DELETE_FRIEND' as const;
 
-export type loadingType =
-  | typeof LOADING_SIGNUP_SUBMIT
-  | typeof LOADING_SIGNIN_SUBMIT
-  | typeof LOADING_LOGOUT
-  | typeof LOADING_DELETE_FRIEND;
+export type loadingType = typeof LOADING_SIGNUP_SUBMIT | typeof LOADING_SIGNIN_SUBMIT | typeof LOADING_LOGOUT;

@@ -1,13 +1,6 @@
 import produce from 'immer';
 
-import {
-  notifyType,
-  loadingType,
-  LOADING_SIGNUP_SUBMIT,
-  LOADING_SIGNIN_SUBMIT,
-  LOADING_LOGOUT,
-  LOADING_DELETE_FRIEND,
-} from './values';
+import { notifyType, loadingType, LOADING_SIGNUP_SUBMIT, LOADING_SIGNIN_SUBMIT, LOADING_LOGOUT } from './values';
 import { SignUp, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './signup';
 import { SignIn, SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE } from './signin';
 import { LogOut, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './logout';
@@ -183,21 +176,14 @@ const user = (state: UserInitialState = initialState, action: ReducerAction) => 
 
       // delete friend
       case DELETE_FRIEND_REQUEST:
-        draft.isLoading.name = LOADING_DELETE_FRIEND;
-        draft.isLoading.id = action.deleteId;
+      case DELETE_FRIEND_FAILURE:
         break;
       case DELETE_FRIEND_SUCCESS: {
         const index = draft.Friends.findIndex((v) => v.Friend.FriendId === action.deleteId);
         draft.Friends.splice(index, 1);
         draft.info.friends--;
-        draft.isLoading.name = null;
-        draft.isLoading.id = null;
         break;
       }
-      case DELETE_FRIEND_FAILURE:
-        draft.isLoading.name = null;
-        draft.isLoading.id = null;
-        break;
 
       // update user info
       case UPDATE_USER_INFO_REQUEST:
