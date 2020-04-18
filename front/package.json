@@ -7,7 +7,7 @@
     "dev": "nodemon --exec node server.js",
     "build": "ANALYZE=true next build",
     "prestart":"npm run build",
-    "start": "NODE_ENV=production PORT=80 pm2 start server"
+    "start": "NODE_ENV=production PORT=80 pm2 start server.js"
   },
   "dependencies": {
     "@ant-design/icons": "4.0.3",
