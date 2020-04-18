@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import { Modal } from 'antd';
+import { useSelector } from 'react-redux';
+import Router from 'next/router';
 
+import { RootState } from '../reducers';
 import SignUpForm from '../container/SignUpForm';
 
 const SignUp = () => {
+  const id = useSelector((state: RootState) => state.user.info && state.user.info.id);
+
   useEffect(() => {
     Modal.warning({
       title: '주의!',
@@ -18,6 +23,12 @@ const SignUp = () => {
       ),
     });
   }, []);
+
+  useEffect(() => {
+    if (id) {
+      Router.push('/');
+    }
+  }, [id]);
 
   return <SignUpForm />;
 };

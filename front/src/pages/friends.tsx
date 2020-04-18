@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
+import Router from 'next/router';
 
 import FriendsList from '../container/FriendsList';
 import MoreButton from '../component/MoreButton';
@@ -11,6 +12,12 @@ const Friends = () => {
   const dispatch = useDispatch();
   const { info } = useSelector((state: RootState) => state.user);
   const friends = useSelector((state: RootState) => state.user.Friends);
+
+  useEffect(() => {
+    if (!info) {
+      Router.push('/');
+    }
+  }, [info]);
 
   const onClickMoreButton = useCallback(() => {
     dispatch(getFriendsRequest(friends[friends.length - 1].id));

@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NextPageContext } from 'next';
+import Router from 'next/router';
 
 import ProfileForm from '../component/ProfileForm';
 import PostCard from '../container/PostCard';
@@ -9,7 +10,7 @@ import { getUserPostsRequest } from '../reducers/post/getUserPosts';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector((state: RootState) => state.user.info);
+  const id = useSelector((state: RootState) => state.user.info && state.user.info.id);
   const { posts } = useSelector((state: RootState) => state.post);
   const { hasMorePost } = useSelector((state: RootState) => state.post);
   const countRef = useRef<string[]>([]);
@@ -27,6 +28,12 @@ const Profile = () => {
       }
     }
   }, [countRef.current, hasMorePost, posts]);
+
+  useEffect(() => {
+    if (!id) {
+      Router.push('/');
+    }
+  }, [id]);
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
@@ -48,7 +55,7 @@ const Profile = () => {
 };
 
 Profile.getInitialProps = async (context: NextPageContext) => {
-  const { id } = context.store.getState().user.info;
+  const id = context.store.getState().user.info && context.store.getState().user.info.id;
   if (id) {
     context.store.dispatch(getUserPostsRequest(id));
   }
