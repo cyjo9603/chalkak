@@ -1,9 +1,9 @@
 import express from 'express';
 import { Op } from 'sequelize';
 
-import Post, { DEFAULT_POST_ATTRIBUTES } from '../sequelize/models/post';
-import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
-import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
+import Post, { DEFAULT_POST_ATTRIBUTES } from '../../models/post';
+import User, { DEFAULT_USER_ATTRIBUTES } from '../../models/user';
+import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../../models/image';
 
 const router = express.Router();
 

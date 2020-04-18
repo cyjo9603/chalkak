@@ -1,6 +1,6 @@
 import passport from 'passport';
 
-import User from '../sequelize/models/user';
+import User from '../../models/user';
 import local from './local';
 
 export default () => {

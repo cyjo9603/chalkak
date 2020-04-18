@@ -1,11 +1,11 @@
 import express from 'express';
 
-import Post, { DEFAULT_POST_ATTRIBUTES } from '../sequelize/models/post';
-import User, { DEFAULT_USER_ATTRIBUTES } from '../sequelize/models/user';
+import Post, { DEFAULT_POST_ATTRIBUTES } from '../../models/post';
+import User, { DEFAULT_USER_ATTRIBUTES } from '../../models/user';
 import { isLoggedIn } from './middleware';
-import Hashtag from '../sequelize/models/hashtag';
-import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
-import Comment, { DEFAULT_COMMENT_ATTRIBUTES } from '../sequelize/models/comment';
+import Hashtag from '../../models/hashtag';
+import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../../models/image';
+import Comment, { DEFAULT_COMMENT_ATTRIBUTES } from '../../models/comment';
 import upload from '../util/imageUploads';
 
 const router = express.Router();

@@ -1,7 +1,7 @@
 import express from 'express';
 
-import Notify from '../sequelize/models/notify';
-import User from '../sequelize/models/user';
+import Notify from '../../models/notify';
+import User from '../../models/user';
 import { isLoggedIn } from './middleware';
 
 const NOTIFY_REQUEST_FRIEND = 'NOTIFY_REQUEST_FRIEND' as const;

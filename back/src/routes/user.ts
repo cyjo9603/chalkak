@@ -3,10 +3,10 @@ import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 
 import passport from 'passport';
-import User, { DEFAULT_USER_ATTRIBUTES, FULL_USER_ATTRIBUTES } from '../sequelize/models/user';
+import User, { DEFAULT_USER_ATTRIBUTES, FULL_USER_ATTRIBUTES } from '../../models/user';
 import { isNotLoggedIn, isLoggedIn } from './middleware';
-import Post, { DEFAULT_POST_ATTRIBUTES } from '../sequelize/models/post';
-import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../sequelize/models/image';
+import Post, { DEFAULT_POST_ATTRIBUTES } from '../../models/post';
+import Image, { DEFAULT_IMAGE_ATTRIBUTES } from '../../models/image';
 import upload from '../util/imageUploads';
 
 const router = express.Router();

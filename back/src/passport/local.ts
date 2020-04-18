@@ -2,7 +2,7 @@ import passport from 'passport';
 import bcrypt from 'bcrypt';
 import { Strategy } from 'passport-local';
 
-import User from '../sequelize/models/user';
+import User from '../../models/user';
 
 export default () => {
   passport.use(

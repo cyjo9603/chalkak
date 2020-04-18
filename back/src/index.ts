@@ -8,7 +8,7 @@ import passport from 'passport';
 import hpp from 'hpp';
 import helmet from 'helmet';
 
-import { sequelize } from './sequelize/models';
+import { sequelize } from '../models';
 import passportConfig from './passport';
 import hashtagAPIRouter from './routes/hashtag';
 import notifyAPIRouter from './routes/notify';
