@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ./node_modules/.bin/ts-node ./src/index.ts",
-    "start": "NODE_ENV=production PROT=80 ts-node src/index.ts"
+    "start": "NODE_ENV=production PORT=80 pm2 start ./src/index.ts"
   },
   "keywords": [],
   "author": "chanyoeng",
