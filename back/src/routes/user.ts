@@ -338,7 +338,8 @@ router.patch('/password', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/image', isLoggedIn, upload.single('image'), (req, res) => {
-  return res.json(req.file.filename);
+  const file = req.file as Express.MulterS3.File;
+  return res.json(file.location);
 });
 
 export default router;

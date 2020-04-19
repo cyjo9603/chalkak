@@ -175,8 +175,8 @@ router.post('/upload', isLoggedIn, upload.none(), async (req, res, next) => {
 });
 
 router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
-  const images = req.files as Express.Multer.File[];
-  return res.json(images.map((v) => v.filename));
+  const images = req.files as Express.MulterS3.File[];
+  return res.json(images.map((v) => v.location));
 });
 
 router.post('/:id/like', isLoggedIn, async (req, res, next) => {
