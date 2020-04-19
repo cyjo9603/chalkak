@@ -38,7 +38,7 @@ if (prod) {
   app.use(morgan('combined'));
   app.use(
     cors({
-      origin: /3\.34\.70\.123$/,
+      origin: /chalkak\.cf$/,
       credentials: true,
     }),
   );
@@ -63,7 +63,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      domain: prod ? 'domainname.com' : undefined,
+      domain: prod ? '.chalkak.cf' : undefined,
     },
     name: 'cksnks',
   }),
