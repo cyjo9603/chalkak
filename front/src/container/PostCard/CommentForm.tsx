@@ -8,6 +8,7 @@ import { CommentFormWrapper } from './styled';
 import { CommentInfo } from '../../reducers/post';
 import { RootState } from '../../reducers';
 import { writeCommentRequest } from '../../reducers/post/writeComment';
+import SERVER_URL from '../../util/config';
 
 interface Props {
   comments: CommentInfo[];
@@ -56,7 +57,7 @@ const CommentForm = memo(({ comments, postId, postIndex }: Props) => {
                 <Link href={`/user/${item.User.id}`}>
                   <a>
                     {item.User.profilePhoto ? (
-                      <Avatar src={`http://localhost:3065/${item.User.profilePhoto}`} />
+                      <Avatar src={`${SERVER_URL}/${item.User.profilePhoto}`} />
                     ) : (
                       <Avatar icon={<UserOutlined />} />
                     )}

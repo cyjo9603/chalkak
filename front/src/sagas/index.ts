@@ -5,7 +5,7 @@ import user from './user/index';
 import post from './post/index';
 import SERVER_URL from '../util/config';
 
-axios.defaults.baseURL = SERVER_URL;
+axios.defaults.baseURL = `${SERVER_URL}/api`;
 
 export default function* rootSaga() {
   yield all([call(user), call(post)]);

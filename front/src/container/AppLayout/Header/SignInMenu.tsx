@@ -9,6 +9,7 @@ import { RootState } from '../../../reducers';
 import { UserInfo } from '../../../reducers/user';
 import { LOADING_LOGOUT } from '../../../reducers/user/values';
 import { logOutRequest } from '../../../reducers/user/logout';
+import SERVER_URL from '../../../util/config';
 
 interface Props {
   info: UserInfo;
@@ -38,7 +39,7 @@ const SignInMenu = memo(({ info }: Props) => {
           <Link href="/profile">
             <a>
               {info.profilePhoto ? (
-                <Avatar size={30} src={`http://localhost:3065/${info.profilePhoto}`} />
+                <Avatar size={30} src={`${SERVER_URL}/${info.profilePhoto}`} />
               ) : (
                 <Avatar size={30} icon={<UserOutlined />} />
               )}
