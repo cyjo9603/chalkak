@@ -38,7 +38,7 @@ if (prod) {
   app.use(morgan('combined'));
   app.use(
     cors({
-      origin: /3\.18\.124\.239$/,
+      origin: /3\.34\.70\.123$/,
       credentials: true,
     }),
   );
