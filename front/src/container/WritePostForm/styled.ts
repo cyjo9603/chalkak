@@ -40,7 +40,7 @@ export const UploadButtonWrapper = styled.span`
 export const PreviewWrapper = styled.span<{ imgSrc: string }>`
   width: 100px;
   height: 100px;
-  background-image: url('http://localhost:3065/${(props) => props.imgSrc}');
+  background-image: url('${(props) => props.imgSrc}');
   background-size: 100px 100px;
   margin-right: 16px;
   margin-bottom: 16px;

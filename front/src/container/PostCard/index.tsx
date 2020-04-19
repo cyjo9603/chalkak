@@ -22,7 +22,6 @@ import { unLikePostRequest } from '../../reducers/post/unLikePost';
 import { getCommentsRequest } from '../../reducers/post/getComments';
 import { sharePostRequest } from '../../reducers/post/sharePost';
 import { removePostRequest } from '../../reducers/post/removePost';
-import SERVER_URL from '../../util/config';
 
 interface Props {
   postData: PostInfo;
@@ -86,7 +85,7 @@ const PostCard = memo(({ postData, postIndex }: Props) => {
             <Link href={`/user/${postData.User.id}`}>
               <a>
                 {postData.User.profilePhoto ? (
-                  <Avatar src={`${SERVER_URL}/${postData.User.profilePhoto}`} />
+                  <Avatar src={`${postData.User.profilePhoto}`} />
                 ) : (
                   <Avatar icon={<UserOutlined />} />
                 )}
@@ -106,7 +105,7 @@ const PostCard = memo(({ postData, postIndex }: Props) => {
                 <Link href={`/post/${postData.SharePost.id}`}>
                   <a>
                     {postData.SharePost.User.profilePhoto ? (
-                      <Avatar src={`${SERVER_URL}/${postData.SharePost.User.profilePhoto}`} />
+                      <Avatar src={`${postData.SharePost.User.profilePhoto}`} />
                     ) : (
                       <Avatar icon={<UserOutlined />} />
                     )}

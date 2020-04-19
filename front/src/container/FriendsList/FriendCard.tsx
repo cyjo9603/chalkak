@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { FriendCardWrapper } from './styled';
 import { UserFriends } from '../../reducers/user';
 import { deleteFriendRequest } from '../../reducers/user/deleteFriend';
-import SERVER_URL from '../../util/config';
 
 interface Props {
   data: UserFriends;
@@ -28,7 +27,7 @@ const FriendCard = memo(({ data }: Props) => {
       <Link href={`/user/${data.id}`}>
         <a>
           {data.profilePhoto ? (
-            <Avatar size={60} src={`${SERVER_URL}/${data.profilePhoto}`} />
+            <Avatar size={60} src={`${data.profilePhoto}`} />
           ) : (
             <Avatar size={60} icon={<UserOutlined />} />
           )}

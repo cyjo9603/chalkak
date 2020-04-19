@@ -3,7 +3,6 @@ import Slick from 'react-slick';
 
 import { Overlay, CloseButton, ImageZoomWrapper } from '../styled';
 import { PostImage } from '../../../reducers/post';
-import SERVER_URL from '../../../util/config';
 
 interface Props {
   images: PostImage[];
@@ -30,7 +29,7 @@ const ImagesZoom = memo(({ images, onClose }: Props) => {
         >
           {images.map((v) => (
             <ImageZoomWrapper key={`div${v}`}>
-              <img src={`${SERVER_URL}/${v.src}`} alt="post_image" />
+              <img src={`${v.src}`} alt="post_image" />
             </ImageZoomWrapper>
           ))}
         </Slick>

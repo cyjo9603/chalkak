@@ -5,7 +5,6 @@ import { UserOutlined } from '@ant-design/icons';
 
 import FormWrapper from './styled';
 import { RootState } from '../../reducers';
-import SERVER_URL from '../../util/config';
 
 const ProfileForm = memo(() => {
   const { profilePhoto } = useSelector((state: RootState) => state.user.info);
@@ -18,11 +17,7 @@ const ProfileForm = memo(() => {
 
   return (
     <FormWrapper>
-      {profilePhoto ? (
-        <Avatar src={`${SERVER_URL}/${profilePhoto}`} size={200} />
-      ) : (
-        <Avatar icon={<UserOutlined />} size={200} />
-      )}
+      {profilePhoto ? <Avatar src={`${profilePhoto}`} size={200} /> : <Avatar icon={<UserOutlined />} size={200} />}
 
       <Row gutter={16}>
         <Col span={24}>

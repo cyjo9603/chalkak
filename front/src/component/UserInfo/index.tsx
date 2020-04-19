@@ -5,7 +5,6 @@ import { UserOutlined } from '@ant-design/icons';
 
 import { RootState } from '../../reducers';
 import UserInfoWrapper from './styled';
-import SERVER_URL from '../../util/config';
 
 const UserInfo = memo(() => {
   const { familyName } = useSelector((state: RootState) => state.user.otherUserInfo);
@@ -30,11 +29,7 @@ const UserInfo = memo(() => {
         </Row>
       </div>
       <div>
-        {profilePhoto ? (
-          <Avatar size={120} src={`${SERVER_URL}/${profilePhoto}`} />
-        ) : (
-          <Avatar size={120} icon={<UserOutlined />} />
-        )}
+        {profilePhoto ? <Avatar size={120} src={`${profilePhoto}`} /> : <Avatar size={120} icon={<UserOutlined />} />}
       </div>
     </UserInfoWrapper>
   );

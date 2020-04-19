@@ -9,7 +9,6 @@ import NameBox from './NameBox';
 import BoxWrapper from './BoxWrapper';
 import { RootState } from '../../reducers';
 import { updateUserInfoRequest, UpdateInfo } from '../../reducers/user/updateUserInfo';
-import SERVER_URL from '../../util/config';
 
 const MyPageForm = memo(() => {
   const dispatch = useDispatch();
@@ -133,7 +132,7 @@ const MyPageForm = memo(() => {
           <div>
             <input type="file" multiple hidden ref={imageInput} onChange={onChangeProfilePhoto} />
             {profilePhoto ? (
-              <Avatar src={`${SERVER_URL}/${profilePhoto}`} size={130} />
+              <Avatar src={`${profilePhoto}`} size={130} />
             ) : (
               <Avatar icon={<UserOutlined />} size={130} />
             )}
