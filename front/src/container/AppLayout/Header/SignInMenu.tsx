@@ -79,11 +79,6 @@ const SignInMenu = memo(({ info }: Props) => {
             <a onClick={onClose}>친구 목록</a>
           </Link>
         </p>
-        <p>
-          <Link href="/settings">
-            <a onClick={onClose}>설정</a>
-          </Link>
-        </p>
       </Drawer>
     </>
   );
