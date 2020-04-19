@@ -38,7 +38,7 @@ if (prod) {
   app.use(morgan('combined'));
   app.use(
     cors({
-      origin: /domainname\.com/,
+      origin: /3\.137\.48\.213$/,
       credentials: true,
     }),
   );
