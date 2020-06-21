@@ -1,3 +1,4 @@
+*현재는 deprecated 되었습니다.*
 # Chalkak
 
 - React로 개발한 SNS 서비스 ( Chalkak )
